@@ -14,7 +14,7 @@ using Microsoft.DirectX.DirectInput;
 namespace SerialShell
 {
     
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         //Thread Scanner ;
         SerialPort sp;
@@ -71,13 +71,36 @@ namespace SerialShell
             joystick_timer.Enabled = true;
             return true;
         }
-        public Form1()
+        private void loadsettings()
+        {
+            btn1.Tag = Properties.Settings.Default.Button1;
+            btn2.Tag = Properties.Settings.Default.Button2;
+            btn3.Tag = Properties.Settings.Default.Button3;
+            btn4.Tag = Properties.Settings.Default.Button4;
+            //l1,,l2,r1,r2
+            leftbtn1.Tag = Properties.Settings.Default.Left1;
+            rightbtn1.Tag = Properties.Settings.Default.Right1;
+            leftbtn2.Tag = Properties.Settings.Default.Left2;
+            rightbtn2.Tag = Properties.Settings.Default.Right2;
+            //select,start
+            selectbtn.Tag = Properties.Settings.Default.Select;
+            startbtn.Tag = Properties.Settings.Default.Start;
+            //up,down,left,right
+            leftbtn.Tag = Properties.Settings.Default.Left;
+            rightbtn.Tag = Properties.Settings.Default.Right;
+            upbtn.Tag = Properties.Settings.Default.Up;
+            downbtn.Tag = Properties.Settings.Default.Down;
+            //analogmid
+            leftanalogmidbtn.Tag = Properties.Settings.Default.LeftAnalogMid;
+            rightanalogmidbtn.Tag = Properties.Settings.Default.RightAnalogMid;
+        }
+        public MainForm()
         {
             InitializeComponent();
-            
+            loadsettings();
             sp = new System.IO.Ports.SerialPort("COM1", 9600, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
             Refresh.PerformClick();
-
+            
             if (!init_joystick())
                 MessageBox.Show("Joystick not found");
         }
@@ -91,9 +114,13 @@ namespace SerialShell
         {
             if (sp.IsOpen)
             {
-                sp.WriteLine(msg);
-                Text1Append("###DATA Sent:" + msg);                
+                if (Properties.Settings.Default.SendEndOfLineChar)
+                     sp.WriteLine(msg);
+                else sp.Write(msg);
+                Text1Append("###Sending data:" + msg);
             }
+            else Text1Append("###Error sending data:" + msg);                
+
         }
         private void UpdateJoystick()
         {
@@ -111,6 +138,19 @@ namespace SerialShell
 
             //Capture Buttons.
             byte[] buttons = joystickstate.GetButtons();
+            //for (int i = 0; i < buttons.Length; i++)
+            //{
+            //    if (buttons[i] != 0)
+            //    {
+            //        MessageBox.Show("Button:" + i + " ");
+            //    }
+           // }
+
+            if (buttons.Count() < 10)
+            {
+                MessageBox.Show("Invalid joystick");
+                return;
+            }
             //btn 0..3
             if (buttons[0] != 0)
                 btn1.PerformClick();
@@ -134,6 +174,13 @@ namespace SerialShell
                 selectbtn.PerformClick();
             if (buttons[9] != 0)
                 startbtn.PerformClick();
+            if (buttons.Count() >= 12)
+            {
+                if (buttons[10] != 0)
+                    leftanalogmidbtn.PerformClick();
+                if (buttons[11] != 0)
+                    rightanalogmidbtn.PerformClick();
+            }
             //up,down,left,right
             if (joystickstate.X == jslow)
                 leftbtn.PerformClick();
@@ -256,15 +303,22 @@ namespace SerialShell
 
         private void aboutbtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("   --- SerialShell - Bluetooth communication V0.1 ---\n\n" + 
+            MessageBox.Show("   --- SerialShell - Bluetooth communication V0.1.1 ---\n\n" + 
                             "                               Developed by: \n" +
                             "                      BOURAOUI AL-Moez L.A\n"+
                             "              (bouraoui.almoez.la@gmail.com)\n\n" +
                             "  License: GPL - 2.0\n\n\n"
-                            , "SerialShell - Bluetooth communication V0.1");
-
+                            , "SerialShell - Bluetooth communication V0.1.1");
 
         }
 
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            if ((new settingsForm()).ShowDialog(this) == DialogResult.OK)
+                Properties.Settings.Default.Save();
+            else Properties.Settings.Default.Reload();
+
+            loadsettings();
+        }
     }
 }

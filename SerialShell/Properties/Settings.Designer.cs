@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SerialShells.Properties {
+namespace SerialShell.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,6 +20,210 @@ namespace SerialShells.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BUTTON1")]
+        public string Button1 {
+            get {
+                return ((string)(this["Button1"]));
+            }
+            set {
+                this["Button1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BUTTON2")]
+        public string Button2 {
+            get {
+                return ((string)(this["Button2"]));
+            }
+            set {
+                this["Button2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BUTTON3")]
+        public string Button3 {
+            get {
+                return ((string)(this["Button3"]));
+            }
+            set {
+                this["Button3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BUTTON4")]
+        public string Button4 {
+            get {
+                return ((string)(this["Button4"]));
+            }
+            set {
+                this["Button4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LEFT1")]
+        public string Left1 {
+            get {
+                return ((string)(this["Left1"]));
+            }
+            set {
+                this["Left1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RIGHT1")]
+        public string Right1 {
+            get {
+                return ((string)(this["Right1"]));
+            }
+            set {
+                this["Right1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LEFT2")]
+        public string Left2 {
+            get {
+                return ((string)(this["Left2"]));
+            }
+            set {
+                this["Left2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RIGHT2")]
+        public string Right2 {
+            get {
+                return ((string)(this["Right2"]));
+            }
+            set {
+                this["Right2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT")]
+        public string Select {
+            get {
+                return ((string)(this["Select"]));
+            }
+            set {
+                this["Select"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("START")]
+        public string Start {
+            get {
+                return ((string)(this["Start"]));
+            }
+            set {
+                this["Start"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UP")]
+        public string Up {
+            get {
+                return ((string)(this["Up"]));
+            }
+            set {
+                this["Up"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("DOWN")]
+        public string Down {
+            get {
+                return ((string)(this["Down"]));
+            }
+            set {
+                this["Down"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LEFT")]
+        public string Left {
+            get {
+                return ((string)(this["Left"]));
+            }
+            set {
+                this["Left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RIGHT")]
+        public string Right {
+            get {
+                return ((string)(this["Right"]));
+            }
+            set {
+                this["Right"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LEFTANALOGMID")]
+        public string LeftAnalogMid {
+            get {
+                return ((string)(this["LeftAnalogMid"]));
+            }
+            set {
+                this["LeftAnalogMid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RIGHTANALOGMID")]
+        public string RightAnalogMid {
+            get {
+                return ((string)(this["RightAnalogMid"]));
+            }
+            set {
+                this["RightAnalogMid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SendEndOfLineChar {
+            get {
+                return ((bool)(this["SendEndOfLineChar"]));
+            }
+            set {
+                this["SendEndOfLineChar"] = value;
             }
         }
     }

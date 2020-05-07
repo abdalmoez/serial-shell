@@ -1,6 +1,6 @@
 ﻿namespace SerialShell
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.Refresh = new System.Windows.Forms.ToolStripButton();
             this.Ports = new System.Windows.Forms.ToolStripComboBox();
@@ -40,9 +40,12 @@
             this.Stop = new System.Windows.Forms.ToolStripButton();
             this.clear = new System.Windows.Forms.ToolStripButton();
             this.resetjoystick_button = new System.Windows.Forms.ToolStripButton();
+            this.Settings = new System.Windows.Forms.ToolStripButton();
             this.aboutbtn = new System.Windows.Forms.ToolStripButton();
             this.mainpanel = new System.Windows.Forms.Panel();
             this.OptionPanel = new System.Windows.Forms.Panel();
+            this.leftanalogmidbtn = new System.Windows.Forms.Button();
+            this.rightanalogmidbtn = new System.Windows.Forms.Button();
             this.selectbtn = new System.Windows.Forms.Button();
             this.startbtn = new System.Windows.Forms.Button();
             this.leftbtn2 = new System.Windows.Forms.Button();
@@ -58,11 +61,13 @@
             this.rightbtn = new System.Windows.Forms.Button();
             this.leftbtn = new System.Windows.Forms.Button();
             this.Text1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.joystick_timer = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.mainpanel.SuspendLayout();
             this.OptionPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -78,10 +83,12 @@
             this.Stop,
             this.clear,
             this.resetjoystick_button,
+            this.Settings,
             this.aboutbtn});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(861, 28);
+            this.toolStrip1.Size = new System.Drawing.Size(912, 28);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -91,7 +98,7 @@
             this.Refresh.Image = ((System.Drawing.Image)(resources.GetObject("Refresh.Image")));
             this.Refresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Refresh.Name = "Refresh";
-            this.Refresh.Size = new System.Drawing.Size(24, 25);
+            this.Refresh.Size = new System.Drawing.Size(24, 24);
             this.Refresh.Text = "Refresh";
             this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
             // 
@@ -104,7 +111,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
             // 
             // Speeds
             // 
@@ -127,7 +134,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 23);
             // 
             // Start
             // 
@@ -135,7 +142,7 @@
             this.Start.Image = ((System.Drawing.Image)(resources.GetObject("Start.Image")));
             this.Start.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(24, 25);
+            this.Start.Size = new System.Drawing.Size(24, 24);
             this.Start.Text = "scan";
             this.Start.Click += new System.EventHandler(this.Start_Click);
             // 
@@ -146,7 +153,7 @@
             this.Stop.Image = ((System.Drawing.Image)(resources.GetObject("Stop.Image")));
             this.Stop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Stop.Name = "Stop";
-            this.Stop.Size = new System.Drawing.Size(24, 25);
+            this.Stop.Size = new System.Drawing.Size(24, 24);
             this.Stop.Text = "Stop Scan";
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
@@ -156,7 +163,7 @@
             this.clear.Image = ((System.Drawing.Image)(resources.GetObject("clear.Image")));
             this.clear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(24, 25);
+            this.clear.Size = new System.Drawing.Size(24, 24);
             this.clear.Text = "Clear";
             this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
@@ -166,9 +173,19 @@
             this.resetjoystick_button.Image = ((System.Drawing.Image)(resources.GetObject("resetjoystick_button.Image")));
             this.resetjoystick_button.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetjoystick_button.Name = "resetjoystick_button";
-            this.resetjoystick_button.Size = new System.Drawing.Size(24, 25);
+            this.resetjoystick_button.Size = new System.Drawing.Size(24, 24);
             this.resetjoystick_button.Text = "Reset joystick";
             this.resetjoystick_button.Click += new System.EventHandler(this.resetjoystick_button_Click);
+            // 
+            // Settings
+            // 
+            this.Settings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Settings.Image = ((System.Drawing.Image)(resources.GetObject("Settings.Image")));
+            this.Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Settings.Name = "Settings";
+            this.Settings.Size = new System.Drawing.Size(24, 24);
+            this.Settings.Text = "Settings";
+            this.Settings.Click += new System.EventHandler(this.Settings_Click);
             // 
             // aboutbtn
             // 
@@ -176,7 +193,7 @@
             this.aboutbtn.Image = ((System.Drawing.Image)(resources.GetObject("aboutbtn.Image")));
             this.aboutbtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.aboutbtn.Name = "aboutbtn";
-            this.aboutbtn.Size = new System.Drawing.Size(24, 25);
+            this.aboutbtn.Size = new System.Drawing.Size(24, 24);
             this.aboutbtn.Text = "About";
             this.aboutbtn.Click += new System.EventHandler(this.aboutbtn_Click);
             // 
@@ -185,16 +202,18 @@
             this.mainpanel.Controls.Add(this.OptionPanel);
             this.mainpanel.Controls.Add(this.Text1);
             this.mainpanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainpanel.Location = new System.Drawing.Point(0, 50);
+            this.mainpanel.Location = new System.Drawing.Point(0, 48);
             this.mainpanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainpanel.Name = "mainpanel";
-            this.mainpanel.Size = new System.Drawing.Size(861, 373);
+            this.mainpanel.Size = new System.Drawing.Size(912, 449);
             this.mainpanel.TabIndex = 5;
             // 
             // OptionPanel
             // 
             this.OptionPanel.BackColor = System.Drawing.Color.White;
             this.OptionPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.OptionPanel.Controls.Add(this.leftanalogmidbtn);
+            this.OptionPanel.Controls.Add(this.rightanalogmidbtn);
             this.OptionPanel.Controls.Add(this.selectbtn);
             this.OptionPanel.Controls.Add(this.startbtn);
             this.OptionPanel.Controls.Add(this.leftbtn2);
@@ -210,12 +229,44 @@
             this.OptionPanel.Controls.Add(this.rightbtn);
             this.OptionPanel.Controls.Add(this.leftbtn);
             this.OptionPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.OptionPanel.Location = new System.Drawing.Point(392, 0);
+            this.OptionPanel.Location = new System.Drawing.Point(443, 0);
             this.OptionPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.OptionPanel.MinimumSize = new System.Drawing.Size(432, 4);
             this.OptionPanel.Name = "OptionPanel";
-            this.OptionPanel.Size = new System.Drawing.Size(469, 373);
+            this.OptionPanel.Size = new System.Drawing.Size(469, 449);
             this.OptionPanel.TabIndex = 3;
+            // 
+            // leftanalogmidbtn
+            // 
+            this.leftanalogmidbtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.leftanalogmidbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+            this.leftanalogmidbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.leftanalogmidbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftanalogmidbtn.Location = new System.Drawing.Point(8, 343);
+            this.leftanalogmidbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.leftanalogmidbtn.Name = "leftanalogmidbtn";
+            this.leftanalogmidbtn.Size = new System.Drawing.Size(139, 28);
+            this.leftanalogmidbtn.TabIndex = 19;
+            this.leftanalogmidbtn.Tag = "LANALOGMID";
+            this.leftanalogmidbtn.Text = "Left AnalogMid";
+            this.leftanalogmidbtn.UseVisualStyleBackColor = true;
+            this.leftanalogmidbtn.Click += new System.EventHandler(this.CMD_btn_Click);
+            // 
+            // rightanalogmidbtn
+            // 
+            this.rightanalogmidbtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.rightanalogmidbtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
+            this.rightanalogmidbtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.rightanalogmidbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rightanalogmidbtn.Location = new System.Drawing.Point(323, 343);
+            this.rightanalogmidbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightanalogmidbtn.Name = "rightanalogmidbtn";
+            this.rightanalogmidbtn.Size = new System.Drawing.Size(139, 28);
+            this.rightanalogmidbtn.TabIndex = 18;
+            this.rightanalogmidbtn.Tag = "RALANALOGMID";
+            this.rightanalogmidbtn.Text = "Right AnalogMid";
+            this.rightanalogmidbtn.UseVisualStyleBackColor = true;
+            this.rightanalogmidbtn.Click += new System.EventHandler(this.CMD_btn_Click);
             // 
             // selectbtn
             // 
@@ -231,6 +282,7 @@
             this.selectbtn.Tag = "SELECT";
             this.selectbtn.Text = "Select";
             this.selectbtn.UseVisualStyleBackColor = true;
+            this.selectbtn.Click += new System.EventHandler(this.CMD_btn_Click);
             // 
             // startbtn
             // 
@@ -246,6 +298,7 @@
             this.startbtn.Tag = "START";
             this.startbtn.Text = "Start";
             this.startbtn.UseVisualStyleBackColor = true;
+            this.startbtn.Click += new System.EventHandler(this.CMD_btn_Click);
             // 
             // leftbtn2
             // 
@@ -445,42 +498,58 @@
             this.Text1.Location = new System.Drawing.Point(0, 0);
             this.Text1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Text1.Name = "Text1";
-            this.Text1.Size = new System.Drawing.Size(861, 373);
+            this.Text1.Size = new System.Drawing.Size(912, 449);
             this.Text1.TabIndex = 2;
             this.Text1.Text = "";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(0, 28);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(861, 22);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // joystick_timer
             // 
             this.joystick_timer.Interval = 20;
             this.joystick_timer.Tick += new System.EventHandler(this.joystickTimer_Tick);
             // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 28);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(912, 20);
+            this.panel1.TabIndex = 8;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(908, 16);
+            this.textBox1.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(861, 423);
+            this.ClientSize = new System.Drawing.Size(912, 497);
             this.Controls.Add(this.mainpanel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(927, 457);
             this.Name = "Form1";
-            this.Text = "Serial Shell - Bluetooth communication V0.1";
+            this.Text = "SerialShell - Bluetooth communication V0.1.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.mainpanel.ResumeLayout(false);
             this.OptionPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,12 +581,16 @@
         private System.Windows.Forms.Button rightbtn1;
         private System.Windows.Forms.Button leftbtn2;
         private System.Windows.Forms.Button leftbtn1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Timer joystick_timer;
         private System.Windows.Forms.Button selectbtn;
         private System.Windows.Forms.Button startbtn;
         private System.Windows.Forms.ToolStripButton resetjoystick_button;
         private System.Windows.Forms.ToolStripButton aboutbtn;
+        private System.Windows.Forms.ToolStripButton Settings;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button leftanalogmidbtn;
+        private System.Windows.Forms.Button rightanalogmidbtn;
     }
 }
 

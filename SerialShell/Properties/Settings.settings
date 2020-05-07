@@ -1,7 +1,57 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SerialShell.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Button1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BUTTON1</Value>
+    </Setting>
+    <Setting Name="Button2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BUTTON2</Value>
+    </Setting>
+    <Setting Name="Button3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BUTTON3</Value>
+    </Setting>
+    <Setting Name="Button4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BUTTON4</Value>
+    </Setting>
+    <Setting Name="Left1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LEFT1</Value>
+    </Setting>
+    <Setting Name="Right1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RIGHT1</Value>
+    </Setting>
+    <Setting Name="Left2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LEFT2</Value>
+    </Setting>
+    <Setting Name="Right2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RIGHT2</Value>
+    </Setting>
+    <Setting Name="Select" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SELECT</Value>
+    </Setting>
+    <Setting Name="Start" Type="System.String" Scope="User">
+      <Value Profile="(Default)">START</Value>
+    </Setting>
+    <Setting Name="Up" Type="System.String" Scope="User">
+      <Value Profile="(Default)">UP</Value>
+    </Setting>
+    <Setting Name="Down" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DOWN</Value>
+    </Setting>
+    <Setting Name="Left" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LEFT</Value>
+    </Setting>
+    <Setting Name="Right" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RIGHT</Value>
+    </Setting>
+    <Setting Name="LeftAnalogMid" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LEFTANALOGMID</Value>
+    </Setting>
+    <Setting Name="RightAnalogMid" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RIGHTANALOGMID</Value>
+    </Setting>
+    <Setting Name="SendEndOfLineChar" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
