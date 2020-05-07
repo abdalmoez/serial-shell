@@ -1,56 +1,104 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SerialShell.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SerialPortBluetooth.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Button1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BUTTON1</Value>
+    <Setting Name="Button1" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="Button2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BUTTON2</Value>
+    <Setting Name="Button2" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="Button3" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BUTTON3</Value>
+    <Setting Name="Button3" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="Button4" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BUTTON4</Value>
+    <Setting Name="Button4" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">4</Value>
     </Setting>
-    <Setting Name="Left1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LEFT1</Value>
+    <Setting Name="Left1" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="Right1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RIGHT1</Value>
+    <Setting Name="Right1" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">6</Value>
     </Setting>
-    <Setting Name="Left2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LEFT2</Value>
+    <Setting Name="Left2" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">7</Value>
     </Setting>
-    <Setting Name="Right2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RIGHT2</Value>
+    <Setting Name="Right2" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">8</Value>
     </Setting>
-    <Setting Name="Select" Type="System.String" Scope="User">
-      <Value Profile="(Default)">SELECT</Value>
+    <Setting Name="Select" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">9</Value>
     </Setting>
-    <Setting Name="Start" Type="System.String" Scope="User">
-      <Value Profile="(Default)">START</Value>
+    <Setting Name="Start" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="Up" Type="System.String" Scope="User">
-      <Value Profile="(Default)">UP</Value>
+    <Setting Name="Up" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">11</Value>
     </Setting>
-    <Setting Name="Down" Type="System.String" Scope="User">
-      <Value Profile="(Default)">DOWN</Value>
+    <Setting Name="Down" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">12</Value>
     </Setting>
-    <Setting Name="Left" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LEFT</Value>
+    <Setting Name="Left" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">13</Value>
     </Setting>
-    <Setting Name="Right" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RIGHT</Value>
+    <Setting Name="Right" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">14</Value>
     </Setting>
-    <Setting Name="LeftAnalogMid" Type="System.String" Scope="User">
-      <Value Profile="(Default)">LEFTANALOGMID</Value>
+    <Setting Name="LeftAnalogMid" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="RightAnalogMid" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RIGHTANALOGMID</Value>
+    <Setting Name="RightAnalogMid" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">16</Value>
     </Setting>
     <Setting Name="SendEndOfLineChar" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Button1Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Button2Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Button3Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Button4Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Left1Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Right1Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Left2Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Right2Repeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SelectRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DownRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LeftRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RightRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LeftAnalogMidRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RightAnalogMidRepeat" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

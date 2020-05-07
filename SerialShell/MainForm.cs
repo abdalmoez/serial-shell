@@ -73,26 +73,51 @@ namespace SerialShell
         }
         private void loadsettings()
         {
-            btn1.Tag = Properties.Settings.Default.Button1;
-            btn2.Tag = Properties.Settings.Default.Button2;
-            btn3.Tag = Properties.Settings.Default.Button3;
-            btn4.Tag = Properties.Settings.Default.Button4;
+            //Tag
+            btn1.code = Properties.Settings.Default.Button1;
+            btn2.code = Properties.Settings.Default.Button2;
+            btn3.code = Properties.Settings.Default.Button3;
+            btn4.code = Properties.Settings.Default.Button4;
             //l1,,l2,r1,r2
-            leftbtn1.Tag = Properties.Settings.Default.Left1;
-            rightbtn1.Tag = Properties.Settings.Default.Right1;
-            leftbtn2.Tag = Properties.Settings.Default.Left2;
-            rightbtn2.Tag = Properties.Settings.Default.Right2;
+            leftbtn1.code = Properties.Settings.Default.Left1;
+            rightbtn1.code = Properties.Settings.Default.Right1;
+            leftbtn2.code = Properties.Settings.Default.Left2;
+            rightbtn2.code = Properties.Settings.Default.Right2;
             //select,start
-            selectbtn.Tag = Properties.Settings.Default.Select;
-            startbtn.Tag = Properties.Settings.Default.Start;
+            selectbtn.code = Properties.Settings.Default.Select;
+            startbtn.code = Properties.Settings.Default.Start;
             //up,down,left,right
-            leftbtn.Tag = Properties.Settings.Default.Left;
-            rightbtn.Tag = Properties.Settings.Default.Right;
-            upbtn.Tag = Properties.Settings.Default.Up;
-            downbtn.Tag = Properties.Settings.Default.Down;
+            leftbtn.code = Properties.Settings.Default.Left;
+            rightbtn.code = Properties.Settings.Default.Right;
+            upbtn.code = Properties.Settings.Default.Up;
+            downbtn.code = Properties.Settings.Default.Down;
             //analogmid
-            leftanalogmidbtn.Tag = Properties.Settings.Default.LeftAnalogMid;
-            rightanalogmidbtn.Tag = Properties.Settings.Default.RightAnalogMid;
+            leftanalogmidbtn.code = Properties.Settings.Default.LeftAnalogMid;
+            rightanalogmidbtn.code = Properties.Settings.Default.RightAnalogMid;
+
+
+            //repeatcode
+
+            btn1.repeatcode = Properties.Settings.Default.Button1Repeat;
+            btn2.repeatcode = Properties.Settings.Default.Button2Repeat;
+            btn3.repeatcode = Properties.Settings.Default.Button3Repeat;
+            btn4.repeatcode = Properties.Settings.Default.Button4Repeat;
+            //l1,,l2,r1,r2
+            leftbtn1.repeatcode = Properties.Settings.Default.Left1Repeat;
+            rightbtn1.repeatcode = Properties.Settings.Default.Right1Repeat;
+            leftbtn2.repeatcode = Properties.Settings.Default.Left2Repeat;
+            rightbtn2.repeatcode = Properties.Settings.Default.Right2Repeat;
+            //select,start
+            selectbtn.repeatcode = Properties.Settings.Default.SelectRepeat;
+            startbtn.repeatcode = Properties.Settings.Default.StartRepeat;
+            //up,down,left,right
+            leftbtn.repeatcode = Properties.Settings.Default.LeftRepeat;
+            rightbtn.repeatcode = Properties.Settings.Default.RightRepeat;
+            upbtn.repeatcode = Properties.Settings.Default.UpRepeat;
+            downbtn.repeatcode = Properties.Settings.Default.DownRepeat;
+            //analogmid
+            leftanalogmidbtn.repeatcode = Properties.Settings.Default.LeftAnalogMidRepeat;
+            rightanalogmidbtn.repeatcode = Properties.Settings.Default.RightAnalogMidRepeat;
         }
         public MainForm()
         {
@@ -110,17 +135,48 @@ namespace SerialShell
             Text1.AppendText(Environment.NewLine + msg + Environment.NewLine);
             Text1.ScrollToCaret();  
         }
+        private void writetoserialport(byte b)
+        {
+            if (sp.IsOpen)
+            {
+                sp.Write(new byte[] { b },0,1);
+                if (Properties.Settings.Default.SendEndOfLineChar)
+                    sp.WriteLine("");
+                Text1Append("###Sending byte:" + b);
+            }
+            else Text1Append("###Error sending byte:" + b);                
+        }
         private void writetoserialport(string msg)
         {
             if (sp.IsOpen)
             {
                 if (Properties.Settings.Default.SendEndOfLineChar)
-                     sp.WriteLine(msg);
+                    sp.WriteLine(msg);
                 else sp.Write(msg);
                 Text1Append("###Sending data:" + msg);
             }
-            else Text1Append("###Error sending data:" + msg);                
-
+            else Text1Append("###Error sending data:" + msg);
+        }
+        private void joystickbtnpress(object sender, bool enabled)
+        {
+            if (enabled)
+            {
+                if ((sender as JoyButton).repeatcode)
+                {
+                    (sender as JoyButton).pressed = true;
+                    writetoserialport((sender as JoyButton).code);
+                }
+                else if ((sender as JoyButton).pressed == false)
+                {
+                    (sender as JoyButton).pressed = true;
+                    writetoserialport((sender as JoyButton).code);
+                }
+            }
+            else if ((sender as JoyButton).pressed)
+            {
+                (sender as JoyButton).pressed = false;
+                writetoserialport((byte)((sender as JoyButton).code + 128));
+            }
         }
         private void UpdateJoystick()
         {
@@ -138,13 +194,6 @@ namespace SerialShell
 
             //Capture Buttons.
             byte[] buttons = joystickstate.GetButtons();
-            //for (int i = 0; i < buttons.Length; i++)
-            //{
-            //    if (buttons[i] != 0)
-            //    {
-            //        MessageBox.Show("Button:" + i + " ");
-            //    }
-           // }
 
             if (buttons.Count() < 10)
             {
@@ -152,44 +201,32 @@ namespace SerialShell
                 return;
             }
             //btn 0..3
-            if (buttons[0] != 0)
-                btn1.PerformClick();
-            if (buttons[1] != 0)
-                btn2.PerformClick();
-            if (buttons[2] != 0)
-                btn3.PerformClick();
-            if (buttons[3] != 0)
-                btn4.PerformClick();
+            joystickbtnpress(btn1, (buttons[0] != 0));
+            joystickbtnpress(btn2, (buttons[1] != 0));
+            joystickbtnpress(btn3, (buttons[2] != 0));
+            joystickbtnpress(btn4, (buttons[3] != 0));
+            
             //l1,,l2,r1,r2
-            if (buttons[4] != 0)
-                leftbtn1.PerformClick();
-            if (buttons[5] != 0)
-                rightbtn1.PerformClick();
-            if (buttons[6] != 0)
-                leftbtn2.PerformClick();
-            if (buttons[7] != 0)
-                rightbtn2.PerformClick();
+            joystickbtnpress(leftbtn1, (buttons[4] != 0));
+            joystickbtnpress(rightbtn1, (buttons[5] != 0));
+            joystickbtnpress(leftbtn2, (buttons[6] != 0));
+            joystickbtnpress(rightbtn2, (buttons[7] != 0));
+            
             //select,start
-            if (buttons[8] != 0)
-                selectbtn.PerformClick();
-            if (buttons[9] != 0)
-                startbtn.PerformClick();
+            joystickbtnpress(selectbtn, (buttons[8] != 0));
+            joystickbtnpress(startbtn, (buttons[9] != 0));
+            
             if (buttons.Count() >= 12)
             {
-                if (buttons[10] != 0)
-                    leftanalogmidbtn.PerformClick();
-                if (buttons[11] != 0)
-                    rightanalogmidbtn.PerformClick();
+                joystickbtnpress(leftanalogmidbtn, (buttons[10] != 0));
+                joystickbtnpress(rightanalogmidbtn, (buttons[11] != 0));
             }
             //up,down,left,right
-            if (joystickstate.X == jslow)
-                leftbtn.PerformClick();
-            if (joystickstate.X == jshigh)
-                rightbtn.PerformClick();
-            if (joystickstate.Y == jslow)
-                upbtn.PerformClick();
-            if (joystickstate.Y == jshigh)
-                downbtn.PerformClick();
+            joystickbtnpress(leftbtn, (joystickstate.X == jslow));
+            joystickbtnpress(rightbtn, (joystickstate.X == jshigh));
+            joystickbtnpress(upbtn, (joystickstate.Y == jslow));
+            joystickbtnpress(downbtn, (joystickstate.Y == jshigh));
+            
         }
         //---------------------------------------------------------------------
         private void Refresh_Click(object sender, EventArgs e)
@@ -203,7 +240,7 @@ namespace SerialShell
             MethodInvoker mi;
             mi = delegate()
             {
-                Text1.AppendText(sp.ReadExisting());
+                Text1.AppendText(sp.ReadByte().ToString()+"\n");
                 Text1.ScrollToCaret();
             };
 
@@ -281,7 +318,7 @@ namespace SerialShell
 
         private void CMD_btn_Click(object sender, EventArgs e)
         {
-            writetoserialport((sender as System.Windows.Forms.Button).Tag.ToString());
+            writetoserialport((sender as JoyButton).code);
         }
 
         private void clear_Click(object sender, EventArgs e)
@@ -291,7 +328,7 @@ namespace SerialShell
 
         private void joystickTimer_Tick(object sender, EventArgs e)
         {
-            if (sp.IsOpen)
+            //if (sp.IsOpen)
                 UpdateJoystick();
         }
 
@@ -303,9 +340,9 @@ namespace SerialShell
 
         private void aboutbtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("   --- SerialShell - Bluetooth communication V0.1.1 ---\n\n" + 
+            MessageBox.Show("   --- SerialShell - Bluetooth communication V0.1.1 ---\n\n" +
                             "                               Developed by: \n" +
-                            "                      BOURAOUI AL-Moez L.A\n"+
+                            "                      BOURAOUI AL-Moez L.A\n" +
                             "              (bouraoui.almoez.la@gmail.com)\n\n" +
                             "  License: GPL - 2.0\n\n\n"
                             , "SerialShell - Bluetooth communication V0.1.1");
@@ -314,7 +351,7 @@ namespace SerialShell
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            if ((new settingsForm()).ShowDialog(this) == DialogResult.OK)
+            if ((new SettingsForm()).ShowDialog(this) == DialogResult.OK)
                 Properties.Settings.Default.Save();
             else Properties.Settings.Default.Reload();
 

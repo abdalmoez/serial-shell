@@ -1,6 +1,6 @@
 ﻿namespace SerialShell
 {
-    partial class settingsForm
+    partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             // 
             this.Acceptbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Acceptbtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Acceptbtn.Location = new System.Drawing.Point(216, 276);
+            this.Acceptbtn.Location = new System.Drawing.Point(226, 488);
             this.Acceptbtn.Name = "Acceptbtn";
             this.Acceptbtn.Size = new System.Drawing.Size(75, 23);
             this.Acceptbtn.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             this.Cancelbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Cancelbtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancelbtn.Location = new System.Drawing.Point(297, 276);
+            this.Cancelbtn.Location = new System.Drawing.Point(307, 488);
             this.Cancelbtn.Name = "Cancelbtn";
             this.Cancelbtn.Size = new System.Drawing.Size(75, 23);
             this.Cancelbtn.TabIndex = 1;
@@ -65,14 +65,15 @@
             this.propertyGrid1.Location = new System.Drawing.Point(12, 12);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.propertyGrid1.Size = new System.Drawing.Size(360, 258);
+            this.propertyGrid1.Size = new System.Drawing.Size(370, 470);
             this.propertyGrid1.TabIndex = 2;
             this.propertyGrid1.ToolbarVisible = false;
             // 
             // defaultbtn
             // 
+            this.defaultbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.defaultbtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.defaultbtn.Location = new System.Drawing.Point(12, 276);
+            this.defaultbtn.Location = new System.Drawing.Point(12, 488);
             this.defaultbtn.Name = "defaultbtn";
             this.defaultbtn.Size = new System.Drawing.Size(75, 23);
             this.defaultbtn.TabIndex = 3;
@@ -86,7 +87,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Cancelbtn;
-            this.ClientSize = new System.Drawing.Size(384, 311);
+            this.ClientSize = new System.Drawing.Size(394, 523);
             this.Controls.Add(this.defaultbtn);
             this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.Cancelbtn);

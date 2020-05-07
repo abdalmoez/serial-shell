@@ -44,22 +44,22 @@
             this.aboutbtn = new System.Windows.Forms.ToolStripButton();
             this.mainpanel = new System.Windows.Forms.Panel();
             this.OptionPanel = new System.Windows.Forms.Panel();
-            this.leftanalogmidbtn = new System.Windows.Forms.Button();
-            this.rightanalogmidbtn = new System.Windows.Forms.Button();
-            this.selectbtn = new System.Windows.Forms.Button();
-            this.startbtn = new System.Windows.Forms.Button();
-            this.leftbtn2 = new System.Windows.Forms.Button();
-            this.leftbtn1 = new System.Windows.Forms.Button();
-            this.rightbtn2 = new System.Windows.Forms.Button();
-            this.rightbtn1 = new System.Windows.Forms.Button();
-            this.btn1 = new System.Windows.Forms.Button();
-            this.btn3 = new System.Windows.Forms.Button();
-            this.btn2 = new System.Windows.Forms.Button();
-            this.btn4 = new System.Windows.Forms.Button();
-            this.upbtn = new System.Windows.Forms.Button();
-            this.downbtn = new System.Windows.Forms.Button();
-            this.rightbtn = new System.Windows.Forms.Button();
-            this.leftbtn = new System.Windows.Forms.Button();
+            this.leftanalogmidbtn = new SerialShell.JoyButton(this.components);
+            this.rightanalogmidbtn = new SerialShell.JoyButton(this.components);
+            this.selectbtn = new SerialShell.JoyButton(this.components);
+            this.startbtn = new SerialShell.JoyButton(this.components);
+            this.leftbtn2 = new SerialShell.JoyButton(this.components);
+            this.leftbtn1 = new SerialShell.JoyButton(this.components);
+            this.rightbtn2 = new SerialShell.JoyButton(this.components);
+            this.rightbtn1 = new SerialShell.JoyButton(this.components);
+            this.btn1 = new SerialShell.JoyButton(this.components);
+            this.btn3 = new SerialShell.JoyButton(this.components);
+            this.btn2 = new SerialShell.JoyButton(this.components);
+            this.btn4 = new SerialShell.JoyButton(this.components);
+            this.upbtn = new SerialShell.JoyButton(this.components);
+            this.downbtn = new SerialShell.JoyButton(this.components);
+            this.rightbtn = new SerialShell.JoyButton(this.components);
+            this.leftbtn = new SerialShell.JoyButton(this.components);
             this.Text1 = new System.Windows.Forms.RichTextBox();
             this.joystick_timer = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
@@ -235,6 +235,7 @@
             this.OptionPanel.Name = "OptionPanel";
             this.OptionPanel.Size = new System.Drawing.Size(469, 449);
             this.OptionPanel.TabIndex = 3;
+            this.OptionPanel.Visible = false;
             // 
             // leftanalogmidbtn
             // 
@@ -245,6 +246,8 @@
             this.leftanalogmidbtn.Location = new System.Drawing.Point(8, 343);
             this.leftanalogmidbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.leftanalogmidbtn.Name = "leftanalogmidbtn";
+            this.leftanalogmidbtn.pressed = false;
+            this.leftanalogmidbtn.repeatcode = false;
             this.leftanalogmidbtn.Size = new System.Drawing.Size(139, 28);
             this.leftanalogmidbtn.TabIndex = 19;
             this.leftanalogmidbtn.Tag = "LANALOGMID";
@@ -261,6 +264,8 @@
             this.rightanalogmidbtn.Location = new System.Drawing.Point(323, 343);
             this.rightanalogmidbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rightanalogmidbtn.Name = "rightanalogmidbtn";
+            this.rightanalogmidbtn.pressed = false;
+            this.rightanalogmidbtn.repeatcode = false;
             this.rightanalogmidbtn.Size = new System.Drawing.Size(139, 28);
             this.rightanalogmidbtn.TabIndex = 18;
             this.rightanalogmidbtn.Tag = "RALANALOGMID";
@@ -277,6 +282,8 @@
             this.selectbtn.Location = new System.Drawing.Point(159, 294);
             this.selectbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.selectbtn.Name = "selectbtn";
+            this.selectbtn.pressed = false;
+            this.selectbtn.repeatcode = false;
             this.selectbtn.Size = new System.Drawing.Size(73, 28);
             this.selectbtn.TabIndex = 17;
             this.selectbtn.Tag = "SELECT";
@@ -293,6 +300,8 @@
             this.startbtn.Location = new System.Drawing.Point(240, 294);
             this.startbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.startbtn.Name = "startbtn";
+            this.startbtn.pressed = false;
+            this.startbtn.repeatcode = false;
             this.startbtn.Size = new System.Drawing.Size(73, 28);
             this.startbtn.TabIndex = 16;
             this.startbtn.Tag = "START";
@@ -309,6 +318,8 @@
             this.leftbtn2.Location = new System.Drawing.Point(8, 23);
             this.leftbtn2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.leftbtn2.Name = "leftbtn2";
+            this.leftbtn2.pressed = false;
+            this.leftbtn2.repeatcode = false;
             this.leftbtn2.Size = new System.Drawing.Size(85, 36);
             this.leftbtn2.TabIndex = 14;
             this.leftbtn2.Tag = "LEFT2";
@@ -325,6 +336,8 @@
             this.leftbtn1.Location = new System.Drawing.Point(8, 66);
             this.leftbtn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.leftbtn1.Name = "leftbtn1";
+            this.leftbtn1.pressed = false;
+            this.leftbtn1.repeatcode = false;
             this.leftbtn1.Size = new System.Drawing.Size(85, 36);
             this.leftbtn1.TabIndex = 13;
             this.leftbtn1.Tag = "LEFT1";
@@ -341,6 +354,8 @@
             this.rightbtn2.Location = new System.Drawing.Point(376, 23);
             this.rightbtn2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rightbtn2.Name = "rightbtn2";
+            this.rightbtn2.pressed = false;
+            this.rightbtn2.repeatcode = false;
             this.rightbtn2.Size = new System.Drawing.Size(85, 36);
             this.rightbtn2.TabIndex = 12;
             this.rightbtn2.Tag = "RIGHT2";
@@ -357,6 +372,8 @@
             this.rightbtn1.Location = new System.Drawing.Point(376, 66);
             this.rightbtn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rightbtn1.Name = "rightbtn1";
+            this.rightbtn1.pressed = false;
+            this.rightbtn1.repeatcode = false;
             this.rightbtn1.Size = new System.Drawing.Size(85, 36);
             this.rightbtn1.TabIndex = 11;
             this.rightbtn1.Tag = "RIGHT1";
@@ -373,6 +390,8 @@
             this.btn1.Location = new System.Drawing.Point(336, 138);
             this.btn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn1.Name = "btn1";
+            this.btn1.pressed = false;
+            this.btn1.repeatcode = false;
             this.btn1.Size = new System.Drawing.Size(57, 36);
             this.btn1.TabIndex = 10;
             this.btn1.Tag = "BUTTON1";
@@ -389,6 +408,8 @@
             this.btn3.Location = new System.Drawing.Point(336, 222);
             this.btn3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn3.Name = "btn3";
+            this.btn3.pressed = false;
+            this.btn3.repeatcode = false;
             this.btn3.Size = new System.Drawing.Size(57, 36);
             this.btn3.TabIndex = 9;
             this.btn3.Tag = "BUTTON3";
@@ -405,6 +426,8 @@
             this.btn2.Location = new System.Drawing.Point(404, 181);
             this.btn2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn2.Name = "btn2";
+            this.btn2.pressed = false;
+            this.btn2.repeatcode = false;
             this.btn2.Size = new System.Drawing.Size(57, 36);
             this.btn2.TabIndex = 8;
             this.btn2.Tag = "BUTTON2";
@@ -421,6 +444,8 @@
             this.btn4.Location = new System.Drawing.Point(271, 181);
             this.btn4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn4.Name = "btn4";
+            this.btn4.pressed = false;
+            this.btn4.repeatcode = false;
             this.btn4.Size = new System.Drawing.Size(57, 36);
             this.btn4.TabIndex = 7;
             this.btn4.Tag = "BUTTON4";
@@ -437,6 +462,8 @@
             this.upbtn.Location = new System.Drawing.Point(71, 138);
             this.upbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.upbtn.Name = "upbtn";
+            this.upbtn.pressed = false;
+            this.upbtn.repeatcode = false;
             this.upbtn.Size = new System.Drawing.Size(57, 36);
             this.upbtn.TabIndex = 6;
             this.upbtn.Tag = "UP";
@@ -453,6 +480,8 @@
             this.downbtn.Location = new System.Drawing.Point(71, 222);
             this.downbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.downbtn.Name = "downbtn";
+            this.downbtn.pressed = false;
+            this.downbtn.repeatcode = false;
             this.downbtn.Size = new System.Drawing.Size(57, 36);
             this.downbtn.TabIndex = 2;
             this.downbtn.Tag = "DOWN";
@@ -469,6 +498,8 @@
             this.rightbtn.Location = new System.Drawing.Point(136, 181);
             this.rightbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rightbtn.Name = "rightbtn";
+            this.rightbtn.pressed = false;
+            this.rightbtn.repeatcode = false;
             this.rightbtn.Size = new System.Drawing.Size(57, 36);
             this.rightbtn.TabIndex = 1;
             this.rightbtn.Tag = "RIGHT";
@@ -485,6 +516,8 @@
             this.leftbtn.Location = new System.Drawing.Point(5, 181);
             this.leftbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.leftbtn.Name = "leftbtn";
+            this.leftbtn.pressed = false;
+            this.leftbtn.repeatcode = false;
             this.leftbtn.Size = new System.Drawing.Size(57, 36);
             this.leftbtn.TabIndex = 0;
             this.leftbtn.Tag = "LEFT";
@@ -530,7 +563,7 @@
             this.textBox1.Size = new System.Drawing.Size(908, 16);
             this.textBox1.TabIndex = 5;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -541,8 +574,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MinimumSize = new System.Drawing.Size(927, 457);
-            this.Name = "Form1";
-            this.Text = "SerialShell - Bluetooth communication V0.1.1";
+            this.Name = "MainForm";
+            this.Text = "SerialShell - Bluetooth communication V0.1.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -569,28 +602,28 @@
         private System.Windows.Forms.Panel mainpanel;
         private System.Windows.Forms.Panel OptionPanel;
         private System.Windows.Forms.RichTextBox Text1;
-        private System.Windows.Forms.Button leftbtn;
-        private System.Windows.Forms.Button upbtn;
-        private System.Windows.Forms.Button downbtn;
-        private System.Windows.Forms.Button rightbtn;
-        private System.Windows.Forms.Button btn1;
-        private System.Windows.Forms.Button btn3;
-        private System.Windows.Forms.Button btn2;
-        private System.Windows.Forms.Button btn4;
-        private System.Windows.Forms.Button rightbtn2;
-        private System.Windows.Forms.Button rightbtn1;
-        private System.Windows.Forms.Button leftbtn2;
-        private System.Windows.Forms.Button leftbtn1;
+        private JoyButton leftbtn;
+        private JoyButton upbtn;
+        private JoyButton downbtn;
+        private JoyButton rightbtn;
+        private JoyButton btn1;
+        private JoyButton btn3;
+        private JoyButton btn2;
+        private JoyButton btn4;
+        private JoyButton rightbtn2;
+        private JoyButton rightbtn1;
+        private JoyButton leftbtn2;
+        private JoyButton leftbtn1;
         private System.Windows.Forms.Timer joystick_timer;
-        private System.Windows.Forms.Button selectbtn;
-        private System.Windows.Forms.Button startbtn;
+        private JoyButton selectbtn;
+        private JoyButton startbtn;
         private System.Windows.Forms.ToolStripButton resetjoystick_button;
         private System.Windows.Forms.ToolStripButton aboutbtn;
         private System.Windows.Forms.ToolStripButton Settings;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button leftanalogmidbtn;
-        private System.Windows.Forms.Button rightanalogmidbtn;
+        private JoyButton leftanalogmidbtn;
+        private JoyButton rightanalogmidbtn;
     }
 }
 
