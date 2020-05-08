@@ -6,3 +6,4 @@ Disable LoaderLock in Debug > Windows > Exception Settings section Managed Debug
 
 ## Dependencies
 DirectX9
+MetroFramework
