@@ -3,359 +3,788 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO.Ports;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.DirectX.DirectInput;
+using MetroFramework.Forms;
+using MetroFramework;
+using System.IO.Ports;
+using System.IO;
+using SerialShell.Base;
 
 namespace SerialShell
 {
-    
-    public partial class MainForm : Form
+    public partial class MainForm : MetroForm
     {
-        //Thread Scanner ;
-        SerialPort sp;
-        Device joystick;
-        JoystickState joystickstate;
+        public Base.SerialShellSettings MySettings = new Base.SerialShellSettings();
+        public string MySettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/SerialShell/SerialShellSettings.xml";
+        CustomSerialPort csp;
+        JoystickDevice jsd;
 
-        const int jshigh =  5000;
-        const int jslow  = -5000;
-        public bool init_joystick()
-        {
-
-            //create joystick device.
-
-            foreach (
-                DeviceInstance di in
-                Manager.GetDevices(
-                    DeviceClass.GameControl,
-                    EnumDevicesFlags.AttachedOnly))
-            {
-                joystick = new Device(di.InstanceGuid);
-                break;
-            }
-
-            if (joystick == null)
-                return false;
-
-            //Set joystick axis ranges.
-            foreach (DeviceObjectInstance doi in joystick.Objects)
-            {
-                if ((doi.ObjectId & (int)DeviceObjectTypeFlags.Axis) != 0)
-                {
-                    joystick.Properties.SetRange(
-                        ParameterHow.ById,
-                        doi.ObjectId,
-                        new InputRange(jslow, jshigh));
-                }
-            }
-
-            //Set joystick axis mode absolute.
-            joystick.Properties.AxisModeAbsolute = true;
-
-            //set cooperative level.
-            joystick.SetCooperativeLevel(
-                this,
-                CooperativeLevelFlags.NonExclusive |
-                CooperativeLevelFlags.Background);
-
-            //Acquire devices for capturing.
-            try{
-                joystick.Acquire();
-            }catch{
-                return false;
-            }
-            joystick_timer.Enabled = true;
-            return true;
-        }
-        private void loadsettings()
-        {
-            //Tag
-            btn1.code = Properties.Settings.Default.Button1;
-            btn2.code = Properties.Settings.Default.Button2;
-            btn3.code = Properties.Settings.Default.Button3;
-            btn4.code = Properties.Settings.Default.Button4;
-            //l1,,l2,r1,r2
-            leftbtn1.code = Properties.Settings.Default.Left1;
-            rightbtn1.code = Properties.Settings.Default.Right1;
-            leftbtn2.code = Properties.Settings.Default.Left2;
-            rightbtn2.code = Properties.Settings.Default.Right2;
-            //select,start
-            selectbtn.code = Properties.Settings.Default.Select;
-            startbtn.code = Properties.Settings.Default.Start;
-            //up,down,left,right
-            leftbtn.code = Properties.Settings.Default.Left;
-            rightbtn.code = Properties.Settings.Default.Right;
-            upbtn.code = Properties.Settings.Default.Up;
-            downbtn.code = Properties.Settings.Default.Down;
-            //analogmid
-            leftanalogmidbtn.code = Properties.Settings.Default.LeftAnalogMid;
-            rightanalogmidbtn.code = Properties.Settings.Default.RightAnalogMid;
-
-
-            //repeatcode
-
-            btn1.repeatcode = Properties.Settings.Default.Button1Repeat;
-            btn2.repeatcode = Properties.Settings.Default.Button2Repeat;
-            btn3.repeatcode = Properties.Settings.Default.Button3Repeat;
-            btn4.repeatcode = Properties.Settings.Default.Button4Repeat;
-            //l1,,l2,r1,r2
-            leftbtn1.repeatcode = Properties.Settings.Default.Left1Repeat;
-            rightbtn1.repeatcode = Properties.Settings.Default.Right1Repeat;
-            leftbtn2.repeatcode = Properties.Settings.Default.Left2Repeat;
-            rightbtn2.repeatcode = Properties.Settings.Default.Right2Repeat;
-            //select,start
-            selectbtn.repeatcode = Properties.Settings.Default.SelectRepeat;
-            startbtn.repeatcode = Properties.Settings.Default.StartRepeat;
-            //up,down,left,right
-            leftbtn.repeatcode = Properties.Settings.Default.LeftRepeat;
-            rightbtn.repeatcode = Properties.Settings.Default.RightRepeat;
-            upbtn.repeatcode = Properties.Settings.Default.UpRepeat;
-            downbtn.repeatcode = Properties.Settings.Default.DownRepeat;
-            //analogmid
-            leftanalogmidbtn.repeatcode = Properties.Settings.Default.LeftAnalogMidRepeat;
-            rightanalogmidbtn.repeatcode = Properties.Settings.Default.RightAnalogMidRepeat;
-        }
         public MainForm()
         {
             InitializeComponent();
+            csp = new CustomSerialPort(this);
+            jsd = new JoystickDevice(this, JoystickDeviceStateScanner);
+            
+            //initialise connection list
+            connectionport_MouseClick(connectionport, new MouseEventArgs(new MouseButtons(),0,0,0,0));
+            if (connectionport.Items.Count != 0)
+                connectionport.SelectedIndex = 0;
+            MySettings = Base.SerialShellSettings.Load(MySettingsPath);
             loadsettings();
-            sp = new System.IO.Ports.SerialPort("COM1", 9600, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
-            Refresh.PerformClick();
-            
-            if (!init_joystick())
-                MessageBox.Show("Joystick not found");
-        }
-        //---------------------------------------------------------------------
-        private void Text1Append(string msg)
-        {
-            Text1.AppendText(Environment.NewLine + msg + Environment.NewLine);
-            Text1.ScrollToCaret();  
-        }
-        private void writetoserialport(byte b)
-        {
-            if (sp.IsOpen)
-            {
-                sp.Write(new byte[] { b },0,1);
-                if (Properties.Settings.Default.SendEndOfLineChar)
-                    sp.WriteLine("");
-                Text1Append("###Sending byte:" + b);
-            }
-            else Text1Append("###Error sending byte:" + b);                
-        }
-        private void writetoserialport(string msg)
-        {
-            if (sp.IsOpen)
-            {
-                if (Properties.Settings.Default.SendEndOfLineChar)
-                    sp.WriteLine(msg);
-                else sp.Write(msg);
-                Text1Append("###Sending data:" + msg);
-            }
-            else Text1Append("###Error sending data:" + msg);
-        }
-        private void joystickbtnpress(object sender, bool enabled)
-        {
-            if (enabled)
-            {
-                if ((sender as JoyButton).repeatcode)
-                {
-                    (sender as JoyButton).pressed = true;
-                    writetoserialport((sender as JoyButton).code);
-                }
-                else if ((sender as JoyButton).pressed == false)
-                {
-                    (sender as JoyButton).pressed = true;
-                    writetoserialport((sender as JoyButton).code);
-                }
-            }
-            else if ((sender as JoyButton).pressed)
-            {
-                (sender as JoyButton).pressed = false;
-                writetoserialport((byte)((sender as JoyButton).code + 128));
-            }
-        }
-        private void UpdateJoystick()
-        {
-            
-            try//get state
-            {
-                joystickstate = joystick.CurrentJoystickState;
-            }
-            catch
-            {
-                Text1Append("###joystick removed.");
-                joystick_timer.Enabled = false;
-                return;
-            }
-
-            //Capture Buttons.
-            byte[] buttons = joystickstate.GetButtons();
-
-            if (buttons.Count() < 10)
-            {
-                MessageBox.Show("Invalid joystick");
-                return;
-            }
-            //btn 0..3
-            joystickbtnpress(btn1, (buttons[0] != 0));
-            joystickbtnpress(btn2, (buttons[1] != 0));
-            joystickbtnpress(btn3, (buttons[2] != 0));
-            joystickbtnpress(btn4, (buttons[3] != 0));
-            
-            //l1,,l2,r1,r2
-            joystickbtnpress(leftbtn1, (buttons[4] != 0));
-            joystickbtnpress(rightbtn1, (buttons[5] != 0));
-            joystickbtnpress(leftbtn2, (buttons[6] != 0));
-            joystickbtnpress(rightbtn2, (buttons[7] != 0));
-            
-            //select,start
-            joystickbtnpress(selectbtn, (buttons[8] != 0));
-            joystickbtnpress(startbtn, (buttons[9] != 0));
-            
-            if (buttons.Count() >= 12)
-            {
-                joystickbtnpress(leftanalogmidbtn, (buttons[10] != 0));
-                joystickbtnpress(rightanalogmidbtn, (buttons[11] != 0));
-            }
-            //up,down,left,right
-            joystickbtnpress(leftbtn, (joystickstate.X == jslow));
-            joystickbtnpress(rightbtn, (joystickstate.X == jshigh));
-            joystickbtnpress(upbtn, (joystickstate.Y == jslow));
-            joystickbtnpress(downbtn, (joystickstate.Y == jshigh));
-            
-        }
-        //---------------------------------------------------------------------
-        private void Refresh_Click(object sender, EventArgs e)
-        {
-            Ports.Items.Clear();
-            foreach (string s in SerialPort.GetPortNames())
-                Ports.Items.Add(s);
-        }
-        private void serialportdatareceived(object sender,SerialDataReceivedEventArgs e)
-        {
-            MethodInvoker mi;
-            mi = delegate()
-            {
-                Text1.AppendText(sp.ReadByte().ToString()+"\n");
-                Text1.ScrollToCaret();
-            };
-
-            this.Invoke(mi);
         }
 
-        private void Start_Click(object sender, EventArgs e)
+        private void loadsettings()
         {
+            //connection settings
+            connectionbaud.SelectedIndex = MySettings.connectionbaud;
+            connectiondatasize.Checked = MySettings.connectiondatasize;
+            connectionstopbits.SelectedIndex = MySettings.connectionstopbits;
+            connectionparity.SelectedIndex = MySettings.connectionparity;
+            //send settings
+            senddatatype.SelectedIndex = MySettings.senddatatype ;
+            sendlineending.SelectedIndex = MySettings.sendlineending ;
+            sendsendfilepath.Text = MySettings.sendsendfilepath;
+            //load send shortcut settings
+            //send settings
+            receivedatatype.SelectedIndex = MySettings.receivedatatype;
+            receivelogpath.Text = MySettings.receivelogpath;
+            //receivelogpathCheckBox.Checked = MySettings.receivelogpathCheckBox;
+            //MetroTheme
+            metroStyleManager.Style = MySettings.metrostyle;
+            metroStyleManager.Theme = MySettings.metrotheme;
+        }
 
-            if (Ports.SelectedIndex == -1)
-            {
-                MessageBox.Show("Select port.");
-                return;
-            }
+        private void savesettings()
+        {
+            //connection settings
+            MySettings.connectionbaud = connectionbaud.SelectedIndex;
+            MySettings.connectiondatasize = connectiondatasize.Checked;
+            MySettings.connectionstopbits =connectionstopbits.SelectedIndex;
+            MySettings.connectionparity = connectionparity.SelectedIndex;
+            //send settings
+            MySettings.senddatatype = senddatatype.SelectedIndex;
+            MySettings.sendlineending = sendlineending.SelectedIndex;
+            MySettings.sendsendfilepath = sendsendfilepath.Text;
+            //save send shortcut settings
+            //receive settings
+            MySettings.receivedatatype = receivedatatype.SelectedIndex;
+            MySettings.receivelogpath = receivelogpath.Text;
+            //MySettings.receivelogpathCheckBox = receivelogpathCheckBox.Checked;
+            //MetroTheme
+            MySettings.metrostyle = metroStyleManager.Style;
+            MySettings.metrotheme = metroStyleManager.Theme;
 
-            if (Speeds.SelectedIndex == -1)
+            MySettings.Save(MySettingsPath);
+            MetroMessageBox.Show(this, "Current configuration was successfully saved.", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
+        }
+        private void sendJoystickShortcut(JoystickKeyState s, string datatype, string data)
+        {
+            switch (s)
             {
-                MessageBox.Show("Select baud rate.");
-                return;
+                case JoystickKeyState.JKSnone: return;
+                case JoystickKeyState.JKSrepeat:
+                case JoystickKeyState.JKSpress: //send data
+                    csp.send(datatype, data);
+                    break;
+                case JoystickKeyState.JKSrelease://send release data
+                    csp.send(datatype, data);
+                    break;
             }
-            
-            sp.PortName = Ports.Text;
-            sp.DataReceived += serialportdatareceived;
-            sp.BaudRate = Convert.ToInt32(Speeds.Text.Split(' ')[0]);
-            Text1Append("###Starting " + sp.PortName + " at speed " + sp.BaudRate + " baud.");
+        }
+        public void JoystickDeviceStateScanner(object sender, JoystickKeysState state)
+        {
+            #region button1
+            switch (state.Button1)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickButton1_Type, MySettings.shortcutJoystickButton1_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                     if (MySettings.shortcutJoystickButton1_Repeat == "True")
+                         csp.send(MySettings.shortcutJoystickButton1_Type, MySettings.shortcutJoystickButton1_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickButton1_Type, MySettings.shortcutJoystickButton1_DataRelease);
+                    break;
+            }
+            #endregion
+            #region button2
+            switch (state.Button2)
+            {
                 
-            try{
-                sp.Open();
-            }catch{
-                Text1Append("###Error opening port.");
-                return;
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickButton2_Type, MySettings.shortcutJoystickButton2_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickButton2_Repeat == "True")
+                           csp.send(MySettings.shortcutJoystickButton2_Type, MySettings.shortcutJoystickButton2_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickButton2_Type, MySettings.shortcutJoystickButton2_DataRelease);
+                    break;
             }
-            Text1Append("###Port opened.");
+            #endregion
+            #region button3
+            switch (state.Button3)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickButton3_Type, MySettings.shortcutJoystickButton3_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickButton3_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickButton3_Type, MySettings.shortcutJoystickButton3_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickButton3_Type, MySettings.shortcutJoystickButton3_DataRelease);
+                    break;
+            }
+            #endregion
+            #region button4
+            switch (state.Button4)
+            {
 
-            #region Enable Stop state
-            Start.Enabled = false;
-            Ports.Enabled = false;
-            Speeds.Enabled = false;
-            Refresh.Enabled = false;
-            Stop.Enabled = true;
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickButton4_Type, MySettings.shortcutJoystickButton4_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickButton4_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickButton4_Type, MySettings.shortcutJoystickButton4_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickButton4_Type, MySettings.shortcutJoystickButton4_DataRelease);
+                    break;
+            }
+            #endregion
+
+            #region L1
+            switch (state.L1)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickL1_Type, MySettings.shortcutJoystickL1_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickL1_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickL1_Type, MySettings.shortcutJoystickL1_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickL1_Type, MySettings.shortcutJoystickL1_DataRelease);
+                    break;
+            }
+            #endregion
+            #region L2
+            switch (state.L2)
+            {
+
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickL2_Type, MySettings.shortcutJoystickL2_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickL2_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickL2_Type, MySettings.shortcutJoystickL2_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickL2_Type, MySettings.shortcutJoystickL2_DataRelease);
+                    break;
+            }
+            #endregion
+            #region L3
+            switch (state.L3)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickL3_Type, MySettings.shortcutJoystickL3_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickL3_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickL3_Type, MySettings.shortcutJoystickL3_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickL3_Type, MySettings.shortcutJoystickL3_DataRelease);
+                    break;
+            }
+            #endregion
+
+            #region R1
+            switch (state.R1)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickR1_Type, MySettings.shortcutJoystickR1_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickR1_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickR1_Type, MySettings.shortcutJoystickR1_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickR1_Type, MySettings.shortcutJoystickR1_DataRelease);
+                    break;
+            }
+            #endregion
+            #region R2
+            switch (state.R2)
+            {
+
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickR2_Type, MySettings.shortcutJoystickR2_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickR2_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickR2_Type, MySettings.shortcutJoystickR2_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickR2_Type, MySettings.shortcutJoystickR2_DataRelease);
+                    break;
+            }
+            #endregion
+            #region R3
+            switch (state.R3)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickR3_Type, MySettings.shortcutJoystickR3_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickR3_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickR3_Type, MySettings.shortcutJoystickR3_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickR3_Type, MySettings.shortcutJoystickR3_DataRelease);
+                    break;
+            }
+            #endregion
+
+            #region Left
+            switch (state.Left)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickLeft_Type, MySettings.shortcutJoystickLeft_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickLeft_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickLeft_Type, MySettings.shortcutJoystickLeft_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickLeft_Type, MySettings.shortcutJoystickLeft_DataRelease);
+                    break;
+            }
+            #endregion
+            #region Right
+            switch (state.Right)
+            {
+
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickRight_Type, MySettings.shortcutJoystickRight_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickRight_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickRight_Type, MySettings.shortcutJoystickRight_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickRight_Type, MySettings.shortcutJoystickRight_DataRelease);
+                    break;
+            }
+            #endregion
+            #region Up
+            switch (state.Up)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickUp_Type, MySettings.shortcutJoystickUp_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickUp_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickUp_Type, MySettings.shortcutJoystickUp_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickUp_Type, MySettings.shortcutJoystickUp_DataRelease);
+                    break;
+            }
+            #endregion
+            #region Down
+            switch (state.Down)
+            {
+
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickDown_Type, MySettings.shortcutJoystickDown_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickDown_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickDown_Type, MySettings.shortcutJoystickDown_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickDown_Type, MySettings.shortcutJoystickDown_DataRelease);
+                    break;
+            }
+            #endregion
+
+            #region Start
+            switch (state.Start)
+            {
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickStart_Type, MySettings.shortcutJoystickStart_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickStart_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickStart_Type, MySettings.shortcutJoystickStart_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickStart_Type, MySettings.shortcutJoystickStart_DataRelease);
+                    break;
+            }
+            #endregion
+            #region Select
+            switch (state.Select)
+            {
+
+                case JoystickKeyState.JKSpress:
+                    csp.send(MySettings.shortcutJoystickSelect_Type, MySettings.shortcutJoystickSelect_Data);
+                    break;
+                case JoystickKeyState.JKSrepeat:
+                    if (MySettings.shortcutJoystickSelect_Repeat == "True")
+                        csp.send(MySettings.shortcutJoystickSelect_Type, MySettings.shortcutJoystickSelect_Data);
+                    break;
+                case JoystickKeyState.JKSrelease:
+                    csp.send(MySettings.shortcutJoystickSelect_Type, MySettings.shortcutJoystickSelect_DataRelease);
+                    break;
+            }
             #endregion
         }
 
-
-        private void Stop_Click(object sender, EventArgs e)
+        private void savesettingsbtn_Click(object sender, EventArgs e)
         {
-            if (sp.IsOpen == false)
-                return;
-                
-            sp.Close();
-            Text1Append("###Port Closed.");
+            savesettings();
+        }
+
+        private void connectionbeginnerconfig_Click(object sender, EventArgs e)
+        {
+            connectionbaud.SelectedIndex = 4;
+            connectiondatasize.Checked = false;
+            connectionstopbits.SelectedIndex = 0;
+            connectionparity.SelectedIndex = 2;
+        }
+
+        private void metroTextButton2_Click(object sender, EventArgs e)
+        {
+            var m = new Random();
+            int next = m.Next(0, 13);
+            metroStyleManager.Style = (MetroFramework.MetroColorStyle)next;
+        }
+
+        private void metroTextButton3_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = metroStyleManager.Theme == MetroThemeStyle.Light ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+        }
+
+        private void sendsendfilebrowse_Click(object sender, EventArgs e)
+        {
+            sendfileopendialog.FileName = sendsendfilepath.Text;
+            if (sendfileopendialog.ShowDialog() == DialogResult.OK)
+                sendsendfilepath.Text = sendfileopendialog.FileName;
+        }
+
+        private void receivelogbrowse_Click(object sender, EventArgs e)
+        {
+            receivelogsaveDialog.FileName = receivelogpath.Text;
+            if (receivelogsaveDialog.ShowDialog() == DialogResult.OK)
+                receivelogpath.Text = receivelogsaveDialog.FileName;
+        }
+
+        private void shortcutloadformsettings(SendShortcutSettingsForm f)
+        {
+            #region Load joystick shortcut settings
+                f.joystickGridSettings[1, 0].Value = MySettings.shortcutJoystickButton1_Type;
+                f.joystickGridSettings[2, 0].Value = MySettings.shortcutJoystickButton1_Repeat;
+                f.joystickGridSettings[3, 0].Value = MySettings.shortcutJoystickButton1_Data;
+                f.joystickGridSettings[4, 0].Value = MySettings.shortcutJoystickButton1_DataRelease;
+                f.joystickGridSettings[1, 1].Value = MySettings.shortcutJoystickButton2_Type;
+                f.joystickGridSettings[2, 1].Value = MySettings.shortcutJoystickButton2_Repeat;
+                f.joystickGridSettings[3, 1].Value = MySettings.shortcutJoystickButton2_Data;
+                f.joystickGridSettings[4, 1].Value = MySettings.shortcutJoystickButton2_DataRelease;
+                f.joystickGridSettings[1, 2].Value = MySettings.shortcutJoystickButton3_Type;
+                f.joystickGridSettings[2, 2].Value = MySettings.shortcutJoystickButton3_Repeat;
+                f.joystickGridSettings[3, 2].Value = MySettings.shortcutJoystickButton3_Data;
+                f.joystickGridSettings[4, 2].Value = MySettings.shortcutJoystickButton3_DataRelease;
+                f.joystickGridSettings[1, 3].Value = MySettings.shortcutJoystickButton4_Type;
+                f.joystickGridSettings[2, 3].Value = MySettings.shortcutJoystickButton4_Repeat;
+                f.joystickGridSettings[3, 3].Value = MySettings.shortcutJoystickButton4_Data;
+                f.joystickGridSettings[4, 3].Value = MySettings.shortcutJoystickButton4_DataRelease;
+                f.joystickGridSettings[1, 4].Value = MySettings.shortcutJoystickL1_Type;
+                f.joystickGridSettings[2, 4].Value = MySettings.shortcutJoystickL1_Repeat;
+                f.joystickGridSettings[3, 4].Value = MySettings.shortcutJoystickL1_Data;
+                f.joystickGridSettings[4, 4].Value = MySettings.shortcutJoystickL1_DataRelease;
+                f.joystickGridSettings[1, 5].Value = MySettings.shortcutJoystickL2_Type;
+                f.joystickGridSettings[2, 5].Value = MySettings.shortcutJoystickL2_Repeat;
+                f.joystickGridSettings[3, 5].Value = MySettings.shortcutJoystickL2_Data;
+                f.joystickGridSettings[4, 5].Value = MySettings.shortcutJoystickL2_DataRelease;
+                f.joystickGridSettings[1, 6].Value = MySettings.shortcutJoystickL3_Type;
+                f.joystickGridSettings[2, 6].Value = MySettings.shortcutJoystickL3_Repeat;
+                f.joystickGridSettings[3, 6].Value = MySettings.shortcutJoystickL3_Data;
+                f.joystickGridSettings[4, 6].Value = MySettings.shortcutJoystickL3_DataRelease;
+                f.joystickGridSettings[1, 7].Value = MySettings.shortcutJoystickR1_Type;
+                f.joystickGridSettings[2, 7].Value = MySettings.shortcutJoystickR1_Repeat;
+                f.joystickGridSettings[3, 7].Value = MySettings.shortcutJoystickR1_Data;
+                f.joystickGridSettings[4, 7].Value = MySettings.shortcutJoystickR1_DataRelease;
+                f.joystickGridSettings[1, 8].Value = MySettings.shortcutJoystickR2_Type;
+                f.joystickGridSettings[2, 8].Value = MySettings.shortcutJoystickR2_Repeat;
+                f.joystickGridSettings[3, 8].Value = MySettings.shortcutJoystickR2_Data;
+                f.joystickGridSettings[4, 8].Value = MySettings.shortcutJoystickR2_DataRelease;
+                f.joystickGridSettings[1, 9].Value = MySettings.shortcutJoystickR3_Type;
+                f.joystickGridSettings[2, 9].Value = MySettings.shortcutJoystickR3_Repeat;
+                f.joystickGridSettings[3, 9].Value = MySettings.shortcutJoystickR3_Data;
+                f.joystickGridSettings[4, 9].Value = MySettings.shortcutJoystickR3_DataRelease;
+                f.joystickGridSettings[1, 10].Value = MySettings.shortcutJoystickUp_Type;
+                f.joystickGridSettings[2, 10].Value = MySettings.shortcutJoystickUp_Repeat;
+                f.joystickGridSettings[3, 10].Value = MySettings.shortcutJoystickUp_Data;
+                f.joystickGridSettings[4, 10].Value = MySettings.shortcutJoystickUp_DataRelease;
+                f.joystickGridSettings[1, 11].Value = MySettings.shortcutJoystickDown_Type;
+                f.joystickGridSettings[2, 11].Value = MySettings.shortcutJoystickDown_Repeat;
+                f.joystickGridSettings[3, 11].Value = MySettings.shortcutJoystickDown_Data;
+                f.joystickGridSettings[4, 11].Value = MySettings.shortcutJoystickDown_DataRelease;
+                f.joystickGridSettings[1, 12].Value = MySettings.shortcutJoystickLeft_Type;
+                f.joystickGridSettings[2, 12].Value = MySettings.shortcutJoystickLeft_Repeat;
+                f.joystickGridSettings[3, 12].Value = MySettings.shortcutJoystickLeft_Data;
+                f.joystickGridSettings[4, 12].Value = MySettings.shortcutJoystickLeft_DataRelease;
+                f.joystickGridSettings[1, 13].Value = MySettings.shortcutJoystickRight_Type;
+                f.joystickGridSettings[2, 13].Value = MySettings.shortcutJoystickRight_Repeat;
+                f.joystickGridSettings[3, 13].Value = MySettings.shortcutJoystickRight_Data;
+                f.joystickGridSettings[4, 13].Value = MySettings.shortcutJoystickRight_DataRelease;
+                f.joystickGridSettings[1, 14].Value = MySettings.shortcutJoystickStart_Type;
+                f.joystickGridSettings[2, 14].Value = MySettings.shortcutJoystickStart_Repeat;
+                f.joystickGridSettings[3, 14].Value = MySettings.shortcutJoystickStart_Data;
+                f.joystickGridSettings[4, 14].Value = MySettings.shortcutJoystickStart_DataRelease;
+                f.joystickGridSettings[1, 15].Value = MySettings.shortcutJoystickSelect_Type;
+                f.joystickGridSettings[2, 15].Value = MySettings.shortcutJoystickSelect_Repeat;
+                f.joystickGridSettings[3, 15].Value = MySettings.shortcutJoystickSelect_Data;
+                f.joystickGridSettings[4, 15].Value = MySettings.shortcutJoystickSelect_DataRelease;
+            #endregion               
+            #region Load keyboard shortcut settings
+                f.keyboardGridSettings[1, 0].Value = MySettings.shortcutKeyboardCtrl0_Type;
+                f.keyboardGridSettings[2, 0].Value = MySettings.shortcutKeyboardCtrl0_Data;
+
+                f.keyboardGridSettings[1, 1].Value = MySettings.shortcutKeyboardCtrl1_Type;
+                f.keyboardGridSettings[2, 1].Value = MySettings.shortcutKeyboardCtrl1_Data;
             
-            #region Enable Start State
-                Ports.Enabled = true;
-                Speeds.Enabled = true;
-                Refresh.Enabled = true;
-                Start.Enabled = true;
-                Stop.Enabled = false;
+                f.keyboardGridSettings[1, 2].Value = MySettings.shortcutKeyboardCtrl2_Type;
+                f.keyboardGridSettings[2, 2].Value = MySettings.shortcutKeyboardCtrl2_Data;
+
+                f.keyboardGridSettings[1, 3].Value = MySettings.shortcutKeyboardCtrl3_Type;
+                f.keyboardGridSettings[2, 3].Value = MySettings.shortcutKeyboardCtrl3_Data;
+
+                f.keyboardGridSettings[1, 4].Value = MySettings.shortcutKeyboardCtrl4_Type;
+                f.keyboardGridSettings[2, 4].Value = MySettings.shortcutKeyboardCtrl4_Data;
+
+                f.keyboardGridSettings[1, 5].Value = MySettings.shortcutKeyboardCtrl5_Type;
+                f.keyboardGridSettings[2, 5].Value = MySettings.shortcutKeyboardCtrl5_Data;
+
+                f.keyboardGridSettings[1, 6].Value = MySettings.shortcutKeyboardCtrl6_Type;
+                f.keyboardGridSettings[2, 6].Value = MySettings.shortcutKeyboardCtrl6_Data;
+
+                f.keyboardGridSettings[1, 7].Value = MySettings.shortcutKeyboardCtrl7_Type;
+                f.keyboardGridSettings[2, 7].Value = MySettings.shortcutKeyboardCtrl7_Data;
+
+                f.keyboardGridSettings[1, 8].Value = MySettings.shortcutKeyboardCtrl8_Type;
+                f.keyboardGridSettings[2, 8].Value = MySettings.shortcutKeyboardCtrl8_Data;
+
+                f.keyboardGridSettings[1, 9].Value = MySettings.shortcutKeyboardCtrl9_Type;
+                f.keyboardGridSettings[2, 9].Value = MySettings.shortcutKeyboardCtrl9_Data;
+
             #endregion
         }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        
+        private void shortcutsaveformsettings(SendShortcutSettingsForm f)
         {
-            Stop.PerformClick();
+            #region Save joystick shortcut settings
+           // f.joystickGridSettings[2, 0] as
+            MySettings.shortcutJoystickButton1_Type = (string)f.joystickGridSettings[1, 0].Value;
+            MySettings.shortcutJoystickButton1_Repeat = (string)f.joystickGridSettings[2, 0].Value;
+            MySettings.shortcutJoystickButton1_Data = (string)f.joystickGridSettings[3, 0].Value;
+            MySettings.shortcutJoystickButton1_DataRelease = (string)f.joystickGridSettings[4, 0].Value;
+            MySettings.shortcutJoystickButton2_Type = (string)f.joystickGridSettings[1, 1].Value;
+            MySettings.shortcutJoystickButton2_Repeat = (string)f.joystickGridSettings[2, 1].Value;
+            MySettings.shortcutJoystickButton2_Data = (string)f.joystickGridSettings[3, 1].Value;
+            MySettings.shortcutJoystickButton2_DataRelease = (string)f.joystickGridSettings[4, 1].Value;
+            MySettings.shortcutJoystickButton3_Type = (string)f.joystickGridSettings[1, 2].Value;
+            MySettings.shortcutJoystickButton3_Repeat = (string)f.joystickGridSettings[2, 2].Value;
+            MySettings.shortcutJoystickButton3_Data = (string)f.joystickGridSettings[3, 2].Value;
+            MySettings.shortcutJoystickButton3_DataRelease = (string)f.joystickGridSettings[4, 2].Value;
+            MySettings.shortcutJoystickButton4_Type = (string)f.joystickGridSettings[1, 3].Value;
+            MySettings.shortcutJoystickButton4_Repeat = (string)f.joystickGridSettings[2, 3].Value;
+            MySettings.shortcutJoystickButton4_Data = (string)f.joystickGridSettings[3, 3].Value;
+            MySettings.shortcutJoystickButton4_DataRelease = (string)f.joystickGridSettings[4, 3].Value;
+            MySettings.shortcutJoystickL1_Type = (string)f.joystickGridSettings[1, 4].Value;
+            MySettings.shortcutJoystickL1_Repeat = (string)f.joystickGridSettings[2, 4].Value;
+            MySettings.shortcutJoystickL1_Data = (string)f.joystickGridSettings[3, 4].Value;
+            MySettings.shortcutJoystickL1_DataRelease = (string)f.joystickGridSettings[4, 4].Value;
+            MySettings.shortcutJoystickL2_Type = (string)f.joystickGridSettings[1, 5].Value;
+            MySettings.shortcutJoystickL2_Repeat = (string)f.joystickGridSettings[2, 5].Value;
+            MySettings.shortcutJoystickL2_Data = (string)f.joystickGridSettings[3, 5].Value;
+            MySettings.shortcutJoystickL2_DataRelease = (string)f.joystickGridSettings[4, 5].Value;
+            MySettings.shortcutJoystickL3_Type = (string)f.joystickGridSettings[1, 6].Value;
+            MySettings.shortcutJoystickL3_Repeat = (string)f.joystickGridSettings[2, 6].Value;
+            MySettings.shortcutJoystickL3_Data = (string)f.joystickGridSettings[3, 6].Value;
+            MySettings.shortcutJoystickL3_DataRelease = (string)f.joystickGridSettings[4, 6].Value;
+            MySettings.shortcutJoystickR1_Type = (string)f.joystickGridSettings[1, 7].Value;
+            MySettings.shortcutJoystickR1_Repeat = (string)f.joystickGridSettings[2, 7].Value;
+            MySettings.shortcutJoystickR1_Data = (string)f.joystickGridSettings[3, 7].Value;
+            MySettings.shortcutJoystickR1_DataRelease = (string)f.joystickGridSettings[4, 7].Value;
+            MySettings.shortcutJoystickR2_Type = (string)f.joystickGridSettings[1, 8].Value;
+            MySettings.shortcutJoystickR2_Repeat = (string)f.joystickGridSettings[2, 8].Value;
+            MySettings.shortcutJoystickR2_Data = (string)f.joystickGridSettings[3, 8].Value;
+            MySettings.shortcutJoystickR2_DataRelease = (string)f.joystickGridSettings[4, 8].Value;
+            MySettings.shortcutJoystickR3_Type = (string)f.joystickGridSettings[1, 9].Value;
+            MySettings.shortcutJoystickR3_Repeat = (string)f.joystickGridSettings[2, 9].Value;
+            MySettings.shortcutJoystickR3_Data = (string)f.joystickGridSettings[3, 9].Value;
+            MySettings.shortcutJoystickR3_DataRelease = (string)f.joystickGridSettings[4, 9].Value;
+            MySettings.shortcutJoystickUp_Type = (string)f.joystickGridSettings[1, 10].Value;
+            MySettings.shortcutJoystickUp_Repeat = (string)f.joystickGridSettings[2, 10].Value;
+            MySettings.shortcutJoystickUp_Data = (string)f.joystickGridSettings[3, 10].Value;
+            MySettings.shortcutJoystickUp_DataRelease = (string)f.joystickGridSettings[4, 10].Value;
+            MySettings.shortcutJoystickDown_Type = (string)f.joystickGridSettings[1, 11].Value;
+            MySettings.shortcutJoystickDown_Repeat = (string)f.joystickGridSettings[2, 11].Value;
+            MySettings.shortcutJoystickDown_Data = (string)f.joystickGridSettings[3, 11].Value;
+            MySettings.shortcutJoystickDown_DataRelease = (string)f.joystickGridSettings[4, 11].Value;
+            MySettings.shortcutJoystickLeft_Type = (string)f.joystickGridSettings[1, 12].Value;
+            MySettings.shortcutJoystickLeft_Repeat = (string)f.joystickGridSettings[2, 12].Value;
+            MySettings.shortcutJoystickLeft_Data = (string)f.joystickGridSettings[3, 12].Value;
+            MySettings.shortcutJoystickLeft_DataRelease = (string)f.joystickGridSettings[4, 12].Value;
+            MySettings.shortcutJoystickRight_Type = (string)f.joystickGridSettings[1, 13].Value;
+            MySettings.shortcutJoystickRight_Repeat = (string)f.joystickGridSettings[2, 13].Value;
+            MySettings.shortcutJoystickRight_Data = (string)f.joystickGridSettings[3, 13].Value;
+            MySettings.shortcutJoystickRight_DataRelease = (string)f.joystickGridSettings[4, 13].Value;
+            MySettings.shortcutJoystickStart_Type = (string)f.joystickGridSettings[1, 14].Value;
+            MySettings.shortcutJoystickStart_Repeat = (string)f.joystickGridSettings[2, 14].Value;
+            MySettings.shortcutJoystickStart_Data = (string)f.joystickGridSettings[3, 14].Value;
+            MySettings.shortcutJoystickStart_DataRelease = (string)f.joystickGridSettings[4, 14].Value;
+            MySettings.shortcutJoystickSelect_Type = (string)f.joystickGridSettings[1, 15].Value;
+            MySettings.shortcutJoystickSelect_Repeat = (string)f.joystickGridSettings[2, 15].Value;
+            MySettings.shortcutJoystickSelect_Data = (string)f.joystickGridSettings[3, 15].Value;
+            MySettings.shortcutJoystickSelect_DataRelease = (string)f.joystickGridSettings[4, 15].Value;
+            #endregion
+            #region Save keyboard shortcut settings
+            MySettings.shortcutKeyboardCtrl0_Type = (string)f.keyboardGridSettings[1, 0].Value;
+            MySettings.shortcutKeyboardCtrl0_Data = (string)f.keyboardGridSettings[2, 0].Value;
+            MySettings.shortcutKeyboardCtrl1_Type = (string)f.keyboardGridSettings[1, 1].Value;
+            MySettings.shortcutKeyboardCtrl1_Data = (string)f.keyboardGridSettings[2, 1].Value;
+            MySettings.shortcutKeyboardCtrl2_Type = (string)f.keyboardGridSettings[1, 2].Value;
+            MySettings.shortcutKeyboardCtrl2_Data = (string)f.keyboardGridSettings[2, 2].Value;
+            MySettings.shortcutKeyboardCtrl3_Type = (string)f.keyboardGridSettings[1, 3].Value;
+            MySettings.shortcutKeyboardCtrl3_Data = (string)f.keyboardGridSettings[2, 3].Value;
+            MySettings.shortcutKeyboardCtrl4_Type = (string)f.keyboardGridSettings[1, 4].Value;
+            MySettings.shortcutKeyboardCtrl4_Data = (string)f.keyboardGridSettings[2, 4].Value;
+            MySettings.shortcutKeyboardCtrl5_Type = (string)f.keyboardGridSettings[1, 5].Value;
+            MySettings.shortcutKeyboardCtrl5_Data = (string)f.keyboardGridSettings[2, 5].Value;
+            MySettings.shortcutKeyboardCtrl6_Type = (string)f.keyboardGridSettings[1, 6].Value;
+            MySettings.shortcutKeyboardCtrl6_Data = (string)f.keyboardGridSettings[2, 6].Value;
+            MySettings.shortcutKeyboardCtrl7_Type = (string)f.keyboardGridSettings[1, 7].Value;
+            MySettings.shortcutKeyboardCtrl7_Data = (string)f.keyboardGridSettings[2, 7].Value;
+            MySettings.shortcutKeyboardCtrl8_Type = (string)f.keyboardGridSettings[1, 8].Value;
+            MySettings.shortcutKeyboardCtrl8_Data = (string)f.keyboardGridSettings[2, 8].Value;
+            MySettings.shortcutKeyboardCtrl9_Type = (string)f.keyboardGridSettings[1, 9].Value;
+            MySettings.shortcutKeyboardCtrl9_Data = (string)f.keyboardGridSettings[2, 9].Value;
+            #endregion
+            MySettings.Save(MySettingsPath);
+            
+        }
+        
+        private void sendshortcutbtn_Click(object sender, EventArgs e)
+        {
+            using (SendShortcutSettingsForm f = new SendShortcutSettingsForm())
+            {
+                f.metroStyleManager.Theme = metroStyleManager.Theme;
+                f.metroStyleManager.Style = metroStyleManager.Style;
+                shortcutloadformsettings(f);
+                if (f.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    shortcutsaveformsettings(f);
+            }
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public void connectbtn_Click(object sender, EventArgs e)
         {
-            if (e.KeyChar == 13)
+            if (connectbtn.Text == "Disconnect")
+            {
+                csp.close();
+                connectbtn.Text = "Connect to serial port";
+                connectionbeginnerconfig.Enabled = true;
+                connectionport.Enabled = true;
+                connectionbaud.Enabled = true;
+                connectionparity.Enabled = true;
+                connectiondatasize.Enabled = true;
+                connectionstopbits.Enabled = true;
+                MetroMessageBox.Show(this, "Port closed.", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                if (csp.open())
                 {
-                    writetoserialport(textBox1.Text);
-                    textBox1.Text = "";
+                    MetroMessageBox.Show(this, "Port opened.", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    connectbtn.Text = "Disconnect";
+                    connectionbeginnerconfig.Enabled = false;
+                    connectionport.Enabled = false;
+                    connectionbaud.Enabled = false;
+                    connectionparity.Enabled = false;
+                    connectiondatasize.Enabled = false;
+                    connectionstopbits.Enabled = false;
                 }
-        }
-
-        private void CMD_btn_Click(object sender, EventArgs e)
-        {
-            writetoserialport((sender as JoyButton).code);
-        }
-
-        private void clear_Click(object sender, EventArgs e)
-        {
-            Text1.Clear();
-        }
-
-        private void joystickTimer_Tick(object sender, EventArgs e)
-        {
-            //if (sp.IsOpen)
-                UpdateJoystick();
-        }
-
-        private void resetjoystick_button_Click(object sender, EventArgs e)
-        {
-            if (init_joystick() == false)
-                MessageBox.Show("Joystick not found");
-        }
-
-        private void aboutbtn_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("   --- SerialShell - Bluetooth communication V0.1.1 ---\n\n" +
-                            "                               Developed by: \n" +
-                            "                      BOURAOUI AL-Moez L.A\n" +
-                            "              (bouraoui.almoez.la@gmail.com)\n\n" +
-                            "  License: GPL - 2.0\n\n\n"
-                            , "SerialShell - Bluetooth communication V0.1.1");
+            }
 
         }
 
-        private void Settings_Click(object sender, EventArgs e)
+        private void senddatatype_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((new SettingsForm()).ShowDialog(this) == DialogResult.OK)
-                Properties.Settings.Default.Save();
-            else Properties.Settings.Default.Reload();
+              
+                    int p = senddatatype.SelectedIndex, t = 0;
+                    if (senddatatype.Tag is int)
+                        t = (int)(senddatatype.Tag);
+                    if (p == t)
+                        return;
+                    senddatatype.Tag = p;
+                    if (p < 2)
+                        sendmsg.Text = "";
+                    else if (p == 2)
+                        sendmsg.Text = "0,0";
+                    else sendmsg.Text = "0";
+        }
 
-            loadsettings();
+        private void sendsendfilesend_Click(object sender, EventArgs e)
+        {
+            if (sendsendfilepath.Text != "")
+                csp.sendfile(sendsendfilepath.Text);
+        }
+
+        private void sendmsg_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                if (Base.TypeCheck.isNotType(senddatatype.Text, sendmsg.Text))
+                {
+                    MetroMessageBox.Show(this, "Error : Unvalid value.", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                csp.send(senddatatype.Text, sendmsg.Text);
+                sendmsg.Text = "";
+            }
+        }
+
+        private void connectionport_MouseClick(object sender, MouseEventArgs e)
+        {
+            string s;
+            s = connectionport.Text;
+            connectionport.Items.Clear();
+            connectionport.Items.AddRange(SerialPort.GetPortNames());
+            connectionport.SelectedIndex = connectionport.Items.IndexOf(s);
+        }
+
+        private void ctrlshortcutpress(object sender, EventArgs e)
+        {
+            switch ((sender as ToolStripMenuItem).Text)
+            {
+                #region ctrl0
+                case "ctrl0":
+                    csp.send(MySettings.shortcutKeyboardCtrl0_Type, MySettings.shortcutKeyboardCtrl0_Data);
+                    break;
+                #endregion
+                #region ctrl1
+                case "ctrl1":
+                    csp.send(MySettings.shortcutKeyboardCtrl1_Type, MySettings.shortcutKeyboardCtrl1_Data);
+                    break;
+                #endregion
+                #region ctrl2
+                case "ctrl2": 
+                    csp.send(MySettings.shortcutKeyboardCtrl2_Type, MySettings.shortcutKeyboardCtrl2_Data);
+                    break;
+                #endregion
+                #region ctrl3
+                case "ctrl3":
+                    csp.send(MySettings.shortcutKeyboardCtrl3_Type, MySettings.shortcutKeyboardCtrl3_Data);
+                    break;
+                #endregion
+                #region ctrl4
+                case "ctrl4":
+                    csp.send(MySettings.shortcutKeyboardCtrl4_Type, MySettings.shortcutKeyboardCtrl4_Data);
+                    break;
+                #endregion
+                #region ctrl5
+                case "ctrl5":
+                    csp.send(MySettings.shortcutKeyboardCtrl5_Type, MySettings.shortcutKeyboardCtrl5_Data);
+                    break;
+                #endregion
+                #region ctrl6
+                case "ctrl6":
+                    csp.send(MySettings.shortcutKeyboardCtrl6_Type, MySettings.shortcutKeyboardCtrl6_Data);
+                    break;
+                #endregion
+                #region ctrl7
+                case "ctrl7":
+                    csp.send(MySettings.shortcutKeyboardCtrl7_Type, MySettings.shortcutKeyboardCtrl7_Data);
+                    break;
+                #endregion
+                #region ctrl8
+                case "ctrl8":
+                    csp.send(MySettings.shortcutKeyboardCtrl8_Type, MySettings.shortcutKeyboardCtrl8_Data);
+                    break;
+                #endregion
+                #region ctrl9
+                case "ctrl9":
+                    csp.send(MySettings.shortcutKeyboardCtrl9_Type, MySettings.shortcutKeyboardCtrl9_Data);
+                    break;
+                #endregion
+            }
+        }
+
+        private void sendmsg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void hostcleaner_Click(object sender, EventArgs e)
+        {
+            hostTextBox.Clear();
+        }
+
+        private void guestcleaner_Click(object sender, EventArgs e)
+        {
+            guestTextBox.Clear();
+        }
+
+        private void LogStartStop_Click(object sender, EventArgs e)
+        {
+            if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(receivelogpath.Text)))
+            {
+                if (LogStartStop.Text == "Enable")
+                {
+                    LogStartStop.Text = "Disable";
+                    receivelogpath.Enabled = false;
+                    receivelogbrowse.Enabled = false;
+                }
+                else if (LogStartStop.Text == "Disable")
+                {
+                    LogStartStop.Text = "Enable";
+                    receivelogpath.Enabled = true;
+                    receivelogbrowse.Enabled = true;
+                }
+            }
+            else MetroMessageBox.Show(this, "Please select a valid access path to file.", "Error access path doesn't exist",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        }
+
+        private void helpbtn_Click(object sender, EventArgs e)
+        {
+            using (HelpForm f = new HelpForm())
+            {
+                f.metroStyleManager.Theme = metroStyleManager.Theme;
+                f.metroStyleManager.Style = metroStyleManager.Style;
+                f.ShowDialog(this);
+            }
+        }
+
+        private void repoButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/abdalmoez/serial-shell");
+        }
+
+        private void licensePicture_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/abdalmoez/serial-shell/blob/master/LICENSE");
         }
     }
 }

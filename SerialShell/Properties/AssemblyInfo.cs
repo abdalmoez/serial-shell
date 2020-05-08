@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SerialPort-Bluetooth Joy Communication")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SerialShell V0.2.0")]
+[assembly: AssemblyDescription("Author: BOURAOUI Al-Moez L.A")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("AMDreamSoft")]
-[assembly: AssemblyProduct("SerialPort-Bluetooth Communication Joy Version")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SerialShell")]
+[assembly: AssemblyCopyright("© 2016-2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("75878ce5-dd81-4559-8464-1348d4ec9a07")]
+[assembly: Guid("572220b4-2b9c-48aa-8019-7dbf349eda4b")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.1")]
-[assembly: AssemblyFileVersion("0.0.1.1")]
+[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

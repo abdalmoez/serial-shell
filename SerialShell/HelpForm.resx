@@ -117,4 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="metroLabel1.Text" xml:space="preserve">
+    <value>Serial communication is characterized by:
+ + The speed of transferring data BAUD (number of bits in a second).
+ + Data size 7bits (used to send ascii code) or 8bits.
+ + Parity used to check if data where not changed when sending it you can select: Even, Odd, None, Mark or Space.
+ + Stop bits : before sending data in serial communication we send a start bit then the data and finally we end by stop bits it can be 1,1.5 or 2bits.</value>
+  </data>
+  <data name="metroLabel2.Text" xml:space="preserve">
+    <value> "Connect" tab:
+Before starting a communication you must select the serial port where the device you wish to use is connected then select your port configuration 
+(every time you active the combo Box it will automatically scan all serial ports).If you are a beginner you can use button "Beginner configuration" to
+ select the default configuration used by all devices then press button connect.</value>
+  </data>
+  <data name="metroLabel3.Text" xml:space="preserve">
+    <value> "Send" tab
+In this tab you can select data type of what you’d like to send.
+Example: if you'd like to send a float you can select in data type section "float" and write your number in message section then press enter.
+You can use ending line:
+          - None
+          - Windows (CR LF) : Carriage return + Line feed
+          - Macintosh (CR): Carriage return 
+          - Unix (LF): Line feed
+You can also send a file:
+          1- Press "browse" button
+          2- Select your file
+          3- Press "send" button
+"Shortcut Settings" button open a dialog to configure shortcuts for keyboard you can use (CTRL0,CTRL1,CTRL2,CTRL3,CTRL4,CTRL5,CTRL6,CTRL7,
+CTRL8,CTRL9) or for joystick buttons.</value>
+  </data>
+  <metadata name="metroStyleManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
