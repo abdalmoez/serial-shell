@@ -149,4 +149,143 @@ CTRL8,CTRL9) or for joystick buttons.</value>
   <metadata name="metroStyleManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>
+
+
+
+
+                                                          SerialShell V0.1 Manual
+                                                                                  Copyright 2016
+
+
+
+
+Summary:
+	I.	Introduction
+	II.	Connecting your device
+	III.	Sending data
+	IV.	Receiving data
+	V.	License
+	VI.	Contact us
+
+
+I.	Introduction
+		SerialShell is an advanced application used to send and receive data using a serial port. 
+		You can use your joystick or your keyboard as shortcut system to send predefined data or 
+		send costumed data messages. This application allows you to select your data type (string,
+		C-Like string, float, byte, word …) and you will have a total access to your serial port 
+		device using the advanced tools.
+II.	Connecting your device:
+		Connection tab is used to connect to your Serial Port device, so you have to specify the 
+		port COM? Data transfer speed in BAUD and other information that your device used so be 
+		careful you have to configure your application correctly to get it work.
+		List of connection settings:
+		•	Port:
+		In this combo box you have to specify your port so if you used COM1 you have to set this 
+		field to COM1. Every time you drop down the combo box the application will scan all serial 
+		ports available for use.
+		•	Baud:
+		Here you have to specify the data rate or data speed if you use another speed than the 
+		hosted port, you will lose your data when sending, so if your hosted device use a speed 
+		of 9600baud you have to set this field to 9600baud.
+		The evaluable values are: 300, 1400, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400,
+		250000. All these values are in BAUD unit. 
+		•	Data Size:
+		Here you specify your device sending data size 8 bits or 7 bits.
+		•	Stop Bits:
+		Number of stop bits used in transferring data 1, 1.5 or 2.
+		•	Parity:
+		This field is used to check if the data are correctly received so you have to specify what
+		type of checking the data. The available values are: ‘Even’, ‘Odd’, ‘None’, ‘Mark’ and ‘Space’.
+
+		If you are a beginner and you don’t know what to set you can use “Beginner Configuration”
+		so this will set the default values used in the most application:
+			Baud: 9600
+			Data Size: 8 bits
+			Stop Bits: 1
+			Parity: None
+		After entering the correct settings use the connect button if there is a connection error 
+		it will be displayed in the Host Monitor.
+
+
+
+
+III.	Sending data:
+
+
+		There is three ways to send data:
+		•	Select a file and then press send button to send all the data in this file. It can be 
+		a text file or binary file.
+		•	Sending a costumed message so every time you’d like to send message you have to write
+		it and press “ENTER” button. You can select your data type using the data type combo box. 
+		Also you can choose the data ending:
+			§	None
+			§	Windows (CR LF)
+			§	Macintosh (CR)
+			§	Unix (LF)
+		The available data types are: 
+			o	String
+			o	Verbatium string: C-Like String \0 \n \r \t …
+			o	Float 32 bits
+			o	Byte 
+			o	Signed byte
+			o	Word 
+			o	Signed word
+			o	Double word
+			o	Signed double word
+		You can select the datatype every time you want to send or receive data.
+		•	Sending predefined shortcut messages.
+		The available shortcuts are:
+			o	For keyboard:
+				§	ALT+0
+				§	ALT+1
+				§	ALT+2
+				§	ALT+3
+				§	ALT+4
+				§	ALT+5
+				§	ALT+6
+				§	ALT+7
+				§	ALT+8
+				§	ALT+9
+				For these is shortcuts you can select the data type and set your data.
+			o	For joystick:
+				§	Button 1
+				§	Button 2
+				§	Button 3
+				§	Button 4
+				§	L1
+				§	L2
+				§	L3
+				§	R1
+				§	R2
+				§	R3
+				§	Up
+				§	Down
+				§	Left
+				§	Right
+				§	Start
+				§	Select
+		For these is shortcuts you can select the data type, set your data when pressing and when 
+		releasing the key. The check box repeat is used to always send data until your release the 
+		pressed key.
+		Empty messages are ignored.  
+		If there is an error in sending data, the current port will be released and the error message
+		will be displayed in the Host Monitor.
+IV.	Receiving data:
+
+		All received data will be displayed in the Guest Monitor. 
+		You can select the data types (String, Float 32 bits, Byte, Signed byte, Word, Signed word, 
+		Double word, Signed double word).
+		You can also save the received data in a log file so the same result in the Guest Monitor 
+		will be written in a log file. This tools can be enabled or disabled using the enable button. 
+		To change the path, you can use the browse button select the destination file and confirm.
+V.	License
+		You can distribute this software but you can’t sell it. Reverse engineering are prohibited. We are 
+		not responsible for any damage encountered by the user. If you use this software, you are accepting
+		this license.
+VI.	Contact:
+		For more information you can contact us on: bouraoui.almoez.la@gmail.com
+		If there is any bug, please report it and we will fix it as soon as possible.</value>
+  </data>
 </root>

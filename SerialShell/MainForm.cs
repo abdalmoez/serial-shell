@@ -749,7 +749,16 @@ namespace SerialShell
 
         private void LogStartStop_Click(object sender, EventArgs e)
         {
-            if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(receivelogpath.Text)))
+            string DIR;
+            try
+            {
+                DIR = System.IO.Path.GetDirectoryName(receivelogpath.Text);
+            }
+            catch
+            {
+                DIR = "";
+            }
+            if (System.IO.Directory.Exists(DIR))
             {
                 if (LogStartStop.Text == "Enable")
                 {
@@ -786,5 +795,15 @@ namespace SerialShell
         {
             System.Diagnostics.Process.Start("https://github.com/abdalmoez/serial-shell/blob/master/LICENSE");
         }
+
+        private void watchdog_Tick(object sender, EventArgs e)
+        {
+            if (csp != null)
+            {
+                if ((csp.IsOpen == false) && (connectionport.Enabled == false)) //device disconnected
+                    connectbtn.PerformClick();
+            }
+        }
+        
     }
 }

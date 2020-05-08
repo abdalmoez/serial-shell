@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO.Ports;
-using MetroFramework;
-using System.Windows.Forms;
+﻿using MetroFramework;
+using System;
 using System.IO;
+using System.IO.Ports;
+using System.Text;
+using System.Windows.Forms;
 
 
 namespace SerialShell.Base
@@ -15,12 +12,51 @@ namespace SerialShell.Base
     {
         SerialPort sp;
         MainForm mainform;
+        public bool IsOpen { get { return sp.IsOpen; } }
         public CustomSerialPort(MainForm f)
         {
             sp = new SerialPort("COM1", 9600, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
             sp.DataReceived += serialportdatareceived;
-            mainform = f;
+            sp.Disposed += sp_Disposed;
+            sp.ErrorReceived += sp_ErrorReceived;
+            sp.PinChanged += sp_PinChanged;
+            mainform = f;          
         }
+
+        void sp_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            mainform.guestTextBox.AppendText("Serial pin changed(" + e.EventType.ToString() + ")\n");
+        }
+
+        void sp_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            string err = "";
+            switch (e.EventType)
+            {
+                case SerialError.RXOver:
+                    err = "An input buffer overflow has occurred. There is either no room in the input buffer, or a character was received after the end-of-file (EOF) character.";
+                    break;
+                case SerialError.Overrun:
+                    err = "A character-buffer overrun has occurred. The next character is lost.";
+                    break;
+                case SerialError.RXParity:
+                    err = "The hardware detected a parity error.";
+                    break;
+                case SerialError.Frame:
+                    err = "The hardware detected a framing error.";
+                    break;
+                case SerialError.TXFull:
+                    err = "The application tried to transmit a character, but the output buffer was full.";
+                    break;
+            }
+            mainform.guestTextBox.AppendText("Error receiving data(" + err + ")\n");
+        }
+
+        void sp_Disposed(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+        
         public bool open()
         {
             if (sp.IsOpen)

@@ -66,10 +66,18 @@
             this.receivedatatype = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.tabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.licensePicture = new System.Windows.Forms.PictureBox();
+            this.metroLabel19 = new MetroFramework.Controls.MetroLabel();
+            this.repoButton = new System.Windows.Forms.PictureBox();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.hostcleaner = new System.Windows.Forms.PictureBox();
             this.hostTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.guestcleaner = new System.Windows.Forms.PictureBox();
             this.guestTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -90,30 +98,23 @@
             this.metroTextButton3 = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
             this.sendfileopendialog = new System.Windows.Forms.OpenFileDialog();
             this.receivelogsaveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel19 = new MetroFramework.Controls.MetroLabel();
-            this.hostcleaner = new System.Windows.Forms.PictureBox();
-            this.guestcleaner = new System.Windows.Forms.PictureBox();
-            this.licensePicture = new System.Windows.Forms.PictureBox();
-            this.repoButton = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.watchdog = new System.Windows.Forms.Timer(this.components);
             this.metroTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.licensePicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hostcleaner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guestcleaner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.licensePicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoButton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
             // metroTabControl1
@@ -462,7 +463,7 @@
             // sendlineending
             // 
             this.sendlineending.FormattingEnabled = true;
-            this.sendlineending.ItemHeight = 24;
+            this.sendlineending.ItemHeight = 23;
             this.sendlineending.Items.AddRange(new object[] {
             "None",
             "Windows (CR LF)",
@@ -471,7 +472,7 @@
             this.sendlineending.Location = new System.Drawing.Point(276, 43);
             this.sendlineending.Margin = new System.Windows.Forms.Padding(4);
             this.sendlineending.Name = "sendlineending";
-            this.sendlineending.Size = new System.Drawing.Size(248, 30);
+            this.sendlineending.Size = new System.Drawing.Size(248, 29);
             this.sendlineending.TabIndex = 5;
             this.sendlineending.UseSelectable = true;
             // 
@@ -488,7 +489,7 @@
             // senddatatype
             // 
             this.senddatatype.FormattingEnabled = true;
-            this.senddatatype.ItemHeight = 24;
+            this.senddatatype.ItemHeight = 23;
             this.senddatatype.Items.AddRange(new object[] {
             "string",
             "verbatim string",
@@ -502,7 +503,7 @@
             this.senddatatype.Location = new System.Drawing.Point(27, 43);
             this.senddatatype.Margin = new System.Windows.Forms.Padding(4);
             this.senddatatype.Name = "senddatatype";
-            this.senddatatype.Size = new System.Drawing.Size(216, 30);
+            this.senddatatype.Size = new System.Drawing.Size(216, 29);
             this.senddatatype.TabIndex = 3;
             this.senddatatype.Tag = "";
             this.senddatatype.UseSelectable = true;
@@ -609,7 +610,7 @@
             // receivedatatype
             // 
             this.receivedatatype.FormattingEnabled = true;
-            this.receivedatatype.ItemHeight = 24;
+            this.receivedatatype.ItemHeight = 23;
             this.receivedatatype.Items.AddRange(new object[] {
             "string",
             "float 32bits",
@@ -622,7 +623,7 @@
             this.receivedatatype.Location = new System.Drawing.Point(27, 43);
             this.receivedatatype.Margin = new System.Windows.Forms.Padding(4);
             this.receivedatatype.Name = "receivedatatype";
-            this.receivedatatype.Size = new System.Drawing.Size(216, 30);
+            this.receivedatatype.Size = new System.Drawing.Size(216, 29);
             this.receivedatatype.TabIndex = 1;
             this.receivedatatype.UseSelectable = true;
             // 
@@ -660,6 +661,81 @@
             this.tabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage4.VerticalScrollbarSize = 13;
             // 
+            // licensePicture
+            // 
+            this.licensePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.licensePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.licensePicture.Image = global::SerialShell.Properties.Resources.license;
+            this.licensePicture.Location = new System.Drawing.Point(1057, 69);
+            this.licensePicture.Margin = new System.Windows.Forms.Padding(4);
+            this.licensePicture.Name = "licensePicture";
+            this.licensePicture.Size = new System.Drawing.Size(32, 32);
+            this.licensePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.licensePicture.TabIndex = 7;
+            this.licensePicture.TabStop = false;
+            this.licensePicture.Click += new System.EventHandler(this.licensePicture_Click);
+            // 
+            // metroLabel19
+            // 
+            this.metroLabel19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel19.AutoSize = true;
+            this.metroLabel19.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroLabel19.Location = new System.Drawing.Point(1090, 72);
+            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel19.Name = "metroLabel19";
+            this.metroLabel19.Size = new System.Drawing.Size(122, 20);
+            this.metroLabel19.TabIndex = 1;
+            this.metroLabel19.Text = "License: GPL-V2.0";
+            this.metroLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.metroLabel19.Click += new System.EventHandler(this.licensePicture_Click);
+            // 
+            // repoButton
+            // 
+            this.repoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.repoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.repoButton.Image = global::SerialShell.Properties.Resources.GitHub_Mark_32px;
+            this.repoButton.Location = new System.Drawing.Point(1057, 29);
+            this.repoButton.Margin = new System.Windows.Forms.Padding(4);
+            this.repoButton.Name = "repoButton";
+            this.repoButton.Size = new System.Drawing.Size(32, 32);
+            this.repoButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.repoButton.TabIndex = 7;
+            this.repoButton.TabStop = false;
+            this.repoButton.Click += new System.EventHandler(this.repoButton_Click);
+            // 
+            // metroLabel16
+            // 
+            this.metroLabel16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel16.AutoSize = true;
+            this.metroLabel16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroLabel16.Location = new System.Drawing.Point(1090, 32);
+            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(117, 20);
+            this.metroLabel16.TabIndex = 1;
+            this.metroLabel16.Text = "Github repository";
+            this.metroLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.metroLabel16.Click += new System.EventHandler(this.repoButton_Click);
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel12.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel12.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel12.Location = new System.Drawing.Point(157, 18);
+            this.metroLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(354, 32);
+            this.metroLabel12.TabIndex = 1;
+            this.metroLabel12.Text = "SerialShell V0.2.1";
+            this.metroLabel12.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
             // metroLabel18
             // 
             this.metroLabel18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -673,6 +749,18 @@
             this.metroLabel18.Text = "Copyright © 2016-2020\r\nAuthor: BOURAOUI AL-Moez L.A\r\nEmail: bouraoui.almoez.la@gm" +
     "ail.com";
             this.metroLabel18.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::SerialShell.Properties.Resources.icon;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 6);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
             // 
             // splitContainer1
             // 
@@ -696,6 +784,18 @@
             this.splitContainer1.SplitterDistance = 1069;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // hostcleaner
+            // 
+            this.hostcleaner.Image = ((System.Drawing.Image)(resources.GetObject("hostcleaner.Image")));
+            this.hostcleaner.Location = new System.Drawing.Point(-2, 0);
+            this.hostcleaner.Margin = new System.Windows.Forms.Padding(4);
+            this.hostcleaner.Name = "hostcleaner";
+            this.hostcleaner.Size = new System.Drawing.Size(32, 30);
+            this.hostcleaner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.hostcleaner.TabIndex = 2;
+            this.hostcleaner.TabStop = false;
+            this.hostcleaner.Click += new System.EventHandler(this.hostcleaner_Click);
             // 
             // hostTextBox
             // 
@@ -742,6 +842,18 @@
             this.metroLabel9.TabIndex = 0;
             this.metroLabel9.Text = "Host";
             this.metroLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guestcleaner
+            // 
+            this.guestcleaner.Image = ((System.Drawing.Image)(resources.GetObject("guestcleaner.Image")));
+            this.guestcleaner.Location = new System.Drawing.Point(-1, 0);
+            this.guestcleaner.Margin = new System.Windows.Forms.Padding(4);
+            this.guestcleaner.Name = "guestcleaner";
+            this.guestcleaner.Size = new System.Drawing.Size(32, 30);
+            this.guestcleaner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guestcleaner.TabIndex = 3;
+            this.guestcleaner.TabStop = false;
+            this.guestcleaner.Click += new System.EventHandler(this.guestcleaner_Click);
             // 
             // guestTextBox
             // 
@@ -917,9 +1029,9 @@
             this.helpbtn.Location = new System.Drawing.Point(1175, 86);
             this.helpbtn.Margin = new System.Windows.Forms.Padding(4);
             this.helpbtn.Name = "helpbtn";
-            this.helpbtn.Size = new System.Drawing.Size(65, 27);
+            this.helpbtn.Size = new System.Drawing.Size(123, 27);
             this.helpbtn.TabIndex = 3;
-            this.helpbtn.Text = "Help";
+            this.helpbtn.Text = "User Manual";
             this.helpbtn.UseSelectable = true;
             this.helpbtn.UseVisualStyleBackColor = true;
             this.helpbtn.Click += new System.EventHandler(this.helpbtn_Click);
@@ -965,118 +1077,11 @@
             this.receivelogsaveDialog.Filter = "Text files|*.txt|All files|*.*";
             this.receivelogsaveDialog.Title = "Save file";
             // 
-            // metroLabel12
+            // watchdog
             // 
-            this.metroLabel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel12.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel12.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel12.Location = new System.Drawing.Point(157, 18);
-            this.metroLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel12.Name = "metroLabel12";
-            this.metroLabel12.Size = new System.Drawing.Size(354, 32);
-            this.metroLabel12.TabIndex = 1;
-            this.metroLabel12.Text = "SerialShell V0.2.0";
-            this.metroLabel12.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // metroLabel16
-            // 
-            this.metroLabel16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel16.AutoSize = true;
-            this.metroLabel16.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLabel16.Location = new System.Drawing.Point(1090, 32);
-            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel16.Name = "metroLabel16";
-            this.metroLabel16.Size = new System.Drawing.Size(117, 20);
-            this.metroLabel16.TabIndex = 1;
-            this.metroLabel16.Text = "Github repository";
-            this.metroLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLabel16.Click += new System.EventHandler(this.repoButton_Click);
-            // 
-            // metroLabel19
-            // 
-            this.metroLabel19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel19.AutoSize = true;
-            this.metroLabel19.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLabel19.Location = new System.Drawing.Point(1090, 72);
-            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel19.Name = "metroLabel19";
-            this.metroLabel19.Size = new System.Drawing.Size(122, 20);
-            this.metroLabel19.TabIndex = 1;
-            this.metroLabel19.Text = "License: GPL-V2.0";
-            this.metroLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLabel19.Click += new System.EventHandler(this.licensePicture_Click);
-            // 
-            // hostcleaner
-            // 
-            this.hostcleaner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.hostcleaner.Image = ((System.Drawing.Image)(resources.GetObject("hostcleaner.Image")));
-            this.hostcleaner.Location = new System.Drawing.Point(1293, 0);
-            this.hostcleaner.Margin = new System.Windows.Forms.Padding(4);
-            this.hostcleaner.Name = "hostcleaner";
-            this.hostcleaner.Size = new System.Drawing.Size(32, 30);
-            this.hostcleaner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.hostcleaner.TabIndex = 2;
-            this.hostcleaner.TabStop = false;
-            this.hostcleaner.Click += new System.EventHandler(this.hostcleaner_Click);
-            // 
-            // guestcleaner
-            // 
-            this.guestcleaner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.guestcleaner.Image = ((System.Drawing.Image)(resources.GetObject("guestcleaner.Image")));
-            this.guestcleaner.Location = new System.Drawing.Point(414, 0);
-            this.guestcleaner.Margin = new System.Windows.Forms.Padding(4);
-            this.guestcleaner.Name = "guestcleaner";
-            this.guestcleaner.Size = new System.Drawing.Size(32, 30);
-            this.guestcleaner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guestcleaner.TabIndex = 3;
-            this.guestcleaner.TabStop = false;
-            this.guestcleaner.Click += new System.EventHandler(this.guestcleaner_Click);
-            // 
-            // licensePicture
-            // 
-            this.licensePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.licensePicture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.licensePicture.Image = global::SerialShell.Properties.Resources.license;
-            this.licensePicture.Location = new System.Drawing.Point(1057, 69);
-            this.licensePicture.Margin = new System.Windows.Forms.Padding(4);
-            this.licensePicture.Name = "licensePicture";
-            this.licensePicture.Size = new System.Drawing.Size(32, 32);
-            this.licensePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.licensePicture.TabIndex = 7;
-            this.licensePicture.TabStop = false;
-            this.licensePicture.Click += new System.EventHandler(this.licensePicture_Click);
-            // 
-            // repoButton
-            // 
-            this.repoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.repoButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.repoButton.Image = global::SerialShell.Properties.Resources.GitHub_Mark_32px;
-            this.repoButton.Location = new System.Drawing.Point(1057, 29);
-            this.repoButton.Margin = new System.Windows.Forms.Padding(4);
-            this.repoButton.Name = "repoButton";
-            this.repoButton.Size = new System.Drawing.Size(32, 32);
-            this.repoButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.repoButton.TabIndex = 7;
-            this.repoButton.TabStop = false;
-            this.repoButton.Click += new System.EventHandler(this.repoButton_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = global::SerialShell.Properties.Resources.icon;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 6);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
+            this.watchdog.Enabled = true;
+            this.watchdog.Interval = 1000;
+            this.watchdog.Tick += new System.EventHandler(this.watchdog_Tick);
             // 
             // MainForm
             // 
@@ -1098,7 +1103,7 @@
             this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.StyleManager = this.metroStyleManager;
-            this.Text = "SerialShell V0.2.0";
+            this.Text = "SerialShell V0.2.1";
             this.metroTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1108,17 +1113,17 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.licensePicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hostcleaner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guestcleaner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.licensePicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoButton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1193,6 +1198,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel16;
         private System.Windows.Forms.PictureBox licensePicture;
         private MetroFramework.Controls.MetroLabel metroLabel19;
+        private System.Windows.Forms.Timer watchdog;
     }
 }
 

@@ -35,6 +35,7 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,18 +44,20 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(22, 60);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(855, 95);
+            this.metroLabel1.Size = new System.Drawing.Size(852, 95);
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = resources.GetString("metroLabel1.Text");
+            this.metroLabel1.Visible = false;
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(22, 174);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(864, 76);
+            this.metroLabel2.Size = new System.Drawing.Size(865, 76);
             this.metroLabel2.TabIndex = 1;
             this.metroLabel2.Text = resources.GetString("metroLabel2.Text");
+            this.metroLabel2.Visible = false;
             // 
             // metroLabel3
             // 
@@ -64,28 +67,45 @@
             this.metroLabel3.Size = new System.Drawing.Size(854, 266);
             this.metroLabel3.TabIndex = 1;
             this.metroLabel3.Text = resources.GetString("metroLabel3.Text");
+            this.metroLabel3.Visible = false;
             // 
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.Location = new System.Drawing.Point(22, 548);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(455, 57);
+            this.metroLabel4.Size = new System.Drawing.Size(454, 57);
             this.metroLabel4.TabIndex = 2;
             this.metroLabel4.Text = " \"Receive\" tab\r\nYou can select data type or use a log file to save received data." +
     "\r\nIf you\'d like to receive a file you can select string data type and use a log " +
     "file.";
+            this.metroLabel4.Visible = false;
             // 
             // metroStyleManager
             // 
             this.metroStyleManager.Owner = this;
             this.metroStyleManager.Style = MetroFramework.MetroColorStyle.Green;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(20, 60);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBox1.ShortcutsEnabled = false;
+            this.richTextBox1.Size = new System.Drawing.Size(646, 531);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.WordWrap = false;
+            // 
             // HelpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 611);
+            this.ClientSize = new System.Drawing.Size(686, 611);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel2);
@@ -96,7 +116,7 @@
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.StyleManager = this.metroStyleManager;
-            this.Text = "SerialShell::Help";
+            this.Text = "SerialShell::User Manual";
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,5 +130,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         public MetroFramework.Components.MetroStyleManager metroStyleManager;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
