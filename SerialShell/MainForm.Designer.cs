@@ -199,7 +199,7 @@
             this.connectbtn.TabIndex = 18;
             this.connectbtn.Text = "Connect to serial port";
             this.connectbtn.UseSelectable = true;
-            this.connectbtn.Click += new System.EventHandler(this.connectbtn_Click);
+            this.connectbtn.Click += new System.EventHandler(this.Connectbtn_Click);
             // 
             // metroLabel8
             // 

@@ -25,7 +25,17 @@ namespace SerialShell.Base
 
         void sp_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
-            mainform.guestTextBox.AppendText("Serial pin changed(" + e.EventType.ToString() + ")\n");
+            MethodInvoker mi = delegate ()
+            {
+                mainform.guestTextBox.AppendText("Serial pin changed(" + e.EventType.ToString() + ")\n");
+            };
+            MethodInvoker call = delegate
+            {
+                if (mainform.InvokeRequired)
+                    mainform.Invoke(mi);
+                else mi();
+            };
+            call();
         }
 
         void sp_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -190,17 +200,20 @@ namespace SerialShell.Base
             {
 
                 if (mainform.connectbtn.Text == "Disconnect")
-                    mainform.connectbtn_Click(mainform.connectbtn, new EventArgs());
+                    mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return;
             }
         }
 
         public void send(string type, string value)
         {
+            if (value == null)
+                return;
             if (sp.IsOpen == false)
             {
                 mainform.hostTextBox.AppendText("Error sending data:" + value + '\n');
                 return;
+                
             }
             sp.WriteTimeout = 3000;//3seconds
             try
@@ -224,7 +237,7 @@ namespace SerialShell.Base
                 
                 mainform.hostTextBox.AppendText("Error sending data("+ex.Message+"):" + value + '\n');
                 if (mainform.connectbtn.Text == "Disconnect")
-                    mainform.connectbtn_Click(mainform.connectbtn, new EventArgs());
+                    mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return ;
             }
             mainform.hostTextBox.AppendText(" sending "+type+":"+value+"\n");
@@ -265,7 +278,7 @@ namespace SerialShell.Base
             {
                 mainform.hostTextBox.AppendText("Error sending file("+ex.Message+"):" + path + '\n');
                 if (mainform.connectbtn.Text == "Disconnect")
-                    mainform.connectbtn_Click(mainform.connectbtn, new EventArgs());
+                    mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return;
             }
             mainform.hostTextBox.AppendText("Successful sending file:" + path + '\n');

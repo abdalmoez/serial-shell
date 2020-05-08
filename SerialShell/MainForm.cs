@@ -598,7 +598,7 @@ namespace SerialShell
             }
         }
 
-        public void connectbtn_Click(object sender, EventArgs e)
+        public void Connectbtn_Click(object sender, EventArgs e)
         {
             if (connectbtn.Text == "Disconnect")
             {
