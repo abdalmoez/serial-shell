@@ -6,4 +6,5 @@ Disable LoaderLock in Debug > Windows > Exception Settings section Managed Debug
 
 ## Dependencies
 DirectX9<br/>
-MetroFramework
+MetroFramework<br/>
+FontAwesome.Sharp

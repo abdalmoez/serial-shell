@@ -8,44 +8,44 @@ using Microsoft.DirectX.DirectInput;
 
 namespace SerialShell.Base
 {
-    public enum JoystickKeyState { JKSnone, JKSpress, JKSrepeat, JKSrelease };
+    public enum KeyState { JKSnone, JKSpress, JKSrepeat, JKSrelease };
     public struct JoystickKeysState
     {
         public void clear()
         {
-            Button1 = JoystickKeyState.JKSnone;
-            Button2 = JoystickKeyState.JKSnone;
-            Button3 = JoystickKeyState.JKSnone;
-            Button4 = JoystickKeyState.JKSnone;
-            L1 = JoystickKeyState.JKSnone;
-            L2 = JoystickKeyState.JKSnone;
-            L3 = JoystickKeyState.JKSnone;
-            R1 = JoystickKeyState.JKSnone;
-            R2 = JoystickKeyState.JKSnone;
-            R3 = JoystickKeyState.JKSnone;
-            Start = JoystickKeyState.JKSnone;
-            Select = JoystickKeyState.JKSnone;
-            Up = JoystickKeyState.JKSnone;
-            Down = JoystickKeyState.JKSnone;
-            Left = JoystickKeyState.JKSnone;
-            Right = JoystickKeyState.JKSnone;
+            Button1 = KeyState.JKSnone;
+            Button2 = KeyState.JKSnone;
+            Button3 = KeyState.JKSnone;
+            Button4 = KeyState.JKSnone;
+            L1 = KeyState.JKSnone;
+            L2 = KeyState.JKSnone;
+            L3 = KeyState.JKSnone;
+            R1 = KeyState.JKSnone;
+            R2 = KeyState.JKSnone;
+            R3 = KeyState.JKSnone;
+            Start = KeyState.JKSnone;
+            Select = KeyState.JKSnone;
+            Up = KeyState.JKSnone;
+            Down = KeyState.JKSnone;
+            Left = KeyState.JKSnone;
+            Right = KeyState.JKSnone;
         }
-        public JoystickKeyState Button1;
-        public JoystickKeyState Button2;
-        public JoystickKeyState Button3;
-        public JoystickKeyState Button4;
-        public JoystickKeyState L1;
-        public JoystickKeyState L2;
-        public JoystickKeyState L3; 
-        public JoystickKeyState R1;
-        public JoystickKeyState R2;
-        public JoystickKeyState R3; 
-        public JoystickKeyState Start;
-        public JoystickKeyState Select;
-        public JoystickKeyState Up;
-        public JoystickKeyState Down;
-        public JoystickKeyState Left;
-        public JoystickKeyState Right;
+        public KeyState Button1;
+        public KeyState Button2;
+        public KeyState Button3;
+        public KeyState Button4;
+        public KeyState L1;
+        public KeyState L2;
+        public KeyState L3; 
+        public KeyState R1;
+        public KeyState R2;
+        public KeyState R3; 
+        public KeyState Start;
+        public KeyState Select;
+        public KeyState Up;
+        public KeyState Down;
+        public KeyState Left;
+        public KeyState Right;
     };
     public delegate void JoystickDeviceStateScanner(object sender, JoystickKeysState state);
 
@@ -124,27 +124,27 @@ namespace SerialShell.Base
             //joystick_timer.Enabled = true;
             return true;
         }
-        private JoystickKeyState getState(JoystickKeyState oldstate, bool ispressed)
+        private KeyState getState(KeyState oldstate, bool ispressed)
         {
-            JoystickKeyState j= JoystickKeyState.JKSnone;
+            KeyState j= KeyState.JKSnone;
             if (ispressed == false)
             {
                 switch (oldstate)
                 {
-                    case JoystickKeyState.JKSnone: j = JoystickKeyState.JKSnone; break;
-                    case JoystickKeyState.JKSpress: j = JoystickKeyState.JKSrelease; break;
-                    case JoystickKeyState.JKSrepeat: j = JoystickKeyState.JKSrelease; break;
-                    case JoystickKeyState.JKSrelease: j = JoystickKeyState.JKSnone; break;
+                    case KeyState.JKSnone: j = KeyState.JKSnone; break;
+                    case KeyState.JKSpress: j = KeyState.JKSrelease; break;
+                    case KeyState.JKSrepeat: j = KeyState.JKSrelease; break;
+                    case KeyState.JKSrelease: j = KeyState.JKSnone; break;
                 };
             }
             else
             {
                 switch (oldstate)
                 {
-                    case JoystickKeyState.JKSnone: j = JoystickKeyState.JKSpress; break;
-                    case JoystickKeyState.JKSpress: j = JoystickKeyState.JKSrepeat; break;
-                    case JoystickKeyState.JKSrepeat: j = JoystickKeyState.JKSrepeat; break;
-                    case JoystickKeyState.JKSrelease: j = JoystickKeyState.JKSpress; break;
+                    case KeyState.JKSnone: j = KeyState.JKSpress; break;
+                    case KeyState.JKSpress: j = KeyState.JKSrepeat; break;
+                    case KeyState.JKSrepeat: j = KeyState.JKSrepeat; break;
+                    case KeyState.JKSrelease: j = KeyState.JKSpress; break;
                 };
             }
             return j;

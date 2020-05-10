@@ -1,6 +1,6 @@
 ﻿namespace SerialShell
 {
-    partial class SendShortcutSettingsForm
+    partial class ShortcutSettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SendShortcutSettingsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShortcutSettingsForm));
             this.metroCheckBox1 = new MetroFramework.Controls.MetroCheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
@@ -55,15 +55,22 @@
             this.joystickGridSettings = new MetroFramework.Controls.MetroGrid();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataRepeat = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.JoyDataRelease = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.keyboardGridSettings = new MetroFramework.Controls.MetroGrid();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewComboBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DataPress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataRelease = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EnableRepeat = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.addKeyBoardShortcutBtn = new FontAwesome.Sharp.IconButton();
+            this.editKeyBoardShortcutBtn = new FontAwesome.Sharp.IconButton();
+            this.deleteKeyBoardShortcutBtn = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -95,7 +102,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(48, 22);
+            this.numericUpDown1.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown1.TabIndex = 16;
             // 
             // metroLabel2
@@ -126,7 +133,7 @@
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(48, 22);
+            this.numericUpDown4.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown4.TabIndex = 13;
             // 
             // metroLabel5
@@ -157,7 +164,7 @@
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(48, 22);
+            this.numericUpDown3.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown3.TabIndex = 10;
             // 
             // metroLabel4
@@ -188,7 +195,7 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(48, 22);
+            this.numericUpDown2.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown2.TabIndex = 7;
             // 
             // metroLabel3
@@ -204,10 +211,9 @@
             // 
             this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelBtn.Location = new System.Drawing.Point(740, 596);
-            this.cancelBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cancelBtn.Location = new System.Drawing.Point(555, 484);
             this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(100, 28);
+            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
             this.cancelBtn.TabIndex = 97;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseSelectable = true;
@@ -216,14 +222,13 @@
             // 
             this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.saveBtn.Location = new System.Drawing.Point(611, 596);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.saveBtn.Location = new System.Drawing.Point(458, 484);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(100, 28);
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 98;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseSelectable = true;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // metroTabControl1
             // 
@@ -232,30 +237,29 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Location = new System.Drawing.Point(31, 76);
-            this.metroTabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroTabControl1.Location = new System.Drawing.Point(23, 62);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(809, 512);
+            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.Size = new System.Drawing.Size(607, 416);
             this.metroTabControl1.TabIndex = 99;
             this.metroTabControl1.Tag = "JoystickShortcut";
             this.metroTabControl1.UseSelectable = true;
+            this.metroTabControl1.SelectedIndexChanged += new System.EventHandler(this.metroTabControl1_SelectedIndexChanged);
             // 
             // metroTabPage2
             // 
             this.metroTabPage2.Controls.Add(this.joystickGridSettings);
             this.metroTabPage2.HorizontalScrollbarBarColor = true;
             this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.HorizontalScrollbarSize = 12;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(801, 470);
+            this.metroTabPage2.Size = new System.Drawing.Size(599, 374);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Joystick";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.VerticalScrollbarSize = 13;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
             // joystickGridSettings
             // 
@@ -283,8 +287,9 @@
             this.joystickGridSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewComboBoxColumn1,
-            this.dataGridViewCheckBoxColumn1,
             this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn5,
+            this.DataRepeat,
             this.JoyDataRelease});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -297,8 +302,7 @@
             this.joystickGridSettings.EnableHeadersVisualStyles = false;
             this.joystickGridSettings.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.joystickGridSettings.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.joystickGridSettings.Location = new System.Drawing.Point(0, 5);
-            this.joystickGridSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.joystickGridSettings.Location = new System.Drawing.Point(0, 4);
             this.joystickGridSettings.MultiSelect = false;
             this.joystickGridSettings.Name = "joystickGridSettings";
             this.joystickGridSettings.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -313,7 +317,7 @@
             this.joystickGridSettings.RowHeadersVisible = false;
             this.joystickGridSettings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.joystickGridSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.joystickGridSettings.Size = new System.Drawing.Size(795, 460);
+            this.joystickGridSettings.Size = new System.Drawing.Size(596, 374);
             this.joystickGridSettings.TabIndex = 133;
             this.joystickGridSettings.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.GridSettings_CellValidating);
             this.joystickGridSettings.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridSettings_CellValueChanged);
@@ -342,27 +346,28 @@
             this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
             this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.FalseValue = "False";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Repeat";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCheckBoxColumn1.TrueValue = "True";
-            this.dataGridViewCheckBoxColumn1.Width = 50;
-            // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Data";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Data press";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Width = 123;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Data release";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 123;
+            // 
+            // DataRepeat
+            // 
+            this.DataRepeat.HeaderText = "Enable repeat";
+            this.DataRepeat.Name = "DataRepeat";
+            this.DataRepeat.Width = 50;
             // 
             // JoyDataRelease
             // 
             this.JoyDataRelease.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.JoyDataRelease.HeaderText = "Data release";
+            this.JoyDataRelease.HeaderText = "Data repeat";
             this.JoyDataRelease.Name = "JoyDataRelease";
             // 
             // metroTabPage1
@@ -370,16 +375,15 @@
             this.metroTabPage1.Controls.Add(this.keyboardGridSettings);
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 12;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(801, 470);
+            this.metroTabPage1.Size = new System.Drawing.Size(599, 374);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Keyboard";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 13;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
             // keyboardGridSettings
             // 
@@ -407,6 +411,9 @@
             this.keyboardGridSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewComboBoxColumn2,
+            this.DataPress,
+            this.DataRelease,
+            this.EnableRepeat,
             this.dataGridViewTextBoxColumn4});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -419,8 +426,7 @@
             this.keyboardGridSettings.EnableHeadersVisualStyles = false;
             this.keyboardGridSettings.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.keyboardGridSettings.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.keyboardGridSettings.Location = new System.Drawing.Point(0, 5);
-            this.keyboardGridSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.keyboardGridSettings.Location = new System.Drawing.Point(0, 4);
             this.keyboardGridSettings.MultiSelect = false;
             this.keyboardGridSettings.Name = "keyboardGridSettings";
             this.keyboardGridSettings.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -435,7 +441,7 @@
             this.keyboardGridSettings.RowHeadersVisible = false;
             this.keyboardGridSettings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.keyboardGridSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.keyboardGridSettings.Size = new System.Drawing.Size(795, 460);
+            this.keyboardGridSettings.Size = new System.Drawing.Size(596, 374);
             this.keyboardGridSettings.TabIndex = 134;
             this.keyboardGridSettings.Tag = "KeyboardShortcut";
             this.keyboardGridSettings.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.GridSettings_CellValidating);
@@ -465,10 +471,28 @@
             this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
             this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // DataPress
+            // 
+            this.DataPress.HeaderText = "Data press";
+            this.DataPress.Name = "DataPress";
+            this.DataPress.Width = 123;
+            // 
+            // DataRelease
+            // 
+            this.DataRelease.HeaderText = "Data release";
+            this.DataRelease.Name = "DataRelease";
+            this.DataRelease.Width = 123;
+            // 
+            // EnableRepeat
+            // 
+            this.EnableRepeat.HeaderText = "Enable repeat";
+            this.EnableRepeat.Name = "EnableRepeat";
+            this.EnableRepeat.Width = 50;
+            // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Data";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Data repeat";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -477,25 +501,99 @@
             // 
             this.metroStyleManager.Owner = this;
             // 
-            // SendShortcutSettingsForm
+            // addKeyBoardShortcutBtn
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.addKeyBoardShortcutBtn.AutoSize = true;
+            this.addKeyBoardShortcutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.addKeyBoardShortcutBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.addKeyBoardShortcutBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.addKeyBoardShortcutBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.addKeyBoardShortcutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addKeyBoardShortcutBtn.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.addKeyBoardShortcutBtn.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.addKeyBoardShortcutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            this.addKeyBoardShortcutBtn.IconSize = 22;
+            this.addKeyBoardShortcutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addKeyBoardShortcutBtn.Location = new System.Drawing.Point(521, 62);
+            this.addKeyBoardShortcutBtn.Name = "addKeyBoardShortcutBtn";
+            this.addKeyBoardShortcutBtn.Rotation = 0D;
+            this.addKeyBoardShortcutBtn.Size = new System.Drawing.Size(32, 30);
+            this.addKeyBoardShortcutBtn.TabIndex = 103;
+            this.addKeyBoardShortcutBtn.UseVisualStyleBackColor = false;
+            this.addKeyBoardShortcutBtn.Visible = false;
+            this.addKeyBoardShortcutBtn.Click += new System.EventHandler(this.AddKeyBoardShortcutBtn_Click);
+            this.addKeyBoardShortcutBtn.MouseEnter += new System.EventHandler(this.IconBtn_MouseEnter);
+            this.addKeyBoardShortcutBtn.MouseLeave += new System.EventHandler(this.IconBtn_MouseLeave);
+            // 
+            // editKeyBoardShortcutBtn
+            // 
+            this.editKeyBoardShortcutBtn.AutoSize = true;
+            this.editKeyBoardShortcutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.editKeyBoardShortcutBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.editKeyBoardShortcutBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.editKeyBoardShortcutBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.editKeyBoardShortcutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editKeyBoardShortcutBtn.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.editKeyBoardShortcutBtn.IconChar = FontAwesome.Sharp.IconChar.Edit;
+            this.editKeyBoardShortcutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            this.editKeyBoardShortcutBtn.IconSize = 22;
+            this.editKeyBoardShortcutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.editKeyBoardShortcutBtn.Location = new System.Drawing.Point(557, 62);
+            this.editKeyBoardShortcutBtn.Name = "editKeyBoardShortcutBtn";
+            this.editKeyBoardShortcutBtn.Rotation = 0D;
+            this.editKeyBoardShortcutBtn.Size = new System.Drawing.Size(32, 30);
+            this.editKeyBoardShortcutBtn.TabIndex = 102;
+            this.editKeyBoardShortcutBtn.UseVisualStyleBackColor = false;
+            this.editKeyBoardShortcutBtn.Visible = false;
+            this.editKeyBoardShortcutBtn.Click += new System.EventHandler(this.editKeyBoardShortcutBtn_Click);
+            this.editKeyBoardShortcutBtn.MouseEnter += new System.EventHandler(this.IconBtn_MouseEnter);
+            this.editKeyBoardShortcutBtn.MouseLeave += new System.EventHandler(this.IconBtn_MouseLeave);
+            // 
+            // deleteKeyBoardShortcutBtn
+            // 
+            this.deleteKeyBoardShortcutBtn.AutoSize = true;
+            this.deleteKeyBoardShortcutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.deleteKeyBoardShortcutBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.deleteKeyBoardShortcutBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.deleteKeyBoardShortcutBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.deleteKeyBoardShortcutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteKeyBoardShortcutBtn.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.deleteKeyBoardShortcutBtn.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+            this.deleteKeyBoardShortcutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            this.deleteKeyBoardShortcutBtn.IconSize = 22;
+            this.deleteKeyBoardShortcutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.deleteKeyBoardShortcutBtn.Location = new System.Drawing.Point(593, 62);
+            this.deleteKeyBoardShortcutBtn.Name = "deleteKeyBoardShortcutBtn";
+            this.deleteKeyBoardShortcutBtn.Rotation = 0D;
+            this.deleteKeyBoardShortcutBtn.Size = new System.Drawing.Size(32, 30);
+            this.deleteKeyBoardShortcutBtn.TabIndex = 101;
+            this.deleteKeyBoardShortcutBtn.UseVisualStyleBackColor = false;
+            this.deleteKeyBoardShortcutBtn.Visible = false;
+            this.deleteKeyBoardShortcutBtn.Click += new System.EventHandler(this.deleteKeyBoardShortcutBtn_Click);
+            this.deleteKeyBoardShortcutBtn.MouseEnter += new System.EventHandler(this.IconBtn_MouseEnter);
+            this.deleteKeyBoardShortcutBtn.MouseLeave += new System.EventHandler(this.IconBtn_MouseLeave);
+            // 
+            // ShortcutSettingsForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 639);
-            this.Controls.Add(this.metroTabControl1);
+            this.ClientSize = new System.Drawing.Size(662, 519);
+            this.Controls.Add(this.addKeyBoardShortcutBtn);
+            this.Controls.Add(this.editKeyBoardShortcutBtn);
+            this.Controls.Add(this.deleteKeyBoardShortcutBtn);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.cancelBtn);
+            this.Controls.Add(this.metroTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
-            this.Name = "SendShortcutSettingsForm";
-            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
+            this.Name = "ShortcutSettingsForm";
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.StyleManager = this.metroStyleManager;
             this.Text = "Shortcut settings";
+            this.StyleChanged += new System.EventHandler(this.SendShortcutSettingsForm_StyleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -507,6 +605,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.keyboardGridSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -532,14 +631,20 @@
         public MetroFramework.Components.MetroStyleManager metroStyleManager;
         public MetroFramework.Controls.MetroGrid joystickGridSettings;
         public MetroFramework.Controls.MetroGrid keyboardGridSettings;
+        private FontAwesome.Sharp.IconButton deleteKeyBoardShortcutBtn;
+        private FontAwesome.Sharp.IconButton addKeyBoardShortcutBtn;
+        private FontAwesome.Sharp.IconButton editKeyBoardShortcutBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn DataRepeat;
         private System.Windows.Forms.DataGridViewTextBoxColumn JoyDataRelease;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataPress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataRelease;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn EnableRepeat;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-
     }
 }
