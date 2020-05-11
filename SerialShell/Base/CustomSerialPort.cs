@@ -12,6 +12,7 @@ namespace SerialShell.Base
     {
         SerialPort sp;
         MainForm mainform;
+
         public bool IsOpen { get { return sp.IsOpen; } }
         public CustomSerialPort(MainForm f)
         {
@@ -20,7 +21,7 @@ namespace SerialShell.Base
             sp.Disposed += sp_Disposed;
             sp.ErrorReceived += sp_ErrorReceived;
             sp.PinChanged += sp_PinChanged;
-            mainform = f;          
+            mainform = f;
         }
 
         void sp_PinChanged(object sender, SerialPinChangedEventArgs e)
@@ -114,7 +115,7 @@ namespace SerialShell.Base
         }
         private void serialportdatareceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string type = "";
+            string type = "", receive_data_separator="";
             int BytesToRead = sp.BytesToRead;
             byte[] data = new byte[sp.ReadBufferSize];
             MethodInvoker mi = delegate()
@@ -126,12 +127,25 @@ namespace SerialShell.Base
                 else mi();
             };
             call();
-            string value="";
+
+            mi = delegate () { receive_data_separator = mainform.receiveDataSeparator.Text; };
+            call();
+            string value = "", separator = "";
+
+            switch (receive_data_separator)
+            {
+                case "None": break;
+                case "Newline": separator = Environment.NewLine; break;
+                case "Space": separator = " "; break;
+                case "Tab": separator = "\t"; break;
+                case "-": separator = "-"; break;
+            }
+
             switch (type)
             {
                 case "string":
                     sp.Read(data, 0, BytesToRead);
-                    value = System.Text.Encoding.UTF8.GetString(data);
+                    value = System.Text.Encoding.UTF8.GetString(data,0,BytesToRead);
                     break;
                 case "float 32bits":
                     sp.Read(data, 0, 4);
@@ -171,6 +185,10 @@ namespace SerialShell.Base
                     mi = delegate { mainform.guestTextBox.AppendText("Error Log file:"+ex.Message + Environment.NewLine); };
                     call();
                 }
+            }
+            if(value != "")
+            {
+                value += separator;
             }
             mi = delegate { mainform.guestTextBox.AppendText(value); };
             call();

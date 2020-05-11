@@ -60,6 +60,8 @@
             this.senddatatype = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             this.tabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.receiveDataSeparator = new MetroFramework.Controls.MetroComboBox();
+            this.receiveDataSeparatorLabel = new MetroFramework.Controls.MetroLabel();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.LogStartStop = new MetroFramework.Controls.MetroButton();
             this.receivelogbrowse = new MetroFramework.Controls.MetroButton();
@@ -124,7 +126,7 @@
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(960, 153);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -552,6 +554,8 @@
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
             this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage3.Controls.Add(this.receiveDataSeparator);
+            this.tabPage3.Controls.Add(this.receiveDataSeparatorLabel);
             this.tabPage3.Controls.Add(this.metroLabel7);
             this.tabPage3.Controls.Add(this.LogStartStop);
             this.tabPage3.Controls.Add(this.receivelogbrowse);
@@ -571,19 +575,45 @@
             this.tabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage3.VerticalScrollbarSize = 10;
             // 
+            // receiveDataSeparator
+            // 
+            this.receiveDataSeparator.FormattingEnabled = true;
+            this.receiveDataSeparator.ItemHeight = 23;
+            this.receiveDataSeparator.Items.AddRange(new object[] {
+            "None",
+            "Newline",
+            "Space",
+            "Tab",
+            "-"});
+            this.receiveDataSeparator.Location = new System.Drawing.Point(167, 35);
+            this.receiveDataSeparator.Margin = new System.Windows.Forms.Padding(2);
+            this.receiveDataSeparator.Name = "receiveDataSeparator";
+            this.receiveDataSeparator.Size = new System.Drawing.Size(133, 29);
+            this.receiveDataSeparator.TabIndex = 9;
+            this.receiveDataSeparator.UseSelectable = true;
+            // 
+            // receiveDataSeparatorLabel
+            // 
+            this.receiveDataSeparatorLabel.AutoSize = true;
+            this.receiveDataSeparatorLabel.Location = new System.Drawing.Point(157, 15);
+            this.receiveDataSeparatorLabel.Name = "receiveDataSeparatorLabel";
+            this.receiveDataSeparatorLabel.Size = new System.Drawing.Size(74, 19);
+            this.receiveDataSeparatorLabel.TabIndex = 8;
+            this.receiveDataSeparatorLabel.Text = "Seperator :";
+            // 
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(157, 15);
+            this.metroLabel7.Location = new System.Drawing.Point(310, 15);
             this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(55, 19);
+            this.metroLabel7.Size = new System.Drawing.Size(59, 19);
             this.metroLabel7.TabIndex = 7;
-            this.metroLabel7.Text = "Log file:";
+            this.metroLabel7.Text = "Log file :";
             // 
             // LogStartStop
             // 
             this.LogStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogStartStop.Location = new System.Drawing.Point(640, 35);
+            this.LogStartStop.Location = new System.Drawing.Point(808, 35);
             this.LogStartStop.Margin = new System.Windows.Forms.Padding(2);
             this.LogStartStop.Name = "LogStartStop";
             this.LogStartStop.Size = new System.Drawing.Size(60, 29);
@@ -595,7 +625,7 @@
             // receivelogbrowse
             // 
             this.receivelogbrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.receivelogbrowse.Location = new System.Drawing.Point(575, 35);
+            this.receivelogbrowse.Location = new System.Drawing.Point(743, 35);
             this.receivelogbrowse.Margin = new System.Windows.Forms.Padding(2);
             this.receivelogbrowse.Name = "receivelogbrowse";
             this.receivelogbrowse.Size = new System.Drawing.Size(60, 29);
@@ -612,7 +642,7 @@
             // 
             // 
             this.receivelogpath.CustomButton.Image = null;
-            this.receivelogpath.CustomButton.Location = new System.Drawing.Point(375, 1);
+            this.receivelogpath.CustomButton.Location = new System.Drawing.Point(390, 1);
             this.receivelogpath.CustomButton.Name = "";
             this.receivelogpath.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.receivelogpath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -622,7 +652,7 @@
             this.receivelogpath.CustomButton.Visible = false;
             this.receivelogpath.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.receivelogpath.Lines = new string[0];
-            this.receivelogpath.Location = new System.Drawing.Point(167, 35);
+            this.receivelogpath.Location = new System.Drawing.Point(320, 35);
             this.receivelogpath.Margin = new System.Windows.Forms.Padding(2);
             this.receivelogpath.MaxLength = 32767;
             this.receivelogpath.Name = "receivelogpath";
@@ -633,7 +663,7 @@
             this.receivelogpath.SelectionLength = 0;
             this.receivelogpath.SelectionStart = 0;
             this.receivelogpath.ShortcutsEnabled = true;
-            this.receivelogpath.Size = new System.Drawing.Size(403, 29);
+            this.receivelogpath.Size = new System.Drawing.Size(418, 29);
             this.receivelogpath.TabIndex = 0;
             this.receivelogpath.UseSelectable = true;
             this.receivelogpath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1236,6 +1266,8 @@
         private FontAwesome.Sharp.IconButton iconButton2;
         private FontAwesome.Sharp.IconButton hostcleaner;
         private FontAwesome.Sharp.IconButton guestcleaner;
+        public MetroFramework.Controls.MetroComboBox receiveDataSeparator;
+        private MetroFramework.Controls.MetroLabel receiveDataSeparatorLabel;
     }
 }
 

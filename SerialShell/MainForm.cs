@@ -40,6 +40,7 @@ namespace SerialShell
             //load send shortcut settings
             //send settings
             receivedatatype.SelectedIndex = MySettings.receivedatatype;
+            receiveDataSeparator.SelectedIndex = MySettings.receivedataseparator;
             receivelogpath.Text = MySettings.receivelogpath;
             receivelogpath.Enabled = MySettings.receivelogpathCheckBox;
             //MetroTheme
@@ -61,6 +62,7 @@ namespace SerialShell
             //save send shortcut settings
             //receive settings
             MySettings.receivedatatype = receivedatatype.SelectedIndex;
+            MySettings.receivedataseparator = receiveDataSeparator.SelectedIndex;
             MySettings.receivelogpath = receivelogpath.Text;
             MySettings.receivelogpathCheckBox = receivelogpath.Enabled;
             //MetroTheme
@@ -327,5 +329,6 @@ namespace SerialShell
                 form.ShowDialog(this);
             }
         }
+
     }
 }
