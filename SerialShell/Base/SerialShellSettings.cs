@@ -43,7 +43,7 @@ namespace SerialShell.Base
         }
 
         public string appName = "SerialShell";
-        public string version = "0.3";
+        public string version = "0.2.1";
 
         public int connectionbaud = 4;
         public bool connectiondatasize = false;

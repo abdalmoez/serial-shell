@@ -27,7 +27,7 @@ namespace SerialShell.Base
         {
             MethodInvoker mi = delegate ()
             {
-                mainform.guestTextBox.AppendText("Serial pin changed(" + e.EventType.ToString() + ")\n");
+                mainform.guestTextBox.AppendText("Serial pin changed(" + e.EventType.ToString() + ")"+Environment.NewLine);
             };
             MethodInvoker call = delegate
             {
@@ -59,7 +59,7 @@ namespace SerialShell.Base
                     err = "The application tried to transmit a character, but the output buffer was full.";
                     break;
             }
-            mainform.guestTextBox.AppendText("Error receiving data(" + err + ")\n");
+            mainform.guestTextBox.AppendText("Error receiving data(" + err + ")"+Environment.NewLine);
         }
 
         void sp_Disposed(object sender, EventArgs e)
@@ -135,29 +135,29 @@ namespace SerialShell.Base
                     break;
                 case "float 32bits":
                     sp.Read(data, 0, 4);
-                    value=System.BitConverter.ToSingle(data, 0).ToString()+"\n";
+                    value=System.BitConverter.ToSingle(data, 0).ToString()+Environment.NewLine;
                     break;
                 case "byte":
-                    value = sp.ReadByte().ToString() + "\n";
+                    value = sp.ReadByte().ToString() + Environment.NewLine;
                     break;
                 case "signed byte":
-                    value = ((sbyte)sp.ReadByte()).ToString() + "\n";
+                    value = ((sbyte)sp.ReadByte()).ToString() + Environment.NewLine;
                     break;
                 case "word":
                     sp.Read(data, 0, 2);
-                    value = System.BitConverter.ToUInt16(data, 0).ToString() + "\n";
+                    value = System.BitConverter.ToUInt16(data, 0).ToString() + Environment.NewLine;
                     break;
                 case "signed word":
                     sp.Read(data, 0, 2);
-                    value = System.BitConverter.ToInt16(data, 0).ToString() + "\n";
+                    value = System.BitConverter.ToInt16(data, 0).ToString() + Environment.NewLine;
                     break;
                 case "dword":
                     sp.Read(data, 0, 4);
-                    value = System.BitConverter.ToUInt32(data, 0).ToString() + "\n";
+                    value = System.BitConverter.ToUInt32(data, 0).ToString() + Environment.NewLine;
                     break;
                 case "signed dword":
                     sp.Read(data, 0, 4);
-                    value = System.BitConverter.ToInt32(data, 0).ToString() + "\n";
+                    value = System.BitConverter.ToInt32(data, 0).ToString() + Environment.NewLine;
                     break;
             }
             if (mainform.LogStartStop.Text == "Disable")//enabled
@@ -168,7 +168,7 @@ namespace SerialShell.Base
                 }
                 catch (Exception ex)
                 {
-                    mi = delegate { mainform.guestTextBox.AppendText("Error Log file:"+ex.Message); };
+                    mi = delegate { mainform.guestTextBox.AppendText("Error Log file:"+ex.Message + Environment.NewLine); };
                     call();
                 }
             }
@@ -211,7 +211,7 @@ namespace SerialShell.Base
                 return;
             if (sp.IsOpen == false)
             {
-                mainform.hostTextBox.AppendText("Error sending data:" + value + '\n');
+                mainform.hostTextBox.AppendText("Error sending data:" + value + Environment.NewLine);
                 return;
                 
             }
@@ -235,12 +235,12 @@ namespace SerialShell.Base
             {
 
                 
-                mainform.hostTextBox.AppendText("Error sending data("+ex.Message+"):" + value + '\n');
+                mainform.hostTextBox.AppendText("Error sending data("+ex.Message+"):" + value + Environment.NewLine);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return ;
             }
-            mainform.hostTextBox.AppendText(" sending "+type+":"+value+"\n");
+            mainform.hostTextBox.AppendText(" sending "+type+":"+value+Environment.NewLine);
             sendlineending();
         }
 
@@ -276,12 +276,12 @@ namespace SerialShell.Base
             }
             catch(Exception ex)
             {
-                mainform.hostTextBox.AppendText("Error sending file("+ex.Message+"):" + path + '\n');
+                mainform.hostTextBox.AppendText("Error sending file("+ex.Message+"):" + path + Environment.NewLine);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return;
             }
-            mainform.hostTextBox.AppendText("Successful sending file:" + path + '\n');
+            mainform.hostTextBox.AppendText("Successful sending file:" + path + Environment.NewLine);
         }
 
     }
