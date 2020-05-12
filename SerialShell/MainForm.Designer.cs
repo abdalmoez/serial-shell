@@ -69,8 +69,8 @@
             this.receivedatatype = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.tabPage4 = new MetroFramework.Controls.MetroTabPage();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.licensePicture = new FontAwesome.Sharp.IconButton();
+            this.repoPicture = new FontAwesome.Sharp.IconButton();
             this.metroLabel19 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
             this.serialShellVersionLabel = new MetroFramework.Controls.MetroLabel();
@@ -96,9 +96,9 @@
             this.ctrl9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.savesettingsbtn = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
             this.helpbtn = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
-            this.metroTextButton2 = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
+            this.changeStyleButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.metroTextButton3 = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
+            this.changeThemeButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
             this.sendfileopendialog = new System.Windows.Forms.OpenFileDialog();
             this.receivelogsaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.watchdog = new System.Windows.Forms.Timer(this.components);
@@ -126,7 +126,7 @@
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(960, 153);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -359,7 +359,7 @@
             // 
             this.showShortcutModeBtn.ActiveControl = null;
             this.showShortcutModeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showShortcutModeBtn.Location = new System.Drawing.Point(709, 14);
+            this.showShortcutModeBtn.Location = new System.Drawing.Point(709, 12);
             this.showShortcutModeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.showShortcutModeBtn.Name = "showShortcutModeBtn";
             this.showShortcutModeBtn.Size = new System.Drawing.Size(107, 52);
@@ -702,8 +702,8 @@
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
             this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage4.Controls.Add(this.iconButton2);
-            this.tabPage4.Controls.Add(this.iconButton1);
+            this.tabPage4.Controls.Add(this.licensePicture);
+            this.tabPage4.Controls.Add(this.repoPicture);
             this.tabPage4.Controls.Add(this.metroLabel19);
             this.tabPage4.Controls.Add(this.metroLabel16);
             this.tabPage4.Controls.Add(this.serialShellVersionLabel);
@@ -722,47 +722,47 @@
             this.tabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.tabPage4.VerticalScrollbarSize = 10;
             // 
-            // iconButton2
+            // licensePicture
             // 
-            this.iconButton2.BackColor = System.Drawing.Color.Transparent;
-            this.iconButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton2.FlatAppearance.BorderSize = 0;
-            this.iconButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.iconButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.BalanceScale;
-            this.iconButton2.IconColor = System.Drawing.Color.Black;
-            this.iconButton2.IconSize = 32;
-            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.iconButton2.Location = new System.Drawing.Point(789, 53);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Rotation = 0D;
-            this.iconButton2.Size = new System.Drawing.Size(31, 36);
-            this.iconButton2.TabIndex = 9;
-            this.iconButton2.UseVisualStyleBackColor = false;
-            this.iconButton2.Click += new System.EventHandler(this.LicensePicture_Click);
+            this.licensePicture.BackColor = System.Drawing.Color.Transparent;
+            this.licensePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.licensePicture.FlatAppearance.BorderSize = 0;
+            this.licensePicture.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.licensePicture.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.licensePicture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.licensePicture.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.licensePicture.IconChar = FontAwesome.Sharp.IconChar.BalanceScale;
+            this.licensePicture.IconColor = System.Drawing.Color.Black;
+            this.licensePicture.IconSize = 32;
+            this.licensePicture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.licensePicture.Location = new System.Drawing.Point(789, 53);
+            this.licensePicture.Name = "licensePicture";
+            this.licensePicture.Rotation = 0D;
+            this.licensePicture.Size = new System.Drawing.Size(31, 36);
+            this.licensePicture.TabIndex = 9;
+            this.licensePicture.UseVisualStyleBackColor = false;
+            this.licensePicture.Click += new System.EventHandler(this.LicensePicture_Click);
             // 
-            // iconButton1
+            // repoPicture
             // 
-            this.iconButton1.BackColor = System.Drawing.Color.Transparent;
-            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Github;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconSize = 32;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.iconButton1.Location = new System.Drawing.Point(789, 14);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Rotation = 0D;
-            this.iconButton1.Size = new System.Drawing.Size(31, 36);
-            this.iconButton1.TabIndex = 9;
-            this.iconButton1.UseVisualStyleBackColor = false;
-            this.iconButton1.Click += new System.EventHandler(this.RepoButton_Click);
+            this.repoPicture.BackColor = System.Drawing.Color.Transparent;
+            this.repoPicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.repoPicture.FlatAppearance.BorderSize = 0;
+            this.repoPicture.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.repoPicture.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.repoPicture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.repoPicture.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.repoPicture.IconChar = FontAwesome.Sharp.IconChar.Github;
+            this.repoPicture.IconColor = System.Drawing.Color.Black;
+            this.repoPicture.IconSize = 32;
+            this.repoPicture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.repoPicture.Location = new System.Drawing.Point(789, 14);
+            this.repoPicture.Name = "repoPicture";
+            this.repoPicture.Rotation = 0D;
+            this.repoPicture.Size = new System.Drawing.Size(31, 36);
+            this.repoPicture.TabIndex = 9;
+            this.repoPicture.UseVisualStyleBackColor = false;
+            this.repoPicture.Click += new System.EventHandler(this.RepoButton_Click);
             // 
             // metroLabel19
             // 
@@ -1107,37 +1107,37 @@
             this.helpbtn.UseVisualStyleBackColor = true;
             this.helpbtn.Click += new System.EventHandler(this.HelpBtn_Click);
             // 
-            // metroTextButton2
+            // changeStyleButton
             // 
-            this.metroTextButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroTextButton2.Image = null;
-            this.metroTextButton2.Location = new System.Drawing.Point(696, 70);
-            this.metroTextButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.metroTextButton2.Name = "metroTextButton2";
-            this.metroTextButton2.Size = new System.Drawing.Size(47, 22);
-            this.metroTextButton2.TabIndex = 4;
-            this.metroTextButton2.Text = "Style";
-            this.metroTextButton2.UseSelectable = true;
-            this.metroTextButton2.UseVisualStyleBackColor = true;
-            this.metroTextButton2.Click += new System.EventHandler(this.MetroTextButton2_Click);
+            this.changeStyleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.changeStyleButton.Image = null;
+            this.changeStyleButton.Location = new System.Drawing.Point(696, 70);
+            this.changeStyleButton.Margin = new System.Windows.Forms.Padding(2);
+            this.changeStyleButton.Name = "changeStyleButton";
+            this.changeStyleButton.Size = new System.Drawing.Size(47, 22);
+            this.changeStyleButton.TabIndex = 4;
+            this.changeStyleButton.Text = "Style";
+            this.changeStyleButton.UseSelectable = true;
+            this.changeStyleButton.UseVisualStyleBackColor = true;
+            this.changeStyleButton.Click += new System.EventHandler(this.ChangeStyleButton_Click);
             // 
             // metroStyleManager
             // 
             this.metroStyleManager.Owner = this;
             // 
-            // metroTextButton3
+            // changeThemeButton
             // 
-            this.metroTextButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroTextButton3.Image = null;
-            this.metroTextButton3.Location = new System.Drawing.Point(643, 70);
-            this.metroTextButton3.Margin = new System.Windows.Forms.Padding(2);
-            this.metroTextButton3.Name = "metroTextButton3";
-            this.metroTextButton3.Size = new System.Drawing.Size(47, 22);
-            this.metroTextButton3.TabIndex = 5;
-            this.metroTextButton3.Text = "Theme";
-            this.metroTextButton3.UseSelectable = true;
-            this.metroTextButton3.UseVisualStyleBackColor = true;
-            this.metroTextButton3.Click += new System.EventHandler(this.MetroTextButton3_Click);
+            this.changeThemeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.changeThemeButton.Image = null;
+            this.changeThemeButton.Location = new System.Drawing.Point(643, 70);
+            this.changeThemeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.changeThemeButton.Name = "changeThemeButton";
+            this.changeThemeButton.Size = new System.Drawing.Size(47, 22);
+            this.changeThemeButton.TabIndex = 5;
+            this.changeThemeButton.Text = "Theme";
+            this.changeThemeButton.UseSelectable = true;
+            this.changeThemeButton.UseVisualStyleBackColor = true;
+            this.changeThemeButton.Click += new System.EventHandler(this.ChangeThemeButton_Click);
             // 
             // sendfileopendialog
             // 
@@ -1161,8 +1161,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 511);
             this.ContextMenuStrip = this.contextMenuStrip1;
-            this.Controls.Add(this.metroTextButton3);
-            this.Controls.Add(this.metroTextButton2);
+            this.Controls.Add(this.changeThemeButton);
+            this.Controls.Add(this.changeStyleButton);
             this.Controls.Add(this.helpbtn);
             this.Controls.Add(this.savesettingsbtn);
             this.Controls.Add(this.splitContainer1);
@@ -1234,9 +1234,9 @@
         private MetroFramework.Controls.MetroTextBox sendmsg;
         private MetroFramework.Controls.MetroLabel metroLabel18;
         private MetroFramework.Controls.MetroTextBox.MetroTextButton helpbtn;
-        private MetroFramework.Controls.MetroTextBox.MetroTextButton metroTextButton2;
+        private MetroFramework.Controls.MetroTextBox.MetroTextButton changeStyleButton;
         private MetroFramework.Components.MetroStyleManager metroStyleManager;
-        private MetroFramework.Controls.MetroTextBox.MetroTextButton metroTextButton3;
+        private MetroFramework.Controls.MetroTextBox.MetroTextButton changeThemeButton;
         private System.Windows.Forms.OpenFileDialog sendfileopendialog;
         private System.Windows.Forms.SaveFileDialog receivelogsaveDialog;
         private MetroFramework.Controls.MetroTile connectionbeginnerconfig;
@@ -1262,8 +1262,8 @@
         private System.Windows.Forms.Timer watchdog;
         private MetroFramework.Controls.MetroLabel serialShellVersionLabel;
         private MetroFramework.Controls.MetroTile showShortcutModeBtn;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton repoPicture;
+        private FontAwesome.Sharp.IconButton licensePicture;
         private FontAwesome.Sharp.IconButton hostcleaner;
         private FontAwesome.Sharp.IconButton guestcleaner;
         public MetroFramework.Controls.MetroComboBox receiveDataSeparator;

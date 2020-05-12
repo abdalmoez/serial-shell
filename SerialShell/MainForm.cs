@@ -4,6 +4,8 @@ using MetroFramework.Forms;
 using MetroFramework;
 using System.IO.Ports;
 using SerialShell.Base;
+using MetroFramework.Drawing;
+using System.Drawing;
 
 namespace SerialShell
 {
@@ -23,6 +25,7 @@ namespace SerialShell
             if (connectionport.Items.Count != 0)
                 connectionport.SelectedIndex = 0;
             Loadsettings();
+            OnChangeStyle(metroStyleManager.Style);
         }
         
 
@@ -137,16 +140,56 @@ namespace SerialShell
             connectionparity.SelectedIndex = 2;
         }
 
-        private void MetroTextButton2_Click(object sender, EventArgs e)
+        private void ChangeStyleButton_Click(object sender, EventArgs e)
         {
-            var m = new Random();
-            int next = m.Next(0, 13);
-            metroStyleManager.Style = (MetroFramework.MetroColorStyle)next;
+
+            int i = (int)(metroStyleManager.Style) + 1;
+
+            if (i == 14)
+                i = 1;
+
+            //if ((i == (int)MetroColorStyle.White) && (metroStyleManager.Theme == MetroThemeStyle.Light))
+            if (i == (int)MetroColorStyle.White) //Bug with MetroTile ForeColor doesn't change there is a case White on White
+                i++;
+
+            if ((i == (int)MetroColorStyle.Black) && (metroStyleManager.Theme == MetroThemeStyle.Dark))
+                i++;
+
+            metroStyleManager.Style = (MetroFramework.MetroColorStyle)(i);
+            OnChangeStyle(metroStyleManager.Style);
         }
 
-        private void MetroTextButton3_Click(object sender, EventArgs e)
+        private void OnChangeStyle(MetroColorStyle new_style)
         {
-            metroStyleManager.Theme = metroStyleManager.Theme == MetroThemeStyle.Light ? MetroThemeStyle.Dark : MetroThemeStyle.Light;
+            Color new_color = MetroPaint.GetStyleColor(new_style);
+            repoPicture.IconColor = new_color;
+            licensePicture.IconColor = new_color;
+            hostcleaner.IconColor = new_color;
+            guestcleaner.IconColor = new_color;
+        }
+
+        private void ChangeThemeButton_Click(object sender, EventArgs e)
+        {
+            if (metroStyleManager.Theme == MetroThemeStyle.Light)
+            {
+                metroStyleManager.Theme = MetroThemeStyle.Dark;
+                if (metroStyleManager.Style == MetroColorStyle.Black)
+                {
+                    metroStyleManager.Style = MetroColorStyle.Silver;
+                    OnChangeStyle(metroStyleManager.Style);
+                }
+                    
+            }
+            else
+            {
+                metroStyleManager.Theme = MetroThemeStyle.Light;
+                if (metroStyleManager.Style == MetroColorStyle.Silver)
+                {
+                    metroStyleManager.Style = MetroColorStyle.Black;
+                    OnChangeStyle(metroStyleManager.Style);
+                }
+                    
+            }
         }
 
         private void SendSendFileBrowse_Click(object sender, EventArgs e)
