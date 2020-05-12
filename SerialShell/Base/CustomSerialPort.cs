@@ -207,7 +207,7 @@ namespace SerialShell.Base
                     break;
                 }
                 
-                case "byte":
+                case "unsigned byte":
                 {
                     for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
                     {
@@ -225,7 +225,7 @@ namespace SerialShell.Base
                     break;
                 }
                 
-                case "word":
+                case "unsigned short":
                 {
                     for (buffer_index = 0; buffer_index + 2 <= BufferSize; buffer_index += 2)
                     {
@@ -234,7 +234,7 @@ namespace SerialShell.Base
                     break;
                 }
                 
-                case "signed word":
+                case "signed short":
                 {
                     for (buffer_index = 0; buffer_index + 2 <= BufferSize; buffer_index += 2)
                     {
@@ -243,7 +243,7 @@ namespace SerialShell.Base
                     break;
                 }
                 
-                case "dword":
+                case "unsigned int":
                 {
                     for (buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
                     {
@@ -252,7 +252,7 @@ namespace SerialShell.Base
                     break;
                 }
                 
-                case "signed dword":
+                case "signed int":
                 {
                     for (buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
                     {
@@ -346,12 +346,12 @@ namespace SerialShell.Base
                     case "verbatim string": sp.Write(StringFromVerbatimLiteral(value)); break;
                     case "hex": sp.Write(HexStringToByteArray(value), 0, value.Length / 2); break;
                     case "float 32bits": sp.Write(BitConverter.GetBytes(float.Parse(value)), 0, 4); break;
-                    case "byte": sp.Write(BitConverter.GetBytes(byte.Parse(value)), 0, 1); break;
+                    case "unsigned byte": sp.Write(BitConverter.GetBytes(byte.Parse(value)), 0, 1); break;
                     case "signed byte": sp.Write(BitConverter.GetBytes(sbyte.Parse(value)), 0, 1); break;
-                    case "word": sp.Write(BitConverter.GetBytes(ushort.Parse(value)), 0, 2); break;
-                    case "signed word": sp.Write(BitConverter.GetBytes(short.Parse(value)), 0, 2); break;
-                    case "dword": sp.Write(BitConverter.GetBytes(uint.Parse(value)), 0, 4); break;
-                    case "signed dword": sp.Write(BitConverter.GetBytes(int.Parse(value)), 0, 4); break;
+                    case "unsigned short": sp.Write(BitConverter.GetBytes(ushort.Parse(value)), 0, 2); break;
+                    case "signed short": sp.Write(BitConverter.GetBytes(short.Parse(value)), 0, 2); break;
+                    case "unsigned int": sp.Write(BitConverter.GetBytes(uint.Parse(value)), 0, 4); break;
+                    case "signed int": sp.Write(BitConverter.GetBytes(int.Parse(value)), 0, 4); break;
                 }
             }
             catch (Exception ex)

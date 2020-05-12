@@ -16,12 +16,12 @@ namespace SerialShell.Base
                 case "verbatim string": return isVerbatimString(value);
                 case "hex": return (value.Length % 2 == 0) && (System.Text.RegularExpressions.Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z"));
                 case "float 32bits": float f = 0f; return float.TryParse(value, out f);
-                case "byte": byte b = 0; return byte.TryParse(value, out b);
+                case "unsigned byte": byte b = 0; return byte.TryParse(value, out b);
                 case "signed byte": sbyte ub = 0; return sbyte.TryParse(value, out ub);
-                case "word": ushort us = 0; return ushort.TryParse(value, out us);
-                case "signed word": short s = 0; return short.TryParse(value, out s);
-                case "dword": uint ui = 0; return uint.TryParse(value, out ui);
-                case "signed dword": int i = 0; return int.TryParse(value,out i);
+                case "unsigned short": ushort us = 0; return ushort.TryParse(value, out us);
+                case "signed short": short s = 0; return short.TryParse(value, out s);
+                case "unsigned int": uint ui = 0; return uint.TryParse(value, out ui);
+                case "signed int": int i = 0; return int.TryParse(value,out i);
                 default:
                     return false;
             }

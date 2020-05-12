@@ -336,13 +336,14 @@
             this.dataGridViewComboBoxColumn1.Items.AddRange(new object[] {
             "string",
             "verbatim string",
+            "hex",
             "float 32bits",
-            "byte",
+            "unsigned byte",
             "signed byte",
-            "word",
-            "signed word",
-            "dword",
-            "signed dword"});
+            "unsigned short",
+            "signed short",
+            "unsigned int",
+            "signed int"});
             this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
             this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
@@ -461,13 +462,14 @@
             this.dataGridViewComboBoxColumn2.Items.AddRange(new object[] {
             "string",
             "verbatim string",
+            "hex",
             "float 32bits",
-            "byte",
+            "unsigned byte",
             "signed byte",
-            "word",
-            "signed word",
-            "dword",
-            "signed dword"});
+            "unsigned short",
+            "signed short",
+            "unsigned int",
+            "signed int"});
             this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
             this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 

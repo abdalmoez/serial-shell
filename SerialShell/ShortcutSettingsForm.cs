@@ -24,7 +24,7 @@ namespace SerialShell
 
         string[] joystickbtnNames = { "Button 1", "Button 2", "Button 3", "Button 4", "L1", "L2", "L3", "R1", "R2", "R3", "Up", "Down", "Left", "Right", "Start", "Select" };
         string[] keyboardbtnNames = { "Ctrl + 0", "Ctrl + 1", "Ctrl + 2", "Ctrl + 3", "Ctrl + 4", "Ctrl + 5", "Ctrl + 6", "Ctrl + 7", "Ctrl + 8", "Ctrl + 9" };
-        string[] datatype = { "string", "verbatim string", "float 32bits", "byte", "signed byte", "word", "signed word", "dword", "signed dword" };
+        string[] datatype = { "string", "verbatim string", "hex", "float 32bits", "unsigned byte", "signed byte", "unsigned short", "signed short", "unsigned int", "signed int" };
 
         public ShortcutSettingsForm(SerialShellSettings MySettings)
         {
@@ -32,35 +32,6 @@ namespace SerialShell
             this.MySettings = MySettings;
             InitJostickGrid();
         }
-
-
-        /*   private void updatecolumntype(int i,string type)
-           {
-               if (type == joystickGridSettings[3, i].ValueType.ToString())
-                   return;
-               switch (type)
-               {
-                   case "string":
-                   case "verbatim string":
-                       joystickGridSettings[3, i] = new DataGridViewTextBoxCell();
-                       break;
-                   case "float 32bits":
-                       break;
-                   case "byte":
-                       break;
-                   case "signed byte":
-                       break;
-                   case "word":
-                       break;
-                   case "signed word":
-                       break;
-                   case "dword":
-                       break;
-                   case "signed dword":
-                       break;
-               }
-
-           }*/
 
         private void InitJostickGrid()
         {
@@ -115,9 +86,9 @@ namespace SerialShell
                     if (p == t)
                         return;
                     (sender as DataGridView)[3, cell.RowIndex].Tag = p;
-                    if (p < 2)
+                    if (p < 3)
                         (sender as DataGridView)[3, cell.RowIndex].Value = "";
-                    else if (p == 2)
+                    else if (p == 3)
                         (sender as DataGridView)[3, cell.RowIndex].Value = "0,0";
                     else (sender as DataGridView)[3, cell.RowIndex].Value = "0";
                     (sender as DataGridView)[2, cell.RowIndex].Value = (sender as DataGridView)[3, cell.RowIndex].Value;
@@ -138,7 +109,7 @@ namespace SerialShell
 
         private void GridSettings_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if ((sender as DataGridView).CurrentCell.ColumnIndex < 3)
+            if ((sender as DataGridView).CurrentCell.ColumnIndex < 2)
                 (sender as DataGridView).EndEdit();        
         }
 
