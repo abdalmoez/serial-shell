@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -178,6 +179,25 @@ namespace SerialShell.Base
                     buffer_index = BufferSize;
                     break;
                 }
+
+                case "ascii + hex":
+                {
+                    for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
+                    {
+                        value += ((char)BufferData[buffer_index]) + " 0x" + BufferData[buffer_index].ToString("X2") + separator;
+                    }
+                    break;
+                }
+                
+                case "hex":
+                {
+                    for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
+                    {
+                        value += BufferData[buffer_index].ToString("X2") + separator;
+                    }
+                    break;
+                }
+                
                 case "float 32bits":
                 {
                     for(buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
@@ -186,6 +206,7 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                
                 case "byte":
                 {
                     for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
@@ -194,6 +215,7 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                
                 case "signed byte":
                 {
                     for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
@@ -202,6 +224,7 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                
                 case "word":
                 {
                     for (buffer_index = 0; buffer_index + 2 <= BufferSize; buffer_index += 2)
@@ -210,6 +233,7 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                
                 case "signed word":
                 {
                     for (buffer_index = 0; buffer_index + 2 <= BufferSize; buffer_index += 2)
@@ -218,6 +242,7 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                
                 case "dword":
                 {
                     for (buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
@@ -226,6 +251,7 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                
                 case "signed dword":
                 {
                     for (buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
@@ -293,6 +319,14 @@ namespace SerialShell.Base
             }
         }
 
+        byte[] HexStringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                                        .Where(x => x % 2 == 0)
+                                        .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                                        .ToArray();
+        }
+
         public void send(string type, string value)
         {
             if (value == null)
@@ -310,6 +344,7 @@ namespace SerialShell.Base
                 {
                     case "string": sp.Write(value); break;
                     case "verbatim string": sp.Write(StringFromVerbatimLiteral(value)); break;
+                    case "hex": sp.Write(HexStringToByteArray(value), 0, value.Length / 2); break;
                     case "float 32bits": sp.Write(BitConverter.GetBytes(float.Parse(value)), 0, 4); break;
                     case "byte": sp.Write(BitConverter.GetBytes(byte.Parse(value)), 0, 1); break;
                     case "signed byte": sp.Write(BitConverter.GetBytes(sbyte.Parse(value)), 0, 1); break;

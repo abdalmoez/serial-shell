@@ -14,6 +14,7 @@ namespace SerialShell.Base
             {
                 case "string": return true;
                 case "verbatim string": return isVerbatimString(value);
+                case "hex": return (value.Length % 2 == 0) && (System.Text.RegularExpressions.Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z"));
                 case "float 32bits": float f = 0f; return float.TryParse(value, out f);
                 case "byte": byte b = 0; return byte.TryParse(value, out b);
                 case "signed byte": sbyte ub = 0; return sbyte.TryParse(value, out ub);

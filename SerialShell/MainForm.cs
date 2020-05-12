@@ -258,9 +258,9 @@ namespace SerialShell
                     if (p == t)
                         return;
                     senddatatype.Tag = p;
-                    if (p < 2)
+                    if (p < 3)
                         sendmsg.Text = "";
-                    else if (p == 2)
+                    else if (p == 3)
                         sendmsg.Text = "0,0";
                     else sendmsg.Text = "0";
         }
