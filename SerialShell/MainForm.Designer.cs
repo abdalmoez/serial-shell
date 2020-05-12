@@ -532,7 +532,9 @@
             "unsigned short",
             "signed short",
             "unsigned int",
-            "signed int"});
+            "signed int",
+            "unsigned long",
+            "signed long"});
             this.senddatatype.Location = new System.Drawing.Point(20, 35);
             this.senddatatype.Margin = new System.Windows.Forms.Padding(2);
             this.senddatatype.Name = "senddatatype";
@@ -684,7 +686,9 @@
             "unsigned short",
             "signed short",
             "unsigned int",
-            "signed int"});
+            "signed int",
+            "unsigned long",
+            "signed long"});
             this.receivedatatype.Location = new System.Drawing.Point(20, 35);
             this.receivedatatype.Margin = new System.Windows.Forms.Padding(2);
             this.receivedatatype.Name = "receivedatatype";

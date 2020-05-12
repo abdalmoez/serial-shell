@@ -260,6 +260,23 @@ namespace SerialShell.Base
                     }
                     break;
                 }
+                case "unsigned long":
+                {
+                    for (buffer_index = 0; buffer_index + 8 <= BufferSize; buffer_index += 8)
+                    {
+                        value += System.BitConverter.ToUInt64(BufferData, buffer_index).ToString() + separator;
+                    }
+                    break;
+                }
+
+                case "signed long":
+                {
+                    for (buffer_index = 0; buffer_index + 8 <= BufferSize; buffer_index += 8)
+                    {
+                        value += System.BitConverter.ToInt64(BufferData, buffer_index).ToString() + separator;
+                    }
+                    break;
+                }
             }
 
             if (buffer_index != -1)
@@ -352,6 +369,8 @@ namespace SerialShell.Base
                     case "signed short": sp.Write(BitConverter.GetBytes(short.Parse(value)), 0, 2); break;
                     case "unsigned int": sp.Write(BitConverter.GetBytes(uint.Parse(value)), 0, 4); break;
                     case "signed int": sp.Write(BitConverter.GetBytes(int.Parse(value)), 0, 4); break;
+                    case "unsigned long": sp.Write(BitConverter.GetBytes(ulong.Parse(value)), 0, 8); break;
+                    case "signed long": sp.Write(BitConverter.GetBytes(long.Parse(value)), 0, 8); break;
                 }
             }
             catch (Exception ex)

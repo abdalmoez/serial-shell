@@ -22,6 +22,9 @@ namespace SerialShell.Base
                 case "signed short": short s = 0; return short.TryParse(value, out s);
                 case "unsigned int": uint ui = 0; return uint.TryParse(value, out ui);
                 case "signed int": int i = 0; return int.TryParse(value,out i);
+                
+                case "unsigned long": ulong ul = 0; return ulong.TryParse(value, out ul);
+                case "signed long": long l = 0; return long.TryParse(value, out l);
                 default:
                     return false;
             }

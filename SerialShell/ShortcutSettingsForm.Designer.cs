@@ -343,7 +343,9 @@
             "unsigned short",
             "signed short",
             "unsigned int",
-            "signed int"});
+            "signed int",
+            "unsigned long",
+            "signed long"});
             this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
             this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
@@ -469,7 +471,9 @@
             "unsigned short",
             "signed short",
             "unsigned int",
-            "signed int"});
+            "signed int",
+            "unsigned long",
+            "signed long"});
             this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
             this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
