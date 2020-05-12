@@ -688,6 +688,7 @@
             this.receivedatatype.Size = new System.Drawing.Size(127, 29);
             this.receivedatatype.TabIndex = 1;
             this.receivedatatype.UseSelectable = true;
+            this.receivedatatype.SelectedIndexChanged += new System.EventHandler(this.receivedatatype_SelectedIndexChanged);
             // 
             // metroLabel11
             // 

@@ -373,5 +373,9 @@ namespace SerialShell
             }
         }
 
+        private void receivedatatype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.SerialPortInteface.DecodeData();
+        }
     }
 }

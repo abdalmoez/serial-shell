@@ -10,6 +10,10 @@ namespace SerialShell.Base
 {
     class CustomSerialPort
     {
+        public const int ReadBufferSize = 4 * 1024;
+        public int BufferSize { get; private set; }
+        private byte[] BufferData;
+
         SerialPort sp;
         MainForm mainform;
 
@@ -21,6 +25,9 @@ namespace SerialShell.Base
             sp.Disposed += sp_Disposed;
             sp.ErrorReceived += sp_ErrorReceived;
             sp.PinChanged += sp_PinChanged;
+            sp.ReadBufferSize = ReadBufferSize;
+            BufferData = new byte[ReadBufferSize + 16];
+            BufferSize = 0;
             mainform = f;
         }
 
@@ -80,6 +87,7 @@ namespace SerialShell.Base
             sp.PortName = mainform.connectionport.Text;
             sp.BaudRate = int.Parse(mainform.connectionbaud.Text.Split(' ')[0]);            
             sp.DataBits = (mainform.connectiondatasize.Checked == true)?7:8;
+            BufferSize  = 0;
             switch(mainform.connectionstopbits.SelectedIndex)
             {
                 //case 0: sp.StopBits = StopBits.None; break;
@@ -112,12 +120,33 @@ namespace SerialShell.Base
             if (sp.IsOpen == false)
                 return;
             sp.Close();
+            if (BufferSize != 0)
+            {
+                DecodeData();
+
+                if(BufferSize != 0)
+                {
+                    var data = "";
+                    for (int i = 0; i < BufferSize; i++)
+                    {
+                        data += ((data != "") ? ", 0x" : "0x") + BufferData[i].ToString("X2");
+                    }
+                    var err = "Cannot receive valid value of type: " + mainform.receivedatatype.Text + " received_size: " + BufferSize + " received_data: " + data;
+                    mainform.guestTextBox.AppendText("Error receiving data(" + err + ")" + Environment.NewLine);
+                }
+            }
+
         }
         private void serialportdatareceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string type = "", receive_data_separator="";
             int BytesToRead = sp.BytesToRead;
-            byte[] data = new byte[sp.ReadBufferSize];
+            sp.Read(BufferData, BufferSize, BytesToRead);
+            BufferSize += BytesToRead;
+            DecodeData();
+        }
+        public void DecodeData()
+        { 
+            string type = "", receive_data_separator="";
             MethodInvoker mi = delegate()
             { type = mainform.receivedatatype.Text; };
             MethodInvoker call = delegate
@@ -140,40 +169,83 @@ namespace SerialShell.Base
                 case "Tab": separator = "\t"; break;
                 case "-": separator = "-"; break;
             }
-
+            int buffer_index = -1;
             switch (type)
             {
                 case "string":
-                    sp.Read(data, 0, BytesToRead);
-                    value = System.Text.Encoding.UTF8.GetString(data,0,BytesToRead);
+                {
+                    value = System.Text.Encoding.UTF8.GetString(BufferData, 0, BufferSize) + separator;
+                    buffer_index = BufferSize;
                     break;
+                }
                 case "float 32bits":
-                    sp.Read(data, 0, 4);
-                    value=System.BitConverter.ToSingle(data, 0).ToString()+Environment.NewLine;
+                {
+                    for(buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
+                    {
+                        value += System.BitConverter.ToSingle(BufferData, buffer_index).ToString() + separator;
+                    }
                     break;
+                }
                 case "byte":
-                    value = sp.ReadByte().ToString() + Environment.NewLine;
+                {
+                    for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
+                    {
+                        value += BufferData[buffer_index].ToString() + separator;
+                    }
                     break;
+                }
                 case "signed byte":
-                    value = ((sbyte)sp.ReadByte()).ToString() + Environment.NewLine;
+                {
+                    for (buffer_index = 0; buffer_index + 1 <= BufferSize; buffer_index += 1)
+                    {
+                        value += ((sbyte)BufferData[buffer_index]).ToString() + separator;
+                    }
                     break;
+                }
                 case "word":
-                    sp.Read(data, 0, 2);
-                    value = System.BitConverter.ToUInt16(data, 0).ToString() + Environment.NewLine;
+                {
+                    for (buffer_index = 0; buffer_index + 2 <= BufferSize; buffer_index += 2)
+                    {
+                        value += System.BitConverter.ToUInt16(BufferData, buffer_index).ToString() + separator;
+                    }
                     break;
+                }
                 case "signed word":
-                    sp.Read(data, 0, 2);
-                    value = System.BitConverter.ToInt16(data, 0).ToString() + Environment.NewLine;
+                {
+                    for (buffer_index = 0; buffer_index + 2 <= BufferSize; buffer_index += 2)
+                    {
+                        value += System.BitConverter.ToInt16(BufferData, buffer_index).ToString() + separator;
+                    }
                     break;
+                }
                 case "dword":
-                    sp.Read(data, 0, 4);
-                    value = System.BitConverter.ToUInt32(data, 0).ToString() + Environment.NewLine;
+                {
+                    for (buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
+                    {
+                        value += System.BitConverter.ToUInt32(BufferData, buffer_index).ToString() + separator;
+                    }
                     break;
+                }
                 case "signed dword":
-                    sp.Read(data, 0, 4);
-                    value = System.BitConverter.ToInt32(data, 0).ToString() + Environment.NewLine;
+                {
+                    for (buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
+                    {
+                        value += System.BitConverter.ToInt32(BufferData, buffer_index).ToString() + separator;
+                    }
                     break;
+                }
             }
+
+            if (buffer_index != -1)
+            {
+                for (int i = buffer_index; i < BufferSize; i++)
+                {
+                    //Clear buffer
+                    BufferData[i - buffer_index] = BufferData[i];
+                }
+                BufferSize -= buffer_index;
+            }
+
             if (mainform.LogStartStop.Text == "Disable")//enabled
             {
                 try
@@ -186,10 +258,8 @@ namespace SerialShell.Base
                     call();
                 }
             }
-            if(value != "")
-            {
-                value += separator;
-            }
+
+            
             mi = delegate { mainform.guestTextBox.AppendText(value); };
             call();
          /*   mi = delegate()
