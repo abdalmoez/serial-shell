@@ -19,6 +19,11 @@ namespace SerialShell
         [STAThread]
         static void Main()
         {
+            if (!RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully)
+            {
+                MessageBox.Show("Cannot initialize LegacyV2Runtime.");
+                return;
+            }
             MySettings = Base.SerialShellSettings.Load(MySettingsPath);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

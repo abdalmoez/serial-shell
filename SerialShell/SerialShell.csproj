@@ -99,6 +99,7 @@
     <Compile Include="Base\KeyDataConfig.cs" />
     <Compile Include="Base\SerialShellSettings.cs" />
     <Compile Include="Base\TypeCheck.cs" />
+    <Compile Include="RuntimePolicyHelper.cs" />
     <Compile Include="KeyboardHookManager\GlobalEventProvider.cs">
       <SubType>Component</SubType>
     </Compile>
