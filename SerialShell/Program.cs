@@ -19,6 +19,7 @@ namespace SerialShell
         [STAThread]
         static void Main()
         {
+            SetProcessDPIAware();
             if (!RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully)
             {
                 MessageBox.Show("Cannot initialize LegacyV2Runtime.");
@@ -29,5 +30,9 @@ namespace SerialShell
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
+
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }
