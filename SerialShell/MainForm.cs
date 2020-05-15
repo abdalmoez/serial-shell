@@ -147,12 +147,12 @@ namespace SerialShell
 
             if (i == 14)
                 i = 1;
+            
+            if ((i == (int)MetroColorStyle.Black) && (metroStyleManager.Theme == MetroThemeStyle.Dark))
+                i++;
 
             //if ((i == (int)MetroColorStyle.White) && (metroStyleManager.Theme == MetroThemeStyle.Light))
             if (i == (int)MetroColorStyle.White) //Bug with MetroTile ForeColor doesn't change there is a case White on White
-                i++;
-
-            if ((i == (int)MetroColorStyle.Black) && (metroStyleManager.Theme == MetroThemeStyle.Dark))
                 i++;
 
             metroStyleManager.Style = (MetroFramework.MetroColorStyle)(i);

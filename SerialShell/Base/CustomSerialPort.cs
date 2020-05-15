@@ -1,5 +1,7 @@
 ﻿using MetroFramework;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -360,7 +362,7 @@ namespace SerialShell.Base
                 switch (type)
                 {
                     case "string": sp.Write(value); break;
-                    case "verbatim string": sp.Write(StringFromVerbatimLiteral(value)); break;
+                    case "C-like string": var bytes = UnescapeString(value); sp.Write(bytes,0, bytes.Length); break;
                     case "hex": sp.Write(HexStringToByteArray(value), 0, value.Length / 2); break;
                     case "float 32bits": sp.Write(BitConverter.GetBytes(float.Parse(value)), 0, 4); break;
                     case "unsigned byte": sp.Write(BitConverter.GetBytes(byte.Parse(value)), 0, 1); break;
@@ -386,25 +388,76 @@ namespace SerialShell.Base
             sendlineending();
         }
 
-        private static string StringFromVerbatimLiteral(string source)
+        private static byte[] UnescapeString(string source)
         {
-            StringBuilder sb = new StringBuilder(source.Length);
+            //StringBuilder sb = new StringBuilder(source.Length);
+            List<byte> bytes = new List<byte>();
             int pos = 0;
             while (pos < source.Length)
             {
-                char c = source[pos];
-                if (c == '\"')
+                if (source[pos++] != '\\')
+                {
+                    bytes.Add((byte)source[pos - 1]);
+                }
+                else
                 {
                     // --- Handle escape sequences
-                    pos++;
-                    if (pos >= source.Length) throw new ArgumentException("Missing escape sequence");
-                    if (source[pos] == '\"') c = '\"';
-                    else throw new ArgumentException("Unrecognized escape sequence");
+                    if (pos >= source.Length)
+                    {
+                        throw new ArgumentException("Missing escape sequence");
+                    }
+                    int hexsize = 2;//number of digits
+
+                    switch (source[pos++])
+                    {
+                        // --- Simple character escapes
+                        case '\'': bytes.Add((byte)'\''); break;
+                        case '\"': bytes.Add((byte)'\"'); break;
+                        case '\\': bytes.Add((byte)'\\'); break;
+                        case '0' : bytes.Add((byte)'\0'); break;
+                        case 'a' : bytes.Add((byte)'\a'); break;
+                        case 'b' : bytes.Add((byte)'\b'); break;
+                        case 'f' : bytes.Add((byte)'\f'); break;
+                        case 'n' : bytes.Add((byte)'\n'); break;
+                        case 'r' : bytes.Add((byte)'\r'); break;
+                        case 't' : bytes.Add((byte)'\t'); break;
+                        case 'v' : bytes.Add((byte)'\v'); break;
+                        case 'U' : hexsize = 8; goto case 'x';  // --- Hexa escape (8 digits)
+                        case 'u' : hexsize = 4; goto case 'x';  // --- Hexa escape (4 digits)
+                        case 'x' :                              // --- Hexa escape (2 digits)
+                        {    
+                            if (pos + hexsize > source.Length)
+                                throw new ArgumentException("Missing escape sequence");
+                          
+                            try
+                            {
+                                //c = Convert.ToChar(Convert.ToByte(source.Substring(pos, 2), 16));
+                                var charCode = UInt32.Parse(source.Substring(pos, hexsize), NumberStyles.HexNumber);
+                                
+                                bytes.Add((byte)((charCode >>  0) & 0xFF));
+                                if(hexsize>2)
+                                {
+                                    bytes.Add((byte)((charCode >>  8) & 0xFF));
+                                }
+                                if(hexsize>4)
+                                {
+                                    bytes.Add((byte)((charCode >> 16) & 0xFF));
+                                    bytes.Add((byte)((charCode >> 24) & 0xFF));
+                                }
+                                pos += hexsize;
+                            }
+                            catch
+                            {
+                                throw new ArgumentException("Invalid hexadecimal escape code");
+                            }
+                            break;
+                        }
+                        default:
+                            throw new ArgumentException("Unrecognized escape sequence");
+                    }
                 }
-                pos++;
-                sb.Append(c);
             }
-            return sb.ToString();
+            return bytes.ToArray();
         }
         public void sendfile(string path)
         {

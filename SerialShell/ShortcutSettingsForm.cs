@@ -24,7 +24,7 @@ namespace SerialShell
 
         string[] joystickbtnNames = { "Button 1", "Button 2", "Button 3", "Button 4", "L1", "L2", "L3", "R1", "R2", "R3", "Up", "Down", "Left", "Right", "Start", "Select" };
         string[] keyboardbtnNames = { "Ctrl + 0", "Ctrl + 1", "Ctrl + 2", "Ctrl + 3", "Ctrl + 4", "Ctrl + 5", "Ctrl + 6", "Ctrl + 7", "Ctrl + 8", "Ctrl + 9" };
-        string[] datatype = { "string", "verbatim string", "hex", "float 32bits", "unsigned byte", "signed byte", "unsigned short", "signed short", "unsigned int", "signed int", "unsigned long", "signed long" };
+        string[] datatype = { "string", "C-like string", "hex", "float 32bits", "unsigned byte", "signed byte", "unsigned short", "signed short", "unsigned int", "signed int", "unsigned long", "signed long" };
 
         public ShortcutSettingsForm(SerialShellSettings MySettings)
         {

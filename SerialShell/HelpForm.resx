@@ -224,7 +224,7 @@ III.     Sending data:
                §     Unix (LF)
           The available data types are: 
                o     String
-               o     Verbatium string: C-Like String \0 \n \r \t …
+               o     C-Like string: String with escape codes \0 \n \r \t …
                o     Hex
                o     Float 32 bits
                o     Unsigned Byte 

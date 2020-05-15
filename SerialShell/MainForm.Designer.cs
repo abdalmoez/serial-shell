@@ -536,7 +536,7 @@
             this.senddatatype.ItemHeight = 24;
             this.senddatatype.Items.AddRange(new object[] {
             "string",
-            "verbatim string",
+            "C-like string",
             "hex",
             "float 32bits",
             "unsigned byte",

@@ -335,7 +335,7 @@
             this.dataGridViewComboBoxColumn1.HeaderText = "Type";
             this.dataGridViewComboBoxColumn1.Items.AddRange(new object[] {
             "string",
-            "verbatim string",
+            "C-like string",
             "hex",
             "float 32bits",
             "unsigned byte",
@@ -463,7 +463,7 @@
             this.dataGridViewComboBoxColumn2.HeaderText = "Type";
             this.dataGridViewComboBoxColumn2.Items.AddRange(new object[] {
             "string",
-            "verbatim string",
+            "C-like string",
             "hex",
             "float 32bits",
             "unsigned byte",
@@ -519,7 +519,6 @@
             this.addKeyBoardShortcutBtn.IconChar = FontAwesome.Sharp.IconChar.Plus;
             this.addKeyBoardShortcutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.addKeyBoardShortcutBtn.IconSize = 22;
-            this.addKeyBoardShortcutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addKeyBoardShortcutBtn.Location = new System.Drawing.Point(521, 62);
             this.addKeyBoardShortcutBtn.Name = "addKeyBoardShortcutBtn";
             this.addKeyBoardShortcutBtn.Rotation = 0D;
@@ -543,7 +542,6 @@
             this.editKeyBoardShortcutBtn.IconChar = FontAwesome.Sharp.IconChar.Edit;
             this.editKeyBoardShortcutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.editKeyBoardShortcutBtn.IconSize = 22;
-            this.editKeyBoardShortcutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.editKeyBoardShortcutBtn.Location = new System.Drawing.Point(557, 62);
             this.editKeyBoardShortcutBtn.Name = "editKeyBoardShortcutBtn";
             this.editKeyBoardShortcutBtn.Rotation = 0D;
@@ -567,7 +565,6 @@
             this.deleteKeyBoardShortcutBtn.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
             this.deleteKeyBoardShortcutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.deleteKeyBoardShortcutBtn.IconSize = 22;
-            this.deleteKeyBoardShortcutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteKeyBoardShortcutBtn.Location = new System.Drawing.Point(593, 62);
             this.deleteKeyBoardShortcutBtn.Name = "deleteKeyBoardShortcutBtn";
             this.deleteKeyBoardShortcutBtn.Rotation = 0D;

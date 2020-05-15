@@ -13,7 +13,7 @@ namespace SerialShell.Base
             switch (type)
             {
                 case "string": return true;
-                case "verbatim string": return isVerbatimString(value);
+                case "C-like string": return isCLikeString(value);
                 case "hex": return (value.Length % 2 == 0) && (System.Text.RegularExpressions.Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z"));
                 case "float 32bits": float f = 0f; return float.TryParse(value, out f);
                 case "unsigned byte": byte b = 0; return byte.TryParse(value, out b);
@@ -35,9 +35,9 @@ namespace SerialShell.Base
             return isType(type, value) == false;
         }
 
-       static bool isVerbatimString(string s)
+       static bool isCLikeString(string s)
         {
-            string verbatimstring = "\'\"\\0abfnrtv";
+            string escape_chars = @"'""\0abfnrtvxuU";
             for(int i=0;i<s.Length;i++)
             {
                 if (s[i] == '\\')
@@ -48,13 +48,14 @@ namespace SerialShell.Base
                         return false;
                     if (s[i] == 'x')
                     {
-                        i++;
-                        if (i == s.Length)
+                        if (i + 2 >= s.Length)
                             return false;
-                        if (("0123456789abdcdefABCDEF").IndexOf(s[i]) == 0)
+                        i++;
+                        if (("0123456789abdcdefABCDEF").IndexOf(s[i++]) == -1 || 
+                            ("0123456789abdcdefABCDEF").IndexOf(s[i  ]) == -1)
                             return false;
                     }
-                    else if (verbatimstring.IndexOf(s[i]) == -1)
+                    else if (escape_chars.IndexOf(s[i]) == -1)
                         return false;
                 }
             }
