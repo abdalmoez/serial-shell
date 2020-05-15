@@ -44,9 +44,10 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(22, 60);
+            this.metroLabel1.Location = new System.Drawing.Point(29, 74);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(852, 95);
+            this.metroLabel1.Size = new System.Drawing.Size(895, 100);
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = resources.GetString("metroLabel1.Text");
             this.metroLabel1.Visible = false;
@@ -54,9 +55,10 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(22, 174);
+            this.metroLabel2.Location = new System.Drawing.Point(29, 214);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(865, 76);
+            this.metroLabel2.Size = new System.Drawing.Size(919, 80);
             this.metroLabel2.TabIndex = 1;
             this.metroLabel2.Text = resources.GetString("metroLabel2.Text");
             this.metroLabel2.Visible = false;
@@ -64,9 +66,10 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(22, 266);
+            this.metroLabel3.Location = new System.Drawing.Point(29, 327);
+            this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(854, 266);
+            this.metroLabel3.Size = new System.Drawing.Size(905, 280);
             this.metroLabel3.TabIndex = 1;
             this.metroLabel3.Text = resources.GetString("metroLabel3.Text");
             this.metroLabel3.Visible = false;
@@ -74,9 +77,10 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(22, 548);
+            this.metroLabel4.Location = new System.Drawing.Point(29, 674);
+            this.metroLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(454, 57);
+            this.metroLabel4.Size = new System.Drawing.Size(481, 60);
             this.metroLabel4.TabIndex = 2;
             this.metroLabel4.Text = " \"Receive\" tab\r\nYou can select data type or use a log file to save received data." +
     "\r\nIf you\'d like to receive a file you can select string data type and use a log " +
@@ -93,33 +97,37 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(20, 60);
+            this.panel1.Location = new System.Drawing.Point(27, 74);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(571, 544);
+            this.panel1.Size = new System.Drawing.Size(761, 669);
             this.panel1.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(710, 2314);
+            this.label1.Size = new System.Drawing.Size(681, 2312);
             this.label1.TabIndex = 4;
             this.label1.Text = resources.GetString("label1.Text");
             // 
             // HelpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 624);
+            this.ClientSize = new System.Drawing.Size(815, 768);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HelpForm";
+            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.StyleManager = this.metroStyleManager;

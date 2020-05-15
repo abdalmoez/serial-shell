@@ -239,7 +239,7 @@
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Location = new System.Drawing.Point(23, 62);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(607, 416);
             this.metroTabControl1.TabIndex = 99;
             this.metroTabControl1.Tag = "JoystickShortcut";
