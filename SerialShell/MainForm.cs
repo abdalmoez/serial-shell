@@ -261,7 +261,7 @@ namespace SerialShell
                     if (p < 3)
                         sendmsg.Text = "";
                     else if (p == 3)
-                        sendmsg.Text = "0,0";
+                        sendmsg.Text = "0.0";
                     else sendmsg.Text = "0";
         }
 
@@ -278,8 +278,12 @@ namespace SerialShell
                 e.SuppressKeyPress = true;
                 if (Base.TypeCheck.isNotType(senddatatype.Text, sendmsg.Text))
                 {
-                    MetroMessageBox.Show(this, "Error : Unvalid value.", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "Error : Unvalid value '" + sendmsg.Text + "' of type '" + senddatatype.Text + "'", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+                }
+                if(sendmsg.Text != "")
+                {
+                    sendmsg.AutoCompleteCustomSource.Add(sendmsg.Text);
                 }
                 Program.SerialPortInteface.send(senddatatype.Text, sendmsg.Text);
                 sendmsg.Text = "";

@@ -38,18 +38,22 @@ namespace SerialShell.Base
             {
                 if (s[i] == '\\')
                 {
-                    
-                    i++;
-                    if (i == s.Length)
+                    if (++i == s.Length)
                         return false;
-                    if (s[i] == 'x')
+                    if ("xuU".IndexOf(s[i]) != -1)
                     {
-                        if (i + 2 >= s.Length)
+                        int hex_size = 2;
+                        if (s[i] == 'u') hex_size = 4;
+                        if (s[i] == 'U') hex_size = 8;
+                        if (i + hex_size >= s.Length)
                             return false;
-                        i++;
-                        if (("0123456789abdcdefABCDEF").IndexOf(s[i++]) == -1 || 
-                            ("0123456789abdcdefABCDEF").IndexOf(s[i  ]) == -1)
-                            return false;
+
+                        for (int j = 1; j <= hex_size; j++)
+                        {
+                            if (("0123456789abdcdefABCDEF").IndexOf(s[i + j]) == -1)
+                                return false;
+                        }
+                        i += hex_size;
                     }
                     else if (escape_chars.IndexOf(s[i]) == -1)
                         return false;

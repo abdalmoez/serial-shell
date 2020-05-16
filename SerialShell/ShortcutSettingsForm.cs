@@ -89,7 +89,7 @@ namespace SerialShell
                     if (p < 3)
                         (sender as DataGridView)[3, cell.RowIndex].Value = "";
                     else if (p == 3)
-                        (sender as DataGridView)[3, cell.RowIndex].Value = "0,0";
+                        (sender as DataGridView)[3, cell.RowIndex].Value = "0.0";
                     else (sender as DataGridView)[3, cell.RowIndex].Value = "0";
                     (sender as DataGridView)[2, cell.RowIndex].Value = (sender as DataGridView)[3, cell.RowIndex].Value;
                     (sender as DataGridView)[5, cell.RowIndex].Value = (sender as DataGridView)[3, cell.RowIndex].Value;

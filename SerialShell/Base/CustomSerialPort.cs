@@ -315,26 +315,15 @@ namespace SerialShell.Base
          //   mainform.Invoke(mi);
         }
 
-        private void sendlineending()
+        byte[] GetLineEnding()
         {
-            if (sp.IsOpen == false)
-                return;
-            try
+            switch (mainform.sendlineending.SelectedIndex)
             {
-                switch (mainform.sendlineending.SelectedIndex)
-                {
-                    case 0: break;//None
-                    case 1: sp.Write("\r\n"); break;//Windows (CR LF)
-                    case 2: sp.Write("\r"); break;//Macintosh (CR)
-                    case 3: sp.Write("\n"); break;//Unix (LF)
-                }
-            }
-            catch
-            {
-
-                if (mainform.connectbtn.Text == "Disconnect")
-                    mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
-                return;
+                case 0:  return new byte[0] ;              // None
+                case 1:  return new byte[2] { 0x0D, 0x0A}; // Windows (CR LF)
+                case 2:  return new byte[1] { 0x0D };      // Macintosh (CR)
+                case 3:  return new byte[1] { 0x0A };      // Unix (LF)
+                default: return new byte[0];
             }
         }
 
@@ -346,46 +335,74 @@ namespace SerialShell.Base
                                         .ToArray();
         }
 
+        List<byte> ToBytes(string type, string value)
+        {
+            List<byte> data = new List<byte>();
+            try
+            { 
+                switch (type)
+                {
+                    case "string":          data.AddRange(Encoding.ASCII.GetBytes(value)); break;
+                    case "C-like string":   data.AddRange(UnescapeString(value));          break;
+                    case "hex":             data.AddRange(HexStringToByteArray(value));    break;
+                    case "float 32bits":    data.AddRange(BitConverter.GetBytes(float .Parse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture))); break;
+                    case "unsigned byte":   data.AddRange(BitConverter.GetBytes(byte  .Parse(value))); break;
+                    case "signed byte":     data.AddRange(BitConverter.GetBytes(sbyte .Parse(value))); break;
+                    case "unsigned short":  data.AddRange(BitConverter.GetBytes(ushort.Parse(value))); break;
+                    case "signed short":    data.AddRange(BitConverter.GetBytes(short .Parse(value))); break;
+                    case "unsigned int":    data.AddRange(BitConverter.GetBytes(uint  .Parse(value))); break;
+                    case "signed int":      data.AddRange(BitConverter.GetBytes(int   .Parse(value))); break;
+                    case "unsigned long":   data.AddRange(BitConverter.GetBytes(ulong .Parse(value))); break;
+                    case "signed long":     data.AddRange(BitConverter.GetBytes(long  .Parse(value))); break;
+                }
+                data.AddRange(GetLineEnding());
+                if (data.Count == 0)
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                MetroMessageBox.Show(mainform, "Error : Unvalid value '" + value + "' of type '" + type + "'", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            return data;
+        }
+
         public void send(string type, string value)
         {
             if (value == null)
                 return;
             if (sp.IsOpen == false)
             {
-                mainform.hostTextBox.AppendText("Error sending data: " + value + Environment.NewLine);
+                if(value != "")
+                {
+                    mainform.hostTextBox.AppendText("Error sending data: " + value + Environment.NewLine);
+                }
                 return;
-                
             }
+
             sp.WriteTimeout = 3000;//3seconds
+
+            var bytes = ToBytes(type, value);
+
+            if(bytes == null)
+            {
+                return;
+            }
+
             try
             {
-                switch (type)
-                {
-                    case "string": sp.Write(value); break;
-                    case "C-like string": var bytes = UnescapeString(value); sp.Write(bytes,0, bytes.Length); break;
-                    case "hex": sp.Write(HexStringToByteArray(value), 0, value.Length / 2); break;
-                    case "float 32bits": sp.Write(BitConverter.GetBytes(float.Parse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)), 0, 4); break;
-                    case "unsigned byte": sp.Write(BitConverter.GetBytes(byte.Parse(value)), 0, 1); break;
-                    case "signed byte": sp.Write(BitConverter.GetBytes(sbyte.Parse(value)), 0, 1); break;
-                    case "unsigned short": sp.Write(BitConverter.GetBytes(ushort.Parse(value)), 0, 2); break;
-                    case "signed short": sp.Write(BitConverter.GetBytes(short.Parse(value)), 0, 2); break;
-                    case "unsigned int": sp.Write(BitConverter.GetBytes(uint.Parse(value)), 0, 4); break;
-                    case "signed int": sp.Write(BitConverter.GetBytes(int.Parse(value)), 0, 4); break;
-                    case "unsigned long": sp.Write(BitConverter.GetBytes(ulong.Parse(value)), 0, 8); break;
-                    case "signed long": sp.Write(BitConverter.GetBytes(long.Parse(value)), 0, 8); break;
-                }
+                sp.Write(bytes.ToArray(), 0, bytes.Count);
             }
             catch (Exception ex)
             {
-
-                
                 mainform.hostTextBox.AppendText("Error sending data("+ex.Message+"):" + value + Environment.NewLine);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return ;
             }
             mainform.hostTextBox.AppendText(" sending "+type+":"+value+Environment.NewLine);
-            sendlineending();
         }
 
         private static byte[] UnescapeString(string source)

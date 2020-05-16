@@ -392,9 +392,8 @@
             // 
             this.sendmsg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
+            this.sendmsg.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.sendmsg.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.sendmsg.CustomButton.Image = null;
             this.sendmsg.CustomButton.Location = new System.Drawing.Point(1060, 2);
             this.sendmsg.CustomButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
