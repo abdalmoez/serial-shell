@@ -150,6 +150,8 @@ namespace SerialShell.Base
         public void DecodeData()
         { 
             string type = "", receive_data_separator="";
+            bool invert_data = false, seven_bits = false;
+
             MethodInvoker mi = delegate()
             { type = mainform.receivedatatype.Text; };
             MethodInvoker call = delegate
@@ -160,8 +162,22 @@ namespace SerialShell.Base
             };
             call();
 
-            mi = delegate () { receive_data_separator = mainform.receiveDataSeparator.Text; };
+            mi = delegate () {
+                receive_data_separator = mainform.receiveDataSeparator.Text;
+                invert_data = mainform.invertDataCheckBox.Checked;
+                seven_bits = mainform.sevenBitsCheckBox.Checked;
+            };
             call();
+            if(invert_data || seven_bits)
+            {
+                for (int i = 0; i < BufferSize; i++)
+                {
+                    if (invert_data)
+                        BufferData[i] = (byte)(~BufferData[i]);
+                    if (seven_bits)
+                        BufferData[i] = (byte)(BufferData[i] & 0x7F);
+                }
+            }
             string value = "", separator = "";
 
             switch (receive_data_separator)

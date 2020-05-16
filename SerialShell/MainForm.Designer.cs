@@ -60,6 +60,8 @@
             this.senddatatype = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             this.tabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.sevenBitsCheckBox = new MetroFramework.Controls.MetroCheckBox();
+            this.invertDataCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.receiveDataSeparator = new MetroFramework.Controls.MetroComboBox();
             this.receiveDataSeparatorLabel = new MetroFramework.Controls.MetroLabel();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
@@ -102,6 +104,7 @@
             this.sendfileopendialog = new System.Windows.Forms.OpenFileDialog();
             this.receivelogsaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.watchdog = new System.Windows.Forms.Timer(this.components);
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -123,11 +126,11 @@
             this.metroTabControl1.Controls.Add(this.tabPage3);
             this.metroTabControl1.Controls.Add(this.tabPage4);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroTabControl1.Location = new System.Drawing.Point(27, 74);
-            this.metroTabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
+            this.metroTabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(1279, 188);
+            this.metroTabControl1.Size = new System.Drawing.Size(960, 153);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -150,39 +153,39 @@
             this.tabPage1.Controls.Add(this.connectionport);
             this.tabPage1.HorizontalScrollbarBarColor = true;
             this.tabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabPage1.HorizontalScrollbarSize = 12;
+            this.tabPage1.HorizontalScrollbarSize = 10;
             this.tabPage1.Location = new System.Drawing.Point(4, 38);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1271, 146);
+            this.tabPage1.Size = new System.Drawing.Size(952, 111);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connection   ";
             this.tabPage1.VerticalScrollbarBarColor = true;
             this.tabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.tabPage1.VerticalScrollbarSize = 13;
+            this.tabPage1.VerticalScrollbarSize = 10;
             // 
             // connectionstopbits
             // 
             this.connectionstopbits.FormattingEnabled = true;
-            this.connectionstopbits.ItemHeight = 24;
+            this.connectionstopbits.ItemHeight = 23;
             this.connectionstopbits.Items.AddRange(new object[] {
             "One",
             "OnePointFive",
             "Two"});
-            this.connectionstopbits.Location = new System.Drawing.Point(845, 55);
-            this.connectionstopbits.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectionstopbits.Location = new System.Drawing.Point(634, 45);
+            this.connectionstopbits.Margin = new System.Windows.Forms.Padding(2);
             this.connectionstopbits.Name = "connectionstopbits";
-            this.connectionstopbits.Size = new System.Drawing.Size(147, 30);
+            this.connectionstopbits.Size = new System.Drawing.Size(111, 29);
             this.connectionstopbits.TabIndex = 20;
             this.connectionstopbits.UseSelectable = true;
             // 
             // connectionbeginnerconfig
             // 
             this.connectionbeginnerconfig.ActiveControl = null;
-            this.connectionbeginnerconfig.Location = new System.Drawing.Point(4, 10);
-            this.connectionbeginnerconfig.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectionbeginnerconfig.Location = new System.Drawing.Point(3, 8);
+            this.connectionbeginnerconfig.Margin = new System.Windows.Forms.Padding(2);
             this.connectionbeginnerconfig.Name = "connectionbeginnerconfig";
-            this.connectionbeginnerconfig.Size = new System.Drawing.Size(209, 52);
+            this.connectionbeginnerconfig.Size = new System.Drawing.Size(157, 42);
             this.connectionbeginnerconfig.TabIndex = 19;
             this.connectionbeginnerconfig.Text = "Beginner configuration";
             this.connectionbeginnerconfig.UseSelectable = true;
@@ -191,10 +194,10 @@
             // connectbtn
             // 
             this.connectbtn.ActiveControl = null;
-            this.connectbtn.Location = new System.Drawing.Point(4, 74);
-            this.connectbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectbtn.Location = new System.Drawing.Point(3, 60);
+            this.connectbtn.Margin = new System.Windows.Forms.Padding(2);
             this.connectbtn.Name = "connectbtn";
-            this.connectbtn.Size = new System.Drawing.Size(209, 52);
+            this.connectbtn.Size = new System.Drawing.Size(157, 42);
             this.connectbtn.TabIndex = 18;
             this.connectbtn.Text = "Connect to serial port";
             this.connectbtn.UseSelectable = true;
@@ -203,67 +206,62 @@
             // metroLabel8
             // 
             this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(1012, 31);
-            this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel8.Location = new System.Drawing.Point(759, 25);
             this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(49, 20);
+            this.metroLabel8.Size = new System.Drawing.Size(48, 19);
             this.metroLabel8.TabIndex = 12;
             this.metroLabel8.Text = "Parity :";
             // 
             // connectionparity
             // 
             this.connectionparity.FormattingEnabled = true;
-            this.connectionparity.ItemHeight = 24;
+            this.connectionparity.ItemHeight = 23;
             this.connectionparity.Items.AddRange(new object[] {
             "Even",
             "Odd",
             "None",
             "Mark",
             "Space"});
-            this.connectionparity.Location = new System.Drawing.Point(1025, 55);
-            this.connectionparity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectionparity.Location = new System.Drawing.Point(769, 45);
+            this.connectionparity.Margin = new System.Windows.Forms.Padding(2);
             this.connectionparity.Name = "connectionparity";
-            this.connectionparity.Size = new System.Drawing.Size(160, 30);
+            this.connectionparity.Size = new System.Drawing.Size(121, 29);
             this.connectionparity.TabIndex = 11;
             this.connectionparity.UseSelectable = true;
             // 
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(832, 31);
-            this.metroLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel6.Location = new System.Drawing.Point(624, 25);
             this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(68, 20);
+            this.metroLabel6.Size = new System.Drawing.Size(67, 19);
             this.metroLabel6.TabIndex = 9;
             this.metroLabel6.Text = "Stop bits :";
             // 
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(767, 60);
-            this.metroLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel5.Location = new System.Drawing.Point(575, 49);
             this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(41, 20);
+            this.metroLabel5.Size = new System.Drawing.Size(40, 19);
             this.metroLabel5.TabIndex = 7;
             this.metroLabel5.Text = "7 bits";
             // 
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(632, 60);
-            this.metroLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel4.Location = new System.Drawing.Point(474, 49);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(42, 20);
+            this.metroLabel4.Size = new System.Drawing.Size(40, 19);
             this.metroLabel4.TabIndex = 6;
             this.metroLabel4.Text = "8 bits";
             // 
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(619, 31);
-            this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel3.Location = new System.Drawing.Point(464, 25);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(72, 20);
+            this.metroLabel3.Size = new System.Drawing.Size(68, 19);
             this.metroLabel3.TabIndex = 5;
             this.metroLabel3.Text = "Data size :";
             // 
@@ -271,10 +269,10 @@
             // 
             this.connectiondatasize.AutoSize = true;
             this.connectiondatasize.DisplayStatus = false;
-            this.connectiondatasize.Location = new System.Drawing.Point(692, 63);
-            this.connectiondatasize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectiondatasize.Location = new System.Drawing.Point(519, 51);
+            this.connectiondatasize.Margin = new System.Windows.Forms.Padding(2);
             this.connectiondatasize.Name = "connectiondatasize";
-            this.connectiondatasize.Size = new System.Drawing.Size(50, 21);
+            this.connectiondatasize.Size = new System.Drawing.Size(50, 17);
             this.connectiondatasize.TabIndex = 4;
             this.connectiondatasize.Text = "Off";
             this.connectiondatasize.UseSelectable = true;
@@ -282,16 +280,15 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(433, 31);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel2.Location = new System.Drawing.Point(325, 25);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(111, 20);
+            this.metroLabel2.Size = new System.Drawing.Size(105, 19);
             this.metroLabel2.TabIndex = 3;
             this.metroLabel2.Text = "Bits per second :";
             // 
             // connectionbaud
             // 
-            this.connectionbaud.ItemHeight = 24;
+            this.connectionbaud.ItemHeight = 23;
             this.connectionbaud.Items.AddRange(new object[] {
             "300 baud",
             "1400 baud",
@@ -304,31 +301,30 @@
             "115200 baud",
             "230400 baud",
             "250000 baud"});
-            this.connectionbaud.Location = new System.Drawing.Point(447, 55);
-            this.connectionbaud.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectionbaud.Location = new System.Drawing.Point(335, 45);
+            this.connectionbaud.Margin = new System.Windows.Forms.Padding(2);
             this.connectionbaud.Name = "connectionbaud";
-            this.connectionbaud.Size = new System.Drawing.Size(160, 30);
+            this.connectionbaud.Size = new System.Drawing.Size(121, 29);
             this.connectionbaud.TabIndex = 2;
             this.connectionbaud.UseSelectable = true;
             // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(240, 31);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel1.Location = new System.Drawing.Point(180, 25);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(41, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(41, 19);
             this.metroLabel1.TabIndex = 1;
             this.metroLabel1.Text = "Port :";
             // 
             // connectionport
             // 
             this.connectionport.FormattingEnabled = true;
-            this.connectionport.ItemHeight = 24;
-            this.connectionport.Location = new System.Drawing.Point(253, 55);
-            this.connectionport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.connectionport.ItemHeight = 23;
+            this.connectionport.Location = new System.Drawing.Point(190, 45);
+            this.connectionport.Margin = new System.Windows.Forms.Padding(2);
             this.connectionport.Name = "connectionport";
-            this.connectionport.Size = new System.Drawing.Size(160, 30);
+            this.connectionport.Size = new System.Drawing.Size(121, 29);
             this.connectionport.TabIndex = 0;
             this.connectionport.UseSelectable = true;
             this.connectionport.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ConnectionPort_MouseClick);
@@ -351,25 +347,25 @@
             this.tabPage2.Controls.Add(this.metroLabel13);
             this.tabPage2.HorizontalScrollbarBarColor = true;
             this.tabPage2.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabPage2.HorizontalScrollbarSize = 12;
+            this.tabPage2.HorizontalScrollbarSize = 10;
             this.tabPage2.Location = new System.Drawing.Point(4, 38);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1271, 146);
+            this.tabPage2.Size = new System.Drawing.Size(952, 111);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Send   ";
             this.tabPage2.VerticalScrollbarBarColor = true;
             this.tabPage2.VerticalScrollbarHighlightOnWheel = false;
-            this.tabPage2.VerticalScrollbarSize = 13;
+            this.tabPage2.VerticalScrollbarSize = 10;
             // 
             // showShortcutModeBtn
             // 
             this.showShortcutModeBtn.ActiveControl = null;
             this.showShortcutModeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showShortcutModeBtn.Location = new System.Drawing.Point(944, 15);
-            this.showShortcutModeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.showShortcutModeBtn.Location = new System.Drawing.Point(709, 12);
+            this.showShortcutModeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.showShortcutModeBtn.Name = "showShortcutModeBtn";
-            this.showShortcutModeBtn.Size = new System.Drawing.Size(143, 64);
+            this.showShortcutModeBtn.Size = new System.Drawing.Size(107, 52);
             this.showShortcutModeBtn.TabIndex = 17;
             this.showShortcutModeBtn.Text = "Shortcut mode";
             this.showShortcutModeBtn.UseSelectable = true;
@@ -379,10 +375,10 @@
             // 
             this.sendshortcutbtn.ActiveControl = null;
             this.sendshortcutbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendshortcutbtn.Location = new System.Drawing.Point(1092, 15);
-            this.sendshortcutbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sendshortcutbtn.Location = new System.Drawing.Point(820, 12);
+            this.sendshortcutbtn.Margin = new System.Windows.Forms.Padding(2);
             this.sendshortcutbtn.Name = "sendshortcutbtn";
-            this.sendshortcutbtn.Size = new System.Drawing.Size(153, 64);
+            this.sendshortcutbtn.Size = new System.Drawing.Size(115, 52);
             this.sendshortcutbtn.TabIndex = 17;
             this.sendshortcutbtn.Text = "Shortcut settings";
             this.sendshortcutbtn.UseSelectable = true;
@@ -394,11 +390,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sendmsg.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.sendmsg.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            // 
+            // 
+            // 
             this.sendmsg.CustomButton.Image = null;
-            this.sendmsg.CustomButton.Location = new System.Drawing.Point(1060, 2);
-            this.sendmsg.CustomButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.sendmsg.CustomButton.Location = new System.Drawing.Point(793, 1);
             this.sendmsg.CustomButton.Name = "";
-            this.sendmsg.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.sendmsg.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.sendmsg.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.sendmsg.CustomButton.TabIndex = 1;
             this.sendmsg.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -406,8 +404,8 @@
             this.sendmsg.CustomButton.Visible = false;
             this.sendmsg.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.sendmsg.Lines = new string[0];
-            this.sendmsg.Location = new System.Drawing.Point(152, 87);
-            this.sendmsg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sendmsg.Location = new System.Drawing.Point(114, 71);
+            this.sendmsg.Margin = new System.Windows.Forms.Padding(2);
             this.sendmsg.MaxLength = 32767;
             this.sendmsg.Name = "sendmsg";
             this.sendmsg.PasswordChar = '\0';
@@ -416,7 +414,7 @@
             this.sendmsg.SelectionLength = 0;
             this.sendmsg.SelectionStart = 0;
             this.sendmsg.ShortcutsEnabled = true;
-            this.sendmsg.Size = new System.Drawing.Size(1094, 36);
+            this.sendmsg.Size = new System.Drawing.Size(821, 29);
             this.sendmsg.TabIndex = 16;
             this.sendmsg.UseSelectable = true;
             this.sendmsg.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -426,20 +424,19 @@
             // metroLabel17
             // 
             this.metroLabel17.AutoSize = true;
-            this.metroLabel17.Location = new System.Drawing.Point(13, 91);
-            this.metroLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel17.Location = new System.Drawing.Point(10, 74);
             this.metroLabel17.Name = "metroLabel17";
-            this.metroLabel17.Size = new System.Drawing.Size(103, 20);
+            this.metroLabel17.Size = new System.Drawing.Size(98, 19);
             this.metroLabel17.TabIndex = 14;
             this.metroLabel17.Text = "Your message :";
             // 
             // sendsendfilesend
             // 
             this.sendsendfilesend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendsendfilesend.Location = new System.Drawing.Point(852, 43);
-            this.sendsendfilesend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sendsendfilesend.Location = new System.Drawing.Point(640, 35);
+            this.sendsendfilesend.Margin = new System.Windows.Forms.Padding(2);
             this.sendsendfilesend.Name = "sendsendfilesend";
-            this.sendsendfilesend.Size = new System.Drawing.Size(80, 36);
+            this.sendsendfilesend.Size = new System.Drawing.Size(60, 29);
             this.sendsendfilesend.TabIndex = 11;
             this.sendsendfilesend.Text = "Send";
             this.sendsendfilesend.UseSelectable = true;
@@ -448,10 +445,10 @@
             // sendsendfilebrowse
             // 
             this.sendsendfilebrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendsendfilebrowse.Location = new System.Drawing.Point(766, 43);
-            this.sendsendfilebrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sendsendfilebrowse.Location = new System.Drawing.Point(575, 35);
+            this.sendsendfilebrowse.Margin = new System.Windows.Forms.Padding(2);
             this.sendsendfilebrowse.Name = "sendsendfilebrowse";
-            this.sendsendfilebrowse.Size = new System.Drawing.Size(80, 36);
+            this.sendsendfilebrowse.Size = new System.Drawing.Size(60, 29);
             this.sendsendfilebrowse.TabIndex = 10;
             this.sendsendfilebrowse.Text = "Browse";
             this.sendsendfilebrowse.UseSelectable = true;
@@ -465,10 +462,9 @@
             // 
             // 
             this.sendsendfilepath.CustomButton.Image = null;
-            this.sendsendfilepath.CustomButton.Location = new System.Drawing.Point(298, 2);
-            this.sendsendfilepath.CustomButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.sendsendfilepath.CustomButton.Location = new System.Drawing.Point(222, 1);
             this.sendsendfilepath.CustomButton.Name = "";
-            this.sendsendfilepath.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.sendsendfilepath.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.sendsendfilepath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.sendsendfilepath.CustomButton.TabIndex = 1;
             this.sendsendfilepath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -476,8 +472,8 @@
             this.sendsendfilepath.CustomButton.Visible = false;
             this.sendsendfilepath.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.sendsendfilepath.Lines = new string[0];
-            this.sendsendfilepath.Location = new System.Drawing.Point(427, 43);
-            this.sendsendfilepath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sendsendfilepath.Location = new System.Drawing.Point(320, 35);
+            this.sendsendfilepath.Margin = new System.Windows.Forms.Padding(2);
             this.sendsendfilepath.MaxLength = 32767;
             this.sendsendfilepath.Name = "sendsendfilepath";
             this.sendsendfilepath.PasswordChar = '\0';
@@ -487,7 +483,7 @@
             this.sendsendfilepath.SelectionLength = 0;
             this.sendsendfilepath.SelectionStart = 0;
             this.sendsendfilepath.ShortcutsEnabled = true;
-            this.sendsendfilepath.Size = new System.Drawing.Size(332, 36);
+            this.sendsendfilepath.Size = new System.Drawing.Size(250, 29);
             this.sendsendfilepath.TabIndex = 9;
             this.sendsendfilepath.UseSelectable = true;
             this.sendsendfilepath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -496,43 +492,41 @@
             // metroLabel15
             // 
             this.metroLabel15.AutoSize = true;
-            this.metroLabel15.Location = new System.Drawing.Point(413, 18);
-            this.metroLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel15.Location = new System.Drawing.Point(310, 15);
             this.metroLabel15.Name = "metroLabel15";
-            this.metroLabel15.Size = new System.Drawing.Size(69, 20);
+            this.metroLabel15.Size = new System.Drawing.Size(66, 19);
             this.metroLabel15.TabIndex = 6;
             this.metroLabel15.Text = "Send file :";
             // 
             // sendlineending
             // 
             this.sendlineending.FormattingEnabled = true;
-            this.sendlineending.ItemHeight = 24;
+            this.sendlineending.ItemHeight = 23;
             this.sendlineending.Items.AddRange(new object[] {
             "None",
             "Windows (CR LF)",
             "Macintosh (CR)",
             "Unix (LF)"});
-            this.sendlineending.Location = new System.Drawing.Point(223, 43);
-            this.sendlineending.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.sendlineending.Location = new System.Drawing.Point(167, 35);
+            this.sendlineending.Margin = new System.Windows.Forms.Padding(2);
             this.sendlineending.Name = "sendlineending";
-            this.sendlineending.Size = new System.Drawing.Size(176, 30);
+            this.sendlineending.Size = new System.Drawing.Size(133, 29);
             this.sendlineending.TabIndex = 5;
             this.sendlineending.UseSelectable = true;
             // 
             // metroLabel14
             // 
             this.metroLabel14.AutoSize = true;
-            this.metroLabel14.Location = new System.Drawing.Point(209, 18);
-            this.metroLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel14.Location = new System.Drawing.Point(157, 15);
             this.metroLabel14.Name = "metroLabel14";
-            this.metroLabel14.Size = new System.Drawing.Size(89, 20);
+            this.metroLabel14.Size = new System.Drawing.Size(83, 19);
             this.metroLabel14.TabIndex = 4;
             this.metroLabel14.Text = "Line ending :";
             // 
             // senddatatype
             // 
             this.senddatatype.FormattingEnabled = true;
-            this.senddatatype.ItemHeight = 24;
+            this.senddatatype.ItemHeight = 23;
             this.senddatatype.Items.AddRange(new object[] {
             "string",
             "C-like string",
@@ -546,10 +540,10 @@
             "signed int",
             "unsigned long",
             "signed long"});
-            this.senddatatype.Location = new System.Drawing.Point(27, 43);
-            this.senddatatype.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.senddatatype.Location = new System.Drawing.Point(20, 35);
+            this.senddatatype.Margin = new System.Windows.Forms.Padding(2);
             this.senddatatype.Name = "senddatatype";
-            this.senddatatype.Size = new System.Drawing.Size(168, 30);
+            this.senddatatype.Size = new System.Drawing.Size(127, 29);
             this.senddatatype.TabIndex = 3;
             this.senddatatype.Tag = "";
             this.senddatatype.UseSelectable = true;
@@ -558,10 +552,9 @@
             // metroLabel13
             // 
             this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(13, 18);
-            this.metroLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel13.Location = new System.Drawing.Point(10, 15);
             this.metroLabel13.Name = "metroLabel13";
-            this.metroLabel13.Size = new System.Drawing.Size(75, 20);
+            this.metroLabel13.Size = new System.Drawing.Size(72, 19);
             this.metroLabel13.TabIndex = 2;
             this.metroLabel13.Text = "Data type :";
             // 
@@ -569,6 +562,8 @@
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
             this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage3.Controls.Add(this.sevenBitsCheckBox);
+            this.tabPage3.Controls.Add(this.invertDataCheckBox);
             this.tabPage3.Controls.Add(this.receiveDataSeparator);
             this.tabPage3.Controls.Add(this.receiveDataSeparatorLabel);
             this.tabPage3.Controls.Add(this.metroLabel7);
@@ -579,61 +574,81 @@
             this.tabPage3.Controls.Add(this.metroLabel11);
             this.tabPage3.HorizontalScrollbarBarColor = true;
             this.tabPage3.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabPage3.HorizontalScrollbarSize = 12;
+            this.tabPage3.HorizontalScrollbarSize = 10;
             this.tabPage3.Location = new System.Drawing.Point(4, 38);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1271, 146);
+            this.tabPage3.Size = new System.Drawing.Size(952, 111);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Receive   ";
             this.tabPage3.VerticalScrollbarBarColor = true;
             this.tabPage3.VerticalScrollbarHighlightOnWheel = false;
-            this.tabPage3.VerticalScrollbarSize = 13;
+            this.tabPage3.VerticalScrollbarSize = 10;
+            // 
+            // sevenBitsCheckBox
+            // 
+            this.sevenBitsCheckBox.AutoSize = true;
+            this.sevenBitsCheckBox.Location = new System.Drawing.Point(95, 81);
+            this.sevenBitsCheckBox.Name = "sevenBitsCheckBox";
+            this.sevenBitsCheckBox.Size = new System.Drawing.Size(51, 15);
+            this.sevenBitsCheckBox.TabIndex = 10;
+            this.sevenBitsCheckBox.Text = "7 bits";
+            this.metroToolTip1.SetToolTip(this.sevenBitsCheckBox, "Clears upper bit before displaying it.");
+            this.sevenBitsCheckBox.UseSelectable = true;
+            // 
+            // invertDataCheckBox
+            // 
+            this.invertDataCheckBox.AutoSize = true;
+            this.invertDataCheckBox.Location = new System.Drawing.Point(10, 81);
+            this.invertDataCheckBox.Name = "invertDataCheckBox";
+            this.invertDataCheckBox.Size = new System.Drawing.Size(79, 15);
+            this.invertDataCheckBox.TabIndex = 10;
+            this.invertDataCheckBox.Text = "Invert data";
+            this.metroToolTip1.SetToolTip(this.invertDataCheckBox, "Inverts received data before displaying it.");
+            this.invertDataCheckBox.UseSelectable = true;
             // 
             // receiveDataSeparator
             // 
             this.receiveDataSeparator.FormattingEnabled = true;
-            this.receiveDataSeparator.ItemHeight = 24;
+            this.receiveDataSeparator.ItemHeight = 23;
             this.receiveDataSeparator.Items.AddRange(new object[] {
             "None",
             "Newline",
             "Space",
             "Tab",
             "-"});
-            this.receiveDataSeparator.Location = new System.Drawing.Point(223, 43);
-            this.receiveDataSeparator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.receiveDataSeparator.Location = new System.Drawing.Point(167, 35);
+            this.receiveDataSeparator.Margin = new System.Windows.Forms.Padding(2);
             this.receiveDataSeparator.Name = "receiveDataSeparator";
-            this.receiveDataSeparator.Size = new System.Drawing.Size(176, 30);
+            this.receiveDataSeparator.Size = new System.Drawing.Size(133, 29);
             this.receiveDataSeparator.TabIndex = 9;
             this.receiveDataSeparator.UseSelectable = true;
             // 
             // receiveDataSeparatorLabel
             // 
             this.receiveDataSeparatorLabel.AutoSize = true;
-            this.receiveDataSeparatorLabel.Location = new System.Drawing.Point(209, 18);
-            this.receiveDataSeparatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.receiveDataSeparatorLabel.Location = new System.Drawing.Point(157, 15);
             this.receiveDataSeparatorLabel.Name = "receiveDataSeparatorLabel";
-            this.receiveDataSeparatorLabel.Size = new System.Drawing.Size(76, 20);
+            this.receiveDataSeparatorLabel.Size = new System.Drawing.Size(74, 19);
             this.receiveDataSeparatorLabel.TabIndex = 8;
             this.receiveDataSeparatorLabel.Text = "Seperator :";
             // 
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(413, 18);
-            this.metroLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel7.Location = new System.Drawing.Point(310, 15);
             this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(61, 20);
+            this.metroLabel7.Size = new System.Drawing.Size(59, 19);
             this.metroLabel7.TabIndex = 7;
             this.metroLabel7.Text = "Log file :";
             // 
             // LogStartStop
             // 
             this.LogStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogStartStop.Location = new System.Drawing.Point(1076, 43);
-            this.LogStartStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LogStartStop.Location = new System.Drawing.Point(807, 35);
+            this.LogStartStop.Margin = new System.Windows.Forms.Padding(2);
             this.LogStartStop.Name = "LogStartStop";
-            this.LogStartStop.Size = new System.Drawing.Size(80, 36);
+            this.LogStartStop.Size = new System.Drawing.Size(60, 29);
             this.LogStartStop.TabIndex = 5;
             this.LogStartStop.Text = "Enable";
             this.LogStartStop.UseSelectable = true;
@@ -642,10 +657,10 @@
             // receivelogbrowse
             // 
             this.receivelogbrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.receivelogbrowse.Location = new System.Drawing.Point(990, 43);
-            this.receivelogbrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.receivelogbrowse.Location = new System.Drawing.Point(742, 35);
+            this.receivelogbrowse.Margin = new System.Windows.Forms.Padding(2);
             this.receivelogbrowse.Name = "receivelogbrowse";
-            this.receivelogbrowse.Size = new System.Drawing.Size(80, 36);
+            this.receivelogbrowse.Size = new System.Drawing.Size(60, 29);
             this.receivelogbrowse.TabIndex = 3;
             this.receivelogbrowse.Text = "Browse";
             this.receivelogbrowse.UseSelectable = true;
@@ -659,10 +674,9 @@
             // 
             // 
             this.receivelogpath.CustomButton.Image = null;
-            this.receivelogpath.CustomButton.Location = new System.Drawing.Point(522, 2);
-            this.receivelogpath.CustomButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.receivelogpath.CustomButton.Location = new System.Drawing.Point(389, 1);
             this.receivelogpath.CustomButton.Name = "";
-            this.receivelogpath.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.receivelogpath.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.receivelogpath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.receivelogpath.CustomButton.TabIndex = 1;
             this.receivelogpath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -670,8 +684,8 @@
             this.receivelogpath.CustomButton.Visible = false;
             this.receivelogpath.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.receivelogpath.Lines = new string[0];
-            this.receivelogpath.Location = new System.Drawing.Point(427, 43);
-            this.receivelogpath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.receivelogpath.Location = new System.Drawing.Point(320, 35);
+            this.receivelogpath.Margin = new System.Windows.Forms.Padding(2);
             this.receivelogpath.MaxLength = 32767;
             this.receivelogpath.Name = "receivelogpath";
             this.receivelogpath.PasswordChar = '\0';
@@ -681,7 +695,7 @@
             this.receivelogpath.SelectionLength = 0;
             this.receivelogpath.SelectionStart = 0;
             this.receivelogpath.ShortcutsEnabled = true;
-            this.receivelogpath.Size = new System.Drawing.Size(556, 36);
+            this.receivelogpath.Size = new System.Drawing.Size(417, 29);
             this.receivelogpath.TabIndex = 0;
             this.receivelogpath.UseSelectable = true;
             this.receivelogpath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -690,7 +704,7 @@
             // receivedatatype
             // 
             this.receivedatatype.FormattingEnabled = true;
-            this.receivedatatype.ItemHeight = 24;
+            this.receivedatatype.ItemHeight = 23;
             this.receivedatatype.Items.AddRange(new object[] {
             "string",
             "ascii + hex",
@@ -704,10 +718,10 @@
             "signed int",
             "unsigned long",
             "signed long"});
-            this.receivedatatype.Location = new System.Drawing.Point(27, 43);
-            this.receivedatatype.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.receivedatatype.Location = new System.Drawing.Point(20, 35);
+            this.receivedatatype.Margin = new System.Windows.Forms.Padding(2);
             this.receivedatatype.Name = "receivedatatype";
-            this.receivedatatype.Size = new System.Drawing.Size(168, 30);
+            this.receivedatatype.Size = new System.Drawing.Size(127, 29);
             this.receivedatatype.TabIndex = 1;
             this.receivedatatype.UseSelectable = true;
             this.receivedatatype.SelectedIndexChanged += new System.EventHandler(this.receivedatatype_SelectedIndexChanged);
@@ -715,10 +729,9 @@
             // metroLabel11
             // 
             this.metroLabel11.AutoSize = true;
-            this.metroLabel11.Location = new System.Drawing.Point(13, 18);
-            this.metroLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel11.Location = new System.Drawing.Point(10, 15);
             this.metroLabel11.Name = "metroLabel11";
-            this.metroLabel11.Size = new System.Drawing.Size(75, 20);
+            this.metroLabel11.Size = new System.Drawing.Size(72, 19);
             this.metroLabel11.TabIndex = 0;
             this.metroLabel11.Text = "Data type :";
             // 
@@ -735,16 +748,16 @@
             this.tabPage4.Controls.Add(this.pictureBox2);
             this.tabPage4.HorizontalScrollbarBarColor = true;
             this.tabPage4.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabPage4.HorizontalScrollbarSize = 12;
+            this.tabPage4.HorizontalScrollbarSize = 10;
             this.tabPage4.Location = new System.Drawing.Point(4, 38);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1271, 146);
+            this.tabPage4.Size = new System.Drawing.Size(952, 111);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "About   ";
             this.tabPage4.VerticalScrollbarBarColor = true;
             this.tabPage4.VerticalScrollbarHighlightOnWheel = false;
-            this.tabPage4.VerticalScrollbarSize = 13;
+            this.tabPage4.VerticalScrollbarSize = 10;
             // 
             // licensePicture
             // 
@@ -759,11 +772,10 @@
             this.licensePicture.IconColor = System.Drawing.Color.Black;
             this.licensePicture.IconSize = 32;
             this.licensePicture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.licensePicture.Location = new System.Drawing.Point(1052, 65);
-            this.licensePicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.licensePicture.Location = new System.Drawing.Point(789, 53);
             this.licensePicture.Name = "licensePicture";
             this.licensePicture.Rotation = 0D;
-            this.licensePicture.Size = new System.Drawing.Size(41, 44);
+            this.licensePicture.Size = new System.Drawing.Size(31, 36);
             this.licensePicture.TabIndex = 9;
             this.licensePicture.UseVisualStyleBackColor = false;
             this.licensePicture.Click += new System.EventHandler(this.LicensePicture_Click);
@@ -781,11 +793,10 @@
             this.repoPicture.IconColor = System.Drawing.Color.Black;
             this.repoPicture.IconSize = 32;
             this.repoPicture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.repoPicture.Location = new System.Drawing.Point(1052, 17);
-            this.repoPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.repoPicture.Location = new System.Drawing.Point(789, 14);
             this.repoPicture.Name = "repoPicture";
             this.repoPicture.Rotation = 0D;
-            this.repoPicture.Size = new System.Drawing.Size(41, 44);
+            this.repoPicture.Size = new System.Drawing.Size(31, 36);
             this.repoPicture.TabIndex = 9;
             this.repoPicture.UseVisualStyleBackColor = false;
             this.repoPicture.Click += new System.EventHandler(this.RepoButton_Click);
@@ -795,10 +806,9 @@
             this.metroLabel19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.metroLabel19.AutoSize = true;
             this.metroLabel19.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLabel19.Location = new System.Drawing.Point(1090, 76);
-            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel19.Location = new System.Drawing.Point(818, 62);
             this.metroLabel19.Name = "metroLabel19";
-            this.metroLabel19.Size = new System.Drawing.Size(122, 20);
+            this.metroLabel19.Size = new System.Drawing.Size(111, 19);
             this.metroLabel19.TabIndex = 1;
             this.metroLabel19.Text = "License: GPL-V2.0";
             this.metroLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -809,10 +819,9 @@
             this.metroLabel16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.metroLabel16.AutoSize = true;
             this.metroLabel16.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLabel16.Location = new System.Drawing.Point(1090, 28);
-            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel16.Location = new System.Drawing.Point(818, 23);
             this.metroLabel16.Name = "metroLabel16";
-            this.metroLabel16.Size = new System.Drawing.Size(117, 20);
+            this.metroLabel16.Size = new System.Drawing.Size(111, 19);
             this.metroLabel16.TabIndex = 1;
             this.metroLabel16.Text = "Github repository";
             this.metroLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -822,10 +831,9 @@
             // 
             this.serialShellVersionLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.serialShellVersionLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.serialShellVersionLabel.Location = new System.Drawing.Point(157, 18);
-            this.serialShellVersionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.serialShellVersionLabel.Location = new System.Drawing.Point(118, 15);
             this.serialShellVersionLabel.Name = "serialShellVersionLabel";
-            this.serialShellVersionLabel.Size = new System.Drawing.Size(355, 32);
+            this.serialShellVersionLabel.Size = new System.Drawing.Size(266, 26);
             this.serialShellVersionLabel.TabIndex = 1;
             this.serialShellVersionLabel.Text = "SerialShell V0.2.1";
             this.serialShellVersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -835,10 +843,9 @@
             this.metroLabel18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel18.Location = new System.Drawing.Point(157, 37);
-            this.metroLabel18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel18.Location = new System.Drawing.Point(118, 30);
             this.metroLabel18.Name = "metroLabel18";
-            this.metroLabel18.Size = new System.Drawing.Size(355, 94);
+            this.metroLabel18.Size = new System.Drawing.Size(266, 76);
             this.metroLabel18.TabIndex = 1;
             this.metroLabel18.Text = "Copyright © 2016-2020\r\nAuthor: BOURAOUI AL-Moez L.A\r\nEmail: bouraoui.almoez.la@gm" +
     "ail.com";
@@ -848,10 +855,10 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = global::SerialShell.Properties.Resources.icon;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 6);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(9, 5);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox2.Size = new System.Drawing.Size(96, 104);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
@@ -859,8 +866,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(27, 262);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer1.Location = new System.Drawing.Point(20, 213);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -874,9 +881,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.guestcleaner);
             this.splitContainer1.Panel2.Controls.Add(this.guestTextBox);
             this.splitContainer1.Panel2.Controls.Add(this.metroLabel10);
-            this.splitContainer1.Size = new System.Drawing.Size(1279, 342);
-            this.splitContainer1.SplitterDistance = 1068;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(960, 278);
+            this.splitContainer1.SplitterDistance = 801;
             this.splitContainer1.TabIndex = 1;
             // 
             // hostcleaner
@@ -893,11 +899,10 @@
             this.hostcleaner.IconColor = System.Drawing.Color.Black;
             this.hostcleaner.IconSize = 24;
             this.hostcleaner.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hostcleaner.Location = new System.Drawing.Point(1027, 0);
-            this.hostcleaner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hostcleaner.Location = new System.Drawing.Point(770, 0);
             this.hostcleaner.Name = "hostcleaner";
             this.hostcleaner.Rotation = 0D;
-            this.hostcleaner.Size = new System.Drawing.Size(37, 30);
+            this.hostcleaner.Size = new System.Drawing.Size(28, 24);
             this.hostcleaner.TabIndex = 10;
             this.hostcleaner.UseVisualStyleBackColor = false;
             this.hostcleaner.Click += new System.EventHandler(this.HostCleaner_Click);
@@ -908,10 +913,10 @@
             // 
             // 
             this.hostTextBox.CustomButton.Image = null;
-            this.hostTextBox.CustomButton.Location = new System.Drawing.Point(758, 2);
-            this.hostTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.hostTextBox.CustomButton.Location = new System.Drawing.Point(549, 2);
+            this.hostTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.hostTextBox.CustomButton.Name = "";
-            this.hostTextBox.CustomButton.Size = new System.Drawing.Size(307, 307);
+            this.hostTextBox.CustomButton.Size = new System.Drawing.Size(249, 249);
             this.hostTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.hostTextBox.CustomButton.TabIndex = 1;
             this.hostTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -919,8 +924,8 @@
             this.hostTextBox.CustomButton.Visible = false;
             this.hostTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hostTextBox.Lines = new string[0];
-            this.hostTextBox.Location = new System.Drawing.Point(0, 30);
-            this.hostTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.hostTextBox.Location = new System.Drawing.Point(0, 24);
+            this.hostTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.hostTextBox.MaxLength = 32767;
             this.hostTextBox.Multiline = true;
             this.hostTextBox.Name = "hostTextBox";
@@ -931,7 +936,7 @@
             this.hostTextBox.SelectionLength = 0;
             this.hostTextBox.SelectionStart = 0;
             this.hostTextBox.ShortcutsEnabled = true;
-            this.hostTextBox.Size = new System.Drawing.Size(1068, 312);
+            this.hostTextBox.Size = new System.Drawing.Size(801, 254);
             this.hostTextBox.TabIndex = 1;
             this.hostTextBox.UseSelectable = true;
             this.hostTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -941,9 +946,8 @@
             // 
             this.metroLabel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroLabel9.Location = new System.Drawing.Point(0, 0);
-            this.metroLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel9.Name = "metroLabel9";
-            this.metroLabel9.Size = new System.Drawing.Size(1068, 30);
+            this.metroLabel9.Size = new System.Drawing.Size(801, 24);
             this.metroLabel9.TabIndex = 0;
             this.metroLabel9.Text = "Host";
             this.metroLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -962,11 +966,10 @@
             this.guestcleaner.IconColor = System.Drawing.Color.Black;
             this.guestcleaner.IconSize = 24;
             this.guestcleaner.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.guestcleaner.Location = new System.Drawing.Point(169, 0);
-            this.guestcleaner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guestcleaner.Location = new System.Drawing.Point(127, 0);
             this.guestcleaner.Name = "guestcleaner";
             this.guestcleaner.Rotation = 0D;
-            this.guestcleaner.Size = new System.Drawing.Size(37, 30);
+            this.guestcleaner.Size = new System.Drawing.Size(28, 24);
             this.guestcleaner.TabIndex = 11;
             this.guestcleaner.UseVisualStyleBackColor = false;
             this.guestcleaner.Click += new System.EventHandler(this.GuestCleaner_Click);
@@ -977,10 +980,10 @@
             // 
             // 
             this.guestTextBox.CustomButton.Image = null;
-            this.guestTextBox.CustomButton.Location = new System.Drawing.Point(-104, 2);
-            this.guestTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guestTextBox.CustomButton.Location = new System.Drawing.Point(-97, 2);
+            this.guestTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.guestTextBox.CustomButton.Name = "";
-            this.guestTextBox.CustomButton.Size = new System.Drawing.Size(307, 307);
+            this.guestTextBox.CustomButton.Size = new System.Drawing.Size(249, 249);
             this.guestTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.guestTextBox.CustomButton.TabIndex = 1;
             this.guestTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -988,8 +991,8 @@
             this.guestTextBox.CustomButton.Visible = false;
             this.guestTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guestTextBox.Lines = new string[0];
-            this.guestTextBox.Location = new System.Drawing.Point(0, 30);
-            this.guestTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guestTextBox.Location = new System.Drawing.Point(0, 24);
+            this.guestTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.guestTextBox.MaxLength = 32767;
             this.guestTextBox.Multiline = true;
             this.guestTextBox.Name = "guestTextBox";
@@ -1000,7 +1003,7 @@
             this.guestTextBox.SelectionLength = 0;
             this.guestTextBox.SelectionStart = 0;
             this.guestTextBox.ShortcutsEnabled = true;
-            this.guestTextBox.Size = new System.Drawing.Size(206, 312);
+            this.guestTextBox.Size = new System.Drawing.Size(155, 254);
             this.guestTextBox.TabIndex = 2;
             this.guestTextBox.UseSelectable = true;
             this.guestTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1010,9 +1013,8 @@
             // 
             this.metroLabel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroLabel10.Location = new System.Drawing.Point(0, 0);
-            this.metroLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(206, 30);
+            this.metroLabel10.Size = new System.Drawing.Size(155, 24);
             this.metroLabel10.TabIndex = 1;
             this.metroLabel10.Text = "Guest";
             this.metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1032,13 +1034,13 @@
             this.ctrl8ToolStripMenuItem,
             this.ctrl9ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 244);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(138, 224);
             // 
             // ctrl0ToolStripMenuItem
             // 
             this.ctrl0ToolStripMenuItem.Name = "ctrl0ToolStripMenuItem";
             this.ctrl0ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.ctrl0ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl0ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl0ToolStripMenuItem.Text = "ctrl0";
             this.ctrl0ToolStripMenuItem.Visible = false;
             // 
@@ -1046,7 +1048,7 @@
             // 
             this.ctrl1ToolStripMenuItem.Name = "ctrl1ToolStripMenuItem";
             this.ctrl1ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.ctrl1ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl1ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl1ToolStripMenuItem.Text = "ctrl1";
             this.ctrl1ToolStripMenuItem.Visible = false;
             // 
@@ -1054,7 +1056,7 @@
             // 
             this.ctrl2ToolStripMenuItem.Name = "ctrl2ToolStripMenuItem";
             this.ctrl2ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.ctrl2ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl2ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl2ToolStripMenuItem.Text = "ctrl2";
             this.ctrl2ToolStripMenuItem.Visible = false;
             // 
@@ -1062,7 +1064,7 @@
             // 
             this.ctrl3ToolStripMenuItem.Name = "ctrl3ToolStripMenuItem";
             this.ctrl3ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.ctrl3ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl3ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl3ToolStripMenuItem.Text = "ctrl3";
             this.ctrl3ToolStripMenuItem.Visible = false;
             // 
@@ -1070,7 +1072,7 @@
             // 
             this.ctrl4ToolStripMenuItem.Name = "ctrl4ToolStripMenuItem";
             this.ctrl4ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
-            this.ctrl4ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl4ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl4ToolStripMenuItem.Text = "ctrl4";
             this.ctrl4ToolStripMenuItem.Visible = false;
             // 
@@ -1078,7 +1080,7 @@
             // 
             this.ctrl5ToolStripMenuItem.Name = "ctrl5ToolStripMenuItem";
             this.ctrl5ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D5)));
-            this.ctrl5ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl5ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl5ToolStripMenuItem.Text = "ctrl5";
             this.ctrl5ToolStripMenuItem.Visible = false;
             // 
@@ -1086,7 +1088,7 @@
             // 
             this.ctrl6ToolStripMenuItem.Name = "ctrl6ToolStripMenuItem";
             this.ctrl6ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D6)));
-            this.ctrl6ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl6ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl6ToolStripMenuItem.Text = "ctrl6";
             this.ctrl6ToolStripMenuItem.Visible = false;
             // 
@@ -1094,7 +1096,7 @@
             // 
             this.ctrl7ToolStripMenuItem.Name = "ctrl7ToolStripMenuItem";
             this.ctrl7ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D7)));
-            this.ctrl7ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl7ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl7ToolStripMenuItem.Text = "ctrl7";
             this.ctrl7ToolStripMenuItem.Visible = false;
             // 
@@ -1102,7 +1104,7 @@
             // 
             this.ctrl8ToolStripMenuItem.Name = "ctrl8ToolStripMenuItem";
             this.ctrl8ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D8)));
-            this.ctrl8ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl8ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl8ToolStripMenuItem.Text = "ctrl8";
             this.ctrl8ToolStripMenuItem.Visible = false;
             // 
@@ -1110,7 +1112,7 @@
             // 
             this.ctrl9ToolStripMenuItem.Name = "ctrl9ToolStripMenuItem";
             this.ctrl9ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9)));
-            this.ctrl9ToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
+            this.ctrl9ToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.ctrl9ToolStripMenuItem.Text = "ctrl9";
             this.ctrl9ToolStripMenuItem.Visible = false;
             // 
@@ -1118,10 +1120,10 @@
             // 
             this.savesettingsbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.savesettingsbtn.Image = null;
-            this.savesettingsbtn.Location = new System.Drawing.Point(1005, 86);
-            this.savesettingsbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.savesettingsbtn.Location = new System.Drawing.Point(754, 70);
+            this.savesettingsbtn.Margin = new System.Windows.Forms.Padding(2);
             this.savesettingsbtn.Name = "savesettingsbtn";
-            this.savesettingsbtn.Size = new System.Drawing.Size(159, 27);
+            this.savesettingsbtn.Size = new System.Drawing.Size(119, 22);
             this.savesettingsbtn.TabIndex = 2;
             this.savesettingsbtn.Text = "Save current settings";
             this.savesettingsbtn.UseSelectable = true;
@@ -1132,10 +1134,10 @@
             // 
             this.helpbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.helpbtn.Image = null;
-            this.helpbtn.Location = new System.Drawing.Point(1175, 86);
-            this.helpbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.helpbtn.Location = new System.Drawing.Point(881, 70);
+            this.helpbtn.Margin = new System.Windows.Forms.Padding(2);
             this.helpbtn.Name = "helpbtn";
-            this.helpbtn.Size = new System.Drawing.Size(123, 27);
+            this.helpbtn.Size = new System.Drawing.Size(92, 22);
             this.helpbtn.TabIndex = 3;
             this.helpbtn.Text = "User Manual";
             this.helpbtn.UseSelectable = true;
@@ -1146,10 +1148,10 @@
             // 
             this.changeStyleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.changeStyleButton.Image = null;
-            this.changeStyleButton.Location = new System.Drawing.Point(931, 86);
-            this.changeStyleButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.changeStyleButton.Location = new System.Drawing.Point(698, 70);
+            this.changeStyleButton.Margin = new System.Windows.Forms.Padding(2);
             this.changeStyleButton.Name = "changeStyleButton";
-            this.changeStyleButton.Size = new System.Drawing.Size(63, 27);
+            this.changeStyleButton.Size = new System.Drawing.Size(47, 22);
             this.changeStyleButton.TabIndex = 4;
             this.changeStyleButton.Text = "Style";
             this.changeStyleButton.UseSelectable = true;
@@ -1164,10 +1166,10 @@
             // 
             this.changeThemeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.changeThemeButton.Image = null;
-            this.changeThemeButton.Location = new System.Drawing.Point(857, 86);
-            this.changeThemeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.changeThemeButton.Location = new System.Drawing.Point(643, 70);
+            this.changeThemeButton.Margin = new System.Windows.Forms.Padding(2);
             this.changeThemeButton.Name = "changeThemeButton";
-            this.changeThemeButton.Size = new System.Drawing.Size(63, 27);
+            this.changeThemeButton.Size = new System.Drawing.Size(47, 22);
             this.changeThemeButton.TabIndex = 5;
             this.changeThemeButton.Text = "Theme";
             this.changeThemeButton.UseSelectable = true;
@@ -1189,12 +1191,18 @@
             this.watchdog.Interval = 1000;
             this.watchdog.Tick += new System.EventHandler(this.Watchdog_Tick);
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // MainForm
             // 
             this.ApplyImageInvert = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 629);
+            this.ClientSize = new System.Drawing.Size(1000, 511);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.changeThemeButton);
             this.Controls.Add(this.changeStyleButton);
@@ -1203,10 +1211,9 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.metroTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(827, 369);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(620, 300);
             this.Name = "MainForm";
-            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.StyleManager = this.metroStyleManager;
             this.Text = "SerialShell V0.2.1";
@@ -1304,6 +1311,9 @@
         private FontAwesome.Sharp.IconButton guestcleaner;
         public MetroFramework.Controls.MetroComboBox receiveDataSeparator;
         private MetroFramework.Controls.MetroLabel receiveDataSeparatorLabel;
+        public MetroFramework.Controls.MetroCheckBox invertDataCheckBox;
+        public MetroFramework.Controls.MetroCheckBox sevenBitsCheckBox;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }
 
