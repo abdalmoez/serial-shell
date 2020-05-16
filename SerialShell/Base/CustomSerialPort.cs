@@ -335,25 +335,41 @@ namespace SerialShell.Base
                                         .ToArray();
         }
 
-        List<byte> ToBytes(string type, string value)
+        List<byte> ToBytes(string type, string msg_value)
         {
             List<byte> data = new List<byte>();
             try
             { 
                 switch (type)
                 {
-                    case "string":          data.AddRange(Encoding.ASCII.GetBytes(value)); break;
-                    case "C-like string":   data.AddRange(UnescapeString(value));          break;
-                    case "hex":             data.AddRange(HexStringToByteArray(value));    break;
-                    case "float 32bits":    data.AddRange(BitConverter.GetBytes(float .Parse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture))); break;
-                    case "unsigned byte":   data.AddRange(BitConverter.GetBytes(byte  .Parse(value))); break;
-                    case "signed byte":     data.AddRange(BitConverter.GetBytes(sbyte .Parse(value))); break;
-                    case "unsigned short":  data.AddRange(BitConverter.GetBytes(ushort.Parse(value))); break;
-                    case "signed short":    data.AddRange(BitConverter.GetBytes(short .Parse(value))); break;
-                    case "unsigned int":    data.AddRange(BitConverter.GetBytes(uint  .Parse(value))); break;
-                    case "signed int":      data.AddRange(BitConverter.GetBytes(int   .Parse(value))); break;
-                    case "unsigned long":   data.AddRange(BitConverter.GetBytes(ulong .Parse(value))); break;
-                    case "signed long":     data.AddRange(BitConverter.GetBytes(long  .Parse(value))); break;
+                    case "string":          data.AddRange(Encoding.ASCII.GetBytes(msg_value)); break;
+                    case "C-like string":   data.AddRange(UnescapeString(msg_value));          break;
+                    case "hex":             data.AddRange(HexStringToByteArray(msg_value));    break;
+                    default:
+                    {
+                        if(!IsMultipleValueType(type))
+                        {
+                            return null;
+                        }
+                        var values = msg_value.Split(' ');
+                        foreach(var value in values)
+                        {
+                            switch(type)
+                            {
+                                case "float 32bits": data.AddRange(BitConverter.GetBytes(float.Parse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture))); break;
+                                case "unsigned byte": data.AddRange(BitConverter.GetBytes(byte.Parse(value))); break;
+                                case "signed byte": data.AddRange(BitConverter.GetBytes(sbyte.Parse(value))); break;
+                                case "unsigned short": data.AddRange(BitConverter.GetBytes(ushort.Parse(value))); break;
+                                case "signed short": data.AddRange(BitConverter.GetBytes(short.Parse(value))); break;
+                                case "unsigned int": data.AddRange(BitConverter.GetBytes(uint.Parse(value))); break;
+                                case "signed int": data.AddRange(BitConverter.GetBytes(int.Parse(value))); break;
+                                case "unsigned long": data.AddRange(BitConverter.GetBytes(ulong.Parse(value))); break;
+                                case "signed long": data.AddRange(BitConverter.GetBytes(long.Parse(value))); break;
+                            }
+                        }
+                        break;
+                    }
+                   
                 }
                 data.AddRange(GetLineEnding());
                 if (data.Count == 0)
@@ -363,10 +379,17 @@ namespace SerialShell.Base
             }
             catch
             {
-                MetroMessageBox.Show(mainform, "Error : Unvalid value '" + value + "' of type '" + type + "'", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(mainform, "Error : Unvalid value '" + msg_value + "' of type '" + type + "'", "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             return data;
+        }
+
+        bool IsMultipleValueType(string type)
+        {
+            string[] types = { "float 32bits", "unsigned byte", "signed byte", "unsigned short", "signed short",
+                               "unsigned int", "signed int", "unsigned long", "signed long"};
+            return Array.IndexOf(types, type) != -1;
         }
 
         public void send(string type, string value)

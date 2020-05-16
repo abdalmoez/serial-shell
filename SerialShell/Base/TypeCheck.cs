@@ -4,25 +4,91 @@ namespace SerialShell.Base
 {
     class TypeCheck
     {
-        public static bool isType(string type, string value)
+        public static bool isType(string type, string msg_value)
         {
             switch (type)
             {
                 case "string": return true;
-                case "C-like string": return isCLikeString(value);
-                case "hex": return (value.Length % 2 == 0) && (System.Text.RegularExpressions.Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z"));
-                case "float 32bits": float f = 0f; return float.TryParse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out f);
-                case "unsigned byte": byte b = 0; return byte.TryParse(value, out b);
-                case "signed byte": sbyte ub = 0; return sbyte.TryParse(value, out ub);
-                case "unsigned short": ushort us = 0; return ushort.TryParse(value, out us);
-                case "signed short": short s = 0; return short.TryParse(value, out s);
-                case "unsigned int": uint ui = 0; return uint.TryParse(value, out ui);
-                case "signed int": int i = 0; return int.TryParse(value,out i);
-                
-                case "unsigned long": ulong ul = 0; return ulong.TryParse(value, out ul);
-                case "signed long": long l = 0; return long.TryParse(value, out l);
+                case "C-like string": return isCLikeString(msg_value);
+                case "hex": return (msg_value.Length % 2 == 0) && (System.Text.RegularExpressions.Regex.IsMatch(msg_value, @"\A\b[0-9a-fA-F]+\b\Z"));
                 default:
-                    return false;
+                {
+                        string[] values = msg_value.Split(' ');
+                        foreach(var value in values)
+                        {
+                            switch(type)
+                            {
+                                case "float 32bits":
+                                {
+                                    float f = 0f;
+                                    if(!float.TryParse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out f))
+                                        return false;
+                                    break;
+                                }
+                                case "unsigned byte": 
+                                {
+                                    byte b = 0; 
+                                    if(!byte.TryParse(value, out b))
+                                        return false;
+                                    break;
+                                }
+                                case "signed byte":
+                                {
+                                    sbyte ub = 0;
+                                    if(!sbyte.TryParse(value, out ub))
+                                        return false;
+                                    break;
+                                }
+                                case "unsigned short": 
+                                {
+                                    ushort us = 0;
+                                    if(!ushort.TryParse(value, out us))
+                                        return false;
+                                    break;
+                                }
+                                case "signed short": 
+                                {
+                                    short s = 0; 
+                                    if(!short.TryParse(value, out s))
+                                        return false;
+                                    break;
+                                }
+                                case "unsigned int": 
+                                {
+                                    uint ui = 0;
+                                    if(!uint.TryParse(value, out ui))
+                                        return false;
+                                    break;
+                                }
+                                case "signed int": 
+                                {
+                                    int i = 0; 
+                                    if(!int.TryParse(value, out i))
+                                        return false;
+                                    break;
+                                }
+
+                                case "unsigned long": 
+                                {
+                                    ulong ul = 0;
+                                    if(!ulong.TryParse(value, out ul))
+                                        return false;
+                                    break;
+                                }
+                                case "signed long": 
+                                {
+                                    long l = 0;
+                                    if(!long.TryParse(value, out l))
+                                        return false;
+                                    break;
+                                }
+                                default:
+                                    return false;
+                            }
+                        }
+                        return true;
+                }
+                
             }
         }
 
