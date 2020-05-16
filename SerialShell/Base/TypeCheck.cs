@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace SerialShell.Base
 {
@@ -15,7 +11,7 @@ namespace SerialShell.Base
                 case "string": return true;
                 case "C-like string": return isCLikeString(value);
                 case "hex": return (value.Length % 2 == 0) && (System.Text.RegularExpressions.Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z"));
-                case "float 32bits": float f = 0f; return float.TryParse(value, out f);
+                case "float 32bits": float f = 0f; return float.TryParse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out f);
                 case "unsigned byte": byte b = 0; return byte.TryParse(value, out b);
                 case "signed byte": sbyte ub = 0; return sbyte.TryParse(value, out ub);
                 case "unsigned short": ushort us = 0; return ushort.TryParse(value, out us);

@@ -204,7 +204,7 @@ namespace SerialShell.Base
                 {
                     for(buffer_index = 0; buffer_index + 4 <= BufferSize; buffer_index += 4)
                     {
-                        value += System.BitConverter.ToSingle(BufferData, buffer_index).ToString() + separator;
+                        value += System.BitConverter.ToSingle(BufferData, buffer_index).ToString(CultureInfo.InvariantCulture) + separator;
                     }
                     break;
                 }
@@ -352,7 +352,7 @@ namespace SerialShell.Base
                 return;
             if (sp.IsOpen == false)
             {
-                mainform.hostTextBox.AppendText("Error sending data:" + value + Environment.NewLine);
+                mainform.hostTextBox.AppendText("Error sending data: " + value + Environment.NewLine);
                 return;
                 
             }
@@ -364,7 +364,7 @@ namespace SerialShell.Base
                     case "string": sp.Write(value); break;
                     case "C-like string": var bytes = UnescapeString(value); sp.Write(bytes,0, bytes.Length); break;
                     case "hex": sp.Write(HexStringToByteArray(value), 0, value.Length / 2); break;
-                    case "float 32bits": sp.Write(BitConverter.GetBytes(float.Parse(value)), 0, 4); break;
+                    case "float 32bits": sp.Write(BitConverter.GetBytes(float.Parse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture)), 0, 4); break;
                     case "unsigned byte": sp.Write(BitConverter.GetBytes(byte.Parse(value)), 0, 1); break;
                     case "signed byte": sp.Write(BitConverter.GetBytes(sbyte.Parse(value)), 0, 1); break;
                     case "unsigned short": sp.Write(BitConverter.GetBytes(ushort.Parse(value)), 0, 2); break;
