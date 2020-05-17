@@ -509,7 +509,7 @@ namespace MetroFramework.Drawing
                 public static Color Normal(MetroThemeStyle theme)
                 {
                     if (theme == MetroThemeStyle.Dark)
-                        return Color.FromArgb(255, 255, 255);
+                        return Color.FromArgb(0, 0, 0);
 
                     return Color.FromArgb(255, 255, 255);
                 }

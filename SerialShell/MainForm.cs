@@ -151,8 +151,7 @@ namespace SerialShell
             if ((i == (int)MetroColorStyle.Black) && (metroStyleManager.Theme == MetroThemeStyle.Dark))
                 i++;
 
-            //if ((i == (int)MetroColorStyle.White) && (metroStyleManager.Theme == MetroThemeStyle.Light))
-            if (i == (int)MetroColorStyle.White) //Bug with MetroTile ForeColor doesn't change there is a case White on White
+            if ((i == (int)MetroColorStyle.White) && (metroStyleManager.Theme == MetroThemeStyle.Light))
                 i++;
 
             metroStyleManager.Style = (MetroFramework.MetroColorStyle)(i);
@@ -175,7 +174,7 @@ namespace SerialShell
                 metroStyleManager.Theme = MetroThemeStyle.Dark;
                 if (metroStyleManager.Style == MetroColorStyle.Black)
                 {
-                    metroStyleManager.Style = MetroColorStyle.Silver;
+                    metroStyleManager.Style = MetroColorStyle.White;
                     OnChangeStyle(metroStyleManager.Style);
                 }
                     
@@ -183,7 +182,7 @@ namespace SerialShell
             else
             {
                 metroStyleManager.Theme = MetroThemeStyle.Light;
-                if (metroStyleManager.Style == MetroColorStyle.Silver)
+                if (metroStyleManager.Style == MetroColorStyle.White)
                 {
                     metroStyleManager.Style = MetroColorStyle.Black;
                     OnChangeStyle(metroStyleManager.Style);
