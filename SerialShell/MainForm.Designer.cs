@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.tabPage1 = new MetroFramework.Controls.MetroTabPage();
@@ -105,6 +108,19 @@
             this.receivelogsaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.watchdog = new System.Windows.Forms.Timer(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.logPanel = new MetroFramework.Controls.MetroGrid();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.logPanelContextMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.copySelectedLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.logPanelToggle = new FontAwesome.Sharp.IconButton();
             this.metroTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -117,6 +133,12 @@
             this.splitContainer1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logPanel)).BeginInit();
+            this.logPanelContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
@@ -274,7 +296,7 @@
             this.connectiondatasize.Name = "connectiondatasize";
             this.connectiondatasize.Size = new System.Drawing.Size(50, 17);
             this.connectiondatasize.TabIndex = 4;
-            this.connectiondatasize.Text = "Off";
+            this.connectiondatasize.Text = "&StatusOff";
             this.connectiondatasize.UseSelectable = true;
             // 
             // metroLabel2
@@ -866,7 +888,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(20, 213);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -881,8 +903,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.guestcleaner);
             this.splitContainer1.Panel2.Controls.Add(this.guestTextBox);
             this.splitContainer1.Panel2.Controls.Add(this.metroLabel10);
-            this.splitContainer1.Size = new System.Drawing.Size(960, 278);
-            this.splitContainer1.SplitterDistance = 801;
+            this.splitContainer1.Size = new System.Drawing.Size(960, 309);
+            this.splitContainer1.SplitterDistance = 477;
             this.splitContainer1.TabIndex = 1;
             // 
             // hostcleaner
@@ -899,7 +921,7 @@
             this.hostcleaner.IconColor = System.Drawing.Color.Black;
             this.hostcleaner.IconSize = 24;
             this.hostcleaner.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hostcleaner.Location = new System.Drawing.Point(770, 0);
+            this.hostcleaner.Location = new System.Drawing.Point(446, 0);
             this.hostcleaner.Name = "hostcleaner";
             this.hostcleaner.Rotation = 0D;
             this.hostcleaner.Size = new System.Drawing.Size(28, 24);
@@ -913,10 +935,10 @@
             // 
             // 
             this.hostTextBox.CustomButton.Image = null;
-            this.hostTextBox.CustomButton.Location = new System.Drawing.Point(549, 2);
+            this.hostTextBox.CustomButton.Location = new System.Drawing.Point(193, 1);
             this.hostTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.hostTextBox.CustomButton.Name = "";
-            this.hostTextBox.CustomButton.Size = new System.Drawing.Size(249, 249);
+            this.hostTextBox.CustomButton.Size = new System.Drawing.Size(283, 283);
             this.hostTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.hostTextBox.CustomButton.TabIndex = 1;
             this.hostTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -936,7 +958,7 @@
             this.hostTextBox.SelectionLength = 0;
             this.hostTextBox.SelectionStart = 0;
             this.hostTextBox.ShortcutsEnabled = true;
-            this.hostTextBox.Size = new System.Drawing.Size(801, 254);
+            this.hostTextBox.Size = new System.Drawing.Size(477, 285);
             this.hostTextBox.TabIndex = 1;
             this.hostTextBox.UseSelectable = true;
             this.hostTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -947,7 +969,7 @@
             this.metroLabel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroLabel9.Location = new System.Drawing.Point(0, 0);
             this.metroLabel9.Name = "metroLabel9";
-            this.metroLabel9.Size = new System.Drawing.Size(801, 24);
+            this.metroLabel9.Size = new System.Drawing.Size(477, 24);
             this.metroLabel9.TabIndex = 0;
             this.metroLabel9.Text = "Host";
             this.metroLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -966,7 +988,7 @@
             this.guestcleaner.IconColor = System.Drawing.Color.Black;
             this.guestcleaner.IconSize = 24;
             this.guestcleaner.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.guestcleaner.Location = new System.Drawing.Point(127, 0);
+            this.guestcleaner.Location = new System.Drawing.Point(451, 0);
             this.guestcleaner.Name = "guestcleaner";
             this.guestcleaner.Rotation = 0D;
             this.guestcleaner.Size = new System.Drawing.Size(28, 24);
@@ -980,10 +1002,10 @@
             // 
             // 
             this.guestTextBox.CustomButton.Image = null;
-            this.guestTextBox.CustomButton.Location = new System.Drawing.Point(-97, 2);
+            this.guestTextBox.CustomButton.Location = new System.Drawing.Point(195, 1);
             this.guestTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.guestTextBox.CustomButton.Name = "";
-            this.guestTextBox.CustomButton.Size = new System.Drawing.Size(249, 249);
+            this.guestTextBox.CustomButton.Size = new System.Drawing.Size(283, 283);
             this.guestTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.guestTextBox.CustomButton.TabIndex = 1;
             this.guestTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -1003,7 +1025,7 @@
             this.guestTextBox.SelectionLength = 0;
             this.guestTextBox.SelectionStart = 0;
             this.guestTextBox.ShortcutsEnabled = true;
-            this.guestTextBox.Size = new System.Drawing.Size(155, 254);
+            this.guestTextBox.Size = new System.Drawing.Size(479, 285);
             this.guestTextBox.TabIndex = 2;
             this.guestTextBox.UseSelectable = true;
             this.guestTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1014,7 +1036,7 @@
             this.metroLabel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroLabel10.Location = new System.Drawing.Point(0, 0);
             this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(155, 24);
+            this.metroLabel10.Size = new System.Drawing.Size(479, 24);
             this.metroLabel10.TabIndex = 1;
             this.metroLabel10.Text = "Guest";
             this.metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1197,18 +1219,193 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // logPanel
+            // 
+            this.logPanel.AllowUserToAddRows = false;
+            this.logPanel.AllowUserToDeleteRows = false;
+            this.logPanel.AllowUserToResizeRows = false;
+            this.logPanel.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.logPanel.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.logPanel.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.logPanel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.logPanel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.logPanel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Time,
+            this.Column1,
+            this.Column2,
+            this.Column3});
+            this.logPanel.ContextMenuStrip = this.logPanelContextMenu;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.logPanel.DefaultCellStyle = dataGridViewCellStyle2;
+            this.logPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logPanel.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.logPanel.EnableHeadersVisualStyles = false;
+            this.logPanel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.logPanel.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.logPanel.Location = new System.Drawing.Point(0, 0);
+            this.logPanel.MultiSelect = false;
+            this.logPanel.Name = "logPanel";
+            this.logPanel.ReadOnly = true;
+            this.logPanel.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.logPanel.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.logPanel.RowHeadersVisible = false;
+            this.logPanel.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.logPanel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.logPanel.Size = new System.Drawing.Size(960, 120);
+            this.logPanel.TabIndex = 6;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 150;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Source";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Severity";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "Message";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // logPanelContextMenu
+            // 
+            this.logPanelContextMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.logPanelContextMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.logPanelContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copySelectedLineToolStripMenuItem,
+            this.copyAllToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exportToolStripMenuItem});
+            this.logPanelContextMenu.Name = "logPanelContextMenu";
+            this.logPanelContextMenu.Size = new System.Drawing.Size(171, 76);
+            this.logPanelContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.LogPanelContextMenu_Opening);
+            // 
+            // copySelectedLineToolStripMenuItem
+            // 
+            this.copySelectedLineToolStripMenuItem.Name = "copySelectedLineToolStripMenuItem";
+            this.copySelectedLineToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.copySelectedLineToolStripMenuItem.Text = "Copy selected line";
+            this.copySelectedLineToolStripMenuItem.Click += new System.EventHandler(this.CopySelectedLineToolStripMenuItem_Click);
+            // 
+            // copyAllToolStripMenuItem
+            // 
+            this.copyAllToolStripMenuItem.Name = "copyAllToolStripMenuItem";
+            this.copyAllToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.copyAllToolStripMenuItem.Text = "Copy All";
+            this.copyAllToolStripMenuItem.Click += new System.EventHandler(this.CopyAllToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.ExportToolStripMenuItem_Click);
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.metroLabel12.Location = new System.Drawing.Point(0, 309);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(960, 24);
+            this.metroLabel12.TabIndex = 2;
+            this.metroLabel12.Text = "Log Panel";
+            this.metroLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(20, 213);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.logPanelToggle);
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
+            this.splitContainer2.Panel1.Controls.Add(this.metroLabel12);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.AutoScroll = true;
+            this.splitContainer2.Panel2.Controls.Add(this.logPanel);
+            this.splitContainer2.Size = new System.Drawing.Size(960, 457);
+            this.splitContainer2.SplitterDistance = 333;
+            this.splitContainer2.TabIndex = 8;
+            // 
+            // logPanelToggle
+            // 
+            this.logPanelToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.logPanelToggle.BackColor = System.Drawing.Color.Transparent;
+            this.logPanelToggle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logPanelToggle.FlatAppearance.BorderSize = 0;
+            this.logPanelToggle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.logPanelToggle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.logPanelToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logPanelToggle.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.logPanelToggle.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.logPanelToggle.IconColor = System.Drawing.Color.Black;
+            this.logPanelToggle.IconSize = 24;
+            this.logPanelToggle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.logPanelToggle.Location = new System.Drawing.Point(930, 309);
+            this.logPanelToggle.Name = "logPanelToggle";
+            this.logPanelToggle.Rotation = 0D;
+            this.logPanelToggle.Size = new System.Drawing.Size(28, 24);
+            this.logPanelToggle.TabIndex = 12;
+            this.metroToolTip1.SetToolTip(this.logPanelToggle, "Toggle log panel");
+            this.logPanelToggle.UseVisualStyleBackColor = false;
+            this.logPanelToggle.Click += new System.EventHandler(this.LogPanelToggle_Click);
+            // 
             // MainForm
             // 
             this.ApplyImageInvert = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 511);
+            this.ClientSize = new System.Drawing.Size(1000, 690);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.changeThemeButton);
             this.Controls.Add(this.changeStyleButton);
             this.Controls.Add(this.helpbtn);
             this.Controls.Add(this.savesettingsbtn);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.metroTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -1233,6 +1430,12 @@
             this.splitContainer1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logPanel)).EndInit();
+            this.logPanelContextMenu.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1314,6 +1517,19 @@
         public MetroFramework.Controls.MetroCheckBox invertDataCheckBox;
         public MetroFramework.Controls.MetroCheckBox sevenBitsCheckBox;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        public MetroFramework.Controls.MetroGrid logPanel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private MetroFramework.Controls.MetroContextMenu logPanelContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem copyAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copySelectedLineToolStripMenuItem;
+        private FontAwesome.Sharp.IconButton logPanelToggle;
     }
 }
 

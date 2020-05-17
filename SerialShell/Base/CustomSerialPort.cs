@@ -38,7 +38,7 @@ namespace SerialShell.Base
         {
             MethodInvoker mi = delegate ()
             {
-                mainform.guestTextBox.AppendTextSmartScroll("Serial pin changed(" + e.EventType.ToString() + ")"+Environment.NewLine);
+                mainform.AppendLogPanel("Guest", "Info", "Serial pin changed '" + e.EventType.ToString() + "'");
             };
             MethodInvoker call = delegate
             {
@@ -70,7 +70,7 @@ namespace SerialShell.Base
                     err = "The application tried to transmit a character, but the output buffer was full.";
                     break;
             }
-            mainform.guestTextBox.AppendTextSmartScroll("Error receiving data(" + err + ")"+Environment.NewLine);
+            mainform.AppendLogPanel("Guest", "Error", "Cannot receive data: '" + err + "'");
         }
 
         void sp_Disposed(object sender, EventArgs e)
@@ -135,7 +135,7 @@ namespace SerialShell.Base
                         data += ((data != "") ? ", 0x" : "0x") + BufferData[i].ToString("X2");
                     }
                     var err = "Cannot receive valid value of type: " + mainform.receivedatatype.Text + " received_size: " + BufferSize + " received_data: " + data;
-                    mainform.guestTextBox.AppendTextSmartScroll("Error receiving data(" + err + ")" + Environment.NewLine);
+                    mainform.AppendLogPanel("Guest", "Error", err);
                 }
             }
 
@@ -315,7 +315,7 @@ namespace SerialShell.Base
                 }
                 catch (Exception ex)
                 {
-                    mi = delegate { mainform.guestTextBox.AppendTextSmartScroll("Error Log file:"+ex.Message + Environment.NewLine); };
+                    mi = delegate { mainform.AppendLogPanel("Guest", "Error", "Cannot write to log file: " + ex.Message); };
                     call();
                 }
             }
@@ -416,7 +416,7 @@ namespace SerialShell.Base
             {
                 if(value != "")
                 {
-                    mainform.hostTextBox.AppendTextSmartScroll("Error sending data: " + value + Environment.NewLine);
+                    mainform.AppendLogPanel("Host", "Error", "Device not connected. Cannot send data '" + value + "' of type '" + type + "'.");
                 }
                 return;
             }
@@ -436,7 +436,7 @@ namespace SerialShell.Base
             }
             catch (Exception ex)
             {
-                mainform.hostTextBox.AppendTextSmartScroll("Error sending data("+ex.Message+"):" + value + Environment.NewLine);
+                mainform.AppendLogPanel("Host", "Error", "Cannot send data '" + value + "' of type '"+ type +"' : " + ex.Message);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return ;
@@ -527,12 +527,12 @@ namespace SerialShell.Base
             }
             catch(Exception ex)
             {
-                mainform.hostTextBox.AppendTextSmartScroll("Error sending file("+ex.Message+"):" + path + Environment.NewLine);
+                mainform.AppendLogPanel("Host", "Error", "Cannot send file '" + path + "' : " + ex.Message);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return;
             }
-            mainform.hostTextBox.AppendTextSmartScroll("Successful sending file:" + path + Environment.NewLine);
+            mainform.AppendLogPanel("Host", "Info", "File was successfully sended : '" + path + "'");
         }
 
     }

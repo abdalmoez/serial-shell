@@ -165,6 +165,7 @@ namespace SerialShell
             licensePicture.IconColor = new_color;
             hostcleaner.IconColor = new_color;
             guestcleaner.IconColor = new_color;
+            logPanelToggle.IconColor = new_color;
         }
 
         private void ChangeThemeButton_Click(object sender, EventArgs e)
@@ -379,6 +380,114 @@ namespace SerialShell
         private void receivedatatype_SelectedIndexChanged(object sender, EventArgs e)
         {
             Program.SerialPortInteface.DecodeData();
+        }
+
+        public void AppendLogPanel(string source, string severity, string message)
+        {
+            logPanel.NotifyCurrentCellDirty(false);
+            logPanel.Rows.Add(1);
+            int index = logPanel.Rows.Count - 1;
+            logPanel[0, index].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:ffff");
+            logPanel[1, index].Value = source;
+            logPanel[2, index].Value = severity;
+            logPanel[3, index].Value = message;
+            logPanel.Rows[index].Selected = true;
+            logPanel.Sort(logPanel.Columns["Time"], System.ComponentModel.ListSortDirection.Descending);
+        }
+
+        private void LogPanelContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(logPanel.SelectedRows.Count == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void CopySelectedLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (logPanel.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            Clipboard.SetText(logPanel.SelectedRows[0].Cells[0].Value + "\t" + 
+                              logPanel.SelectedRows[0].Cells[1].Value + "\t" + 
+                              logPanel.SelectedRows[0].Cells[2].Value + "\t" + 
+                              logPanel.SelectedRows[0].Cells[3].Value);
+
+        }
+
+        private void CopyAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (logPanel.Rows.Count == 0)
+            {
+                return;
+            }
+            string text="";
+            for(int i = 0 ; i < logPanel.RowCount ; i++)
+            {
+                if (text != "")
+                    text += Environment.NewLine;
+                text += logPanel.Rows[i].Cells[0].Value + "\t" +
+                        logPanel.Rows[i].Cells[1].Value + "\t" +
+                        logPanel.Rows[i].Cells[2].Value + "\t" +
+                        logPanel.Rows[i].Cells[3].Value;
+            }
+            Clipboard.SetText(text);
+        }
+
+        private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (logPanel.Rows.Count == 0)
+            {
+                return;
+            }
+            SaveFileDialog save_file_dialog = new SaveFileDialog();
+
+            save_file_dialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            save_file_dialog.FilterIndex = 1;
+            save_file_dialog.RestoreDirectory = true;
+
+            if (save_file_dialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = save_file_dialog.FileName;
+                if(save_file_dialog.FilterIndex == 1 && (filename.Length < 4 || filename.Substring(filename.Length-4,4).ToLower() != ".txt"))
+                {
+                    filename += ".txt";
+                }
+                string text = "";
+                for (int i = 0; i < logPanel.RowCount; i++)
+                {
+                    if (text != "")
+                        text += Environment.NewLine;
+                    text += logPanel.Rows[i].Cells[0].Value + "\t" +
+                            logPanel.Rows[i].Cells[1].Value + "\t" +
+                            logPanel.Rows[i].Cells[2].Value + "\t" +
+                            logPanel.Rows[i].Cells[3].Value;
+                }
+                try
+                { 
+                    System.IO.File.WriteAllText(filename, text);
+                }
+                catch (Exception ex)
+                {
+                    MetroMessageBox.Show(this, "Cannot export logs to '" + filename + "' : " + ex.Message);
+                }
+            }
+                
+        }
+
+        private void LogPanelToggle_Click(object sender, EventArgs e)
+        {
+            splitContainer2.Panel2Collapsed = !splitContainer2.Panel2Collapsed;
+            if (!splitContainer2.Panel2Collapsed)
+            {
+                logPanelToggle.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            }
+            else
+            {
+                logPanelToggle.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
+            }
         }
     }
 }
