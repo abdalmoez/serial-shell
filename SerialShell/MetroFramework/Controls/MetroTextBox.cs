@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
+using MetroFramework.Native;
 
 namespace MetroFramework.Controls
 {
@@ -396,6 +397,36 @@ namespace MetroFramework.Controls
         {
             get { return baseTextBox.WaterMarkFont; }
             set { baseTextBox.WaterMarkFont = value; }
+        }
+
+        public void AppendTextSmartScroll(string value)
+        {
+            bool bottomFlag = false;
+            int VSmin;
+            int VSmax;
+            int sbOffset;
+            int savedVpos;
+            const int SB_THUMBPOSITION = 4;
+
+            WinApi.SendMessage(baseTextBox.Handle, (int)WinApi.Messages.WM_SETREDRAW, false, 0);
+            sbOffset = (int)((baseTextBox.ClientSize.Height - SystemInformation.HorizontalScrollBarHeight) / (baseTextBox.Font.Height));
+            savedVpos = WinApi.GetScrollPos(baseTextBox.Handle, (int)WinApi.ScrollBar.SB_VERT);
+            WinApi.GetScrollRange(baseTextBox.Handle, (int)WinApi.ScrollBar.SB_VERT, out VSmin, out VSmax);
+            if (savedVpos >= (VSmax - sbOffset - 1))
+                bottomFlag = true;
+            baseTextBox.AppendText(value);
+            if (bottomFlag)
+            {
+                WinApi.GetScrollRange(baseTextBox.Handle, (int)WinApi.ScrollBar.SB_VERT, out VSmin, out VSmax);
+                savedVpos = VSmax - sbOffset;
+                bottomFlag = false;
+            }
+            WinApi.SetScrollPos(baseTextBox.Handle, (int)WinApi.ScrollBar.SB_VERT, savedVpos, true);
+            WinApi.PostMessageA(baseTextBox.Handle, (int)WinApi.Messages.WM_VSCROLL, SB_THUMBPOSITION + 0x10000 * savedVpos, 0);
+            WinApi.SendMessage(baseTextBox.Handle, (int)WinApi.Messages.WM_SETREDRAW, true, 0);
+            baseTextBox.Update();
+            //this.OnPaint( null);
+
         }
 
         public string[] Lines

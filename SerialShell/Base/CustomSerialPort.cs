@@ -38,7 +38,7 @@ namespace SerialShell.Base
         {
             MethodInvoker mi = delegate ()
             {
-                mainform.guestTextBox.AppendText("Serial pin changed(" + e.EventType.ToString() + ")"+Environment.NewLine);
+                mainform.guestTextBox.AppendTextSmartScroll("Serial pin changed(" + e.EventType.ToString() + ")"+Environment.NewLine);
             };
             MethodInvoker call = delegate
             {
@@ -70,7 +70,7 @@ namespace SerialShell.Base
                     err = "The application tried to transmit a character, but the output buffer was full.";
                     break;
             }
-            mainform.guestTextBox.AppendText("Error receiving data(" + err + ")"+Environment.NewLine);
+            mainform.guestTextBox.AppendTextSmartScroll("Error receiving data(" + err + ")"+Environment.NewLine);
         }
 
         void sp_Disposed(object sender, EventArgs e)
@@ -135,7 +135,7 @@ namespace SerialShell.Base
                         data += ((data != "") ? ", 0x" : "0x") + BufferData[i].ToString("X2");
                     }
                     var err = "Cannot receive valid value of type: " + mainform.receivedatatype.Text + " received_size: " + BufferSize + " received_data: " + data;
-                    mainform.guestTextBox.AppendText("Error receiving data(" + err + ")" + Environment.NewLine);
+                    mainform.guestTextBox.AppendTextSmartScroll("Error receiving data(" + err + ")" + Environment.NewLine);
                 }
             }
 
@@ -315,17 +315,17 @@ namespace SerialShell.Base
                 }
                 catch (Exception ex)
                 {
-                    mi = delegate { mainform.guestTextBox.AppendText("Error Log file:"+ex.Message + Environment.NewLine); };
+                    mi = delegate { mainform.guestTextBox.AppendTextSmartScroll("Error Log file:"+ex.Message + Environment.NewLine); };
                     call();
                 }
             }
 
             
-            mi = delegate { mainform.guestTextBox.AppendText(value); };
+            mi = delegate { mainform.guestTextBox.AppendTextSmartScroll(value); };
             call();
          /*   mi = delegate()
             {
-                //mainform.guestTextBox.AppendText(qs);//autoscroll
+                //mainform.guestTextBox.AppendTextSmartScroll(qs);//autoscroll
             };*/
 
          //   mainform.Invoke(mi);
@@ -416,7 +416,7 @@ namespace SerialShell.Base
             {
                 if(value != "")
                 {
-                    mainform.hostTextBox.AppendText("Error sending data: " + value + Environment.NewLine);
+                    mainform.hostTextBox.AppendTextSmartScroll("Error sending data: " + value + Environment.NewLine);
                 }
                 return;
             }
@@ -436,12 +436,12 @@ namespace SerialShell.Base
             }
             catch (Exception ex)
             {
-                mainform.hostTextBox.AppendText("Error sending data("+ex.Message+"):" + value + Environment.NewLine);
+                mainform.hostTextBox.AppendTextSmartScroll("Error sending data("+ex.Message+"):" + value + Environment.NewLine);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return ;
             }
-            mainform.hostTextBox.AppendText(" sending "+type+":"+value+Environment.NewLine);
+            mainform.hostTextBox.AppendTextSmartScroll(" sending "+type+":"+value+Environment.NewLine);
         }
 
         private static byte[] UnescapeString(string source)
@@ -527,12 +527,12 @@ namespace SerialShell.Base
             }
             catch(Exception ex)
             {
-                mainform.hostTextBox.AppendText("Error sending file("+ex.Message+"):" + path + Environment.NewLine);
+                mainform.hostTextBox.AppendTextSmartScroll("Error sending file("+ex.Message+"):" + path + Environment.NewLine);
                 if (mainform.connectbtn.Text == "Disconnect")
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return;
             }
-            mainform.hostTextBox.AppendText("Successful sending file:" + path + Environment.NewLine);
+            mainform.hostTextBox.AppendTextSmartScroll("Successful sending file:" + path + Environment.NewLine);
         }
 
     }

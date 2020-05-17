@@ -541,6 +541,19 @@ namespace MetroFramework.Native
         [DllImport("user32.dll")]
         public static extern bool ShowScrollBar(IntPtr hWnd, int bar, int cmd);
 
+        [DllImport("user32.dll")]
+        public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+        
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
+
+        [DllImport("user32.dll")]
+        public static extern bool PostMessageA(IntPtr hWnd, int nBar, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetScrollRange(IntPtr hWnd, int nBar, out int lpMinPos, out int lpMaxPos);
+
+
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetWindowDC(IntPtr handle);
 
