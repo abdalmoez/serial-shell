@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -16,6 +17,10 @@ namespace SerialShell.Base
         public const int ReadBufferSize = 4 * 1024;
         public int BufferSize { get; private set; }
         private byte[] BufferData;
+        public DateTime last_data_received = new DateTime();
+        public DateTime last_data_sended = new DateTime();
+        public DateTime last_break = new DateTime();
+        public DateTime last_ring = new DateTime();
 
         SerialPort sp;
         MainForm mainform;
@@ -38,7 +43,21 @@ namespace SerialShell.Base
         {
             MethodInvoker mi = delegate ()
             {
-                mainform.AppendLogPanel("Guest", "Info", "Serial pin changed '" + e.EventType.ToString() + "'");
+                if(e.EventType == SerialPinChange.Break)
+                {
+                    last_break = DateTime.Now;
+                    mainform.breakStatus.IconColor = Color.Maroon;
+                    mainform.AppendLogPanel("Guest", "Info", "Serial pin changed '" + e.EventType.ToString() + "'"
+                        + " break_state: " + sp.BreakState.ToString() );
+                }
+                else if (e.EventType == SerialPinChange.Ring)
+                {
+                    last_ring = DateTime.Now;
+                    mainform.ringStatus.IconColor = Color.Maroon;
+                    mainform.AppendLogPanel("Guest", "Info", "Serial pin changed '" + e.EventType.ToString() + "'");
+                }                    
+                else
+                    updateStatusFlags();
             };
             MethodInvoker call = delegate
             {
@@ -47,6 +66,25 @@ namespace SerialShell.Base
                 else mi();
             };
             call();
+        }
+        void updateStatusFlags()
+        {
+            Color enabled_color = Color.Green;
+            Color disabled_color = Color.LightGray;
+            
+            mainform.dcdStatus.IconColor = sp.CDHolding  ? enabled_color : disabled_color;
+            mainform.ctsStatus.IconColor = sp.CtsHolding ? enabled_color : disabled_color;
+            mainform.dsrStatus.IconColor = sp.DsrHolding ? enabled_color : disabled_color;
+        }
+
+
+        void clearStatusFlags()
+        {
+            Color disabled_color = Color.LightGray;
+            
+            mainform.dcdStatus.IconColor = disabled_color;
+            mainform.ctsStatus.IconColor = disabled_color;
+            mainform.dsrStatus.IconColor = disabled_color;
         }
 
         void sp_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -116,6 +154,7 @@ namespace SerialShell.Base
                 MetroMessageBox.Show(mainform, "Error opening port: " + ex.Message, "SerialShell", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            updateStatusFlags();
             return true;
         }
         public void close()
@@ -138,11 +177,30 @@ namespace SerialShell.Base
                     mainform.AppendLogPanel("Guest", "Error", err);
                 }
             }
+            clearStatusFlags();
 
         }
         private void serialportdatareceived(object sender, SerialDataReceivedEventArgs e)
         {
             int BytesToRead = sp.BytesToRead;
+            if(BytesToRead == 0)
+            {
+                return;
+            }
+
+            MethodInvoker mi = delegate ()
+            {
+                last_data_received = DateTime.Now;
+                mainform.rxdStatus.IconColor = Color.FromArgb(192, 192, 0);
+            };
+            MethodInvoker call = delegate
+            {
+                if (mainform.InvokeRequired)
+                    mainform.Invoke(mi);
+                else mi();
+            };
+            call();
+            
             sp.Read(BufferData, BufferSize, BytesToRead);
             BufferSize += BytesToRead;
             DecodeData();
@@ -441,6 +499,8 @@ namespace SerialShell.Base
                     mainform.Connectbtn_Click(mainform.connectbtn, new EventArgs());
                 return ;
             }
+            last_data_sended = DateTime.Now;
+            mainform.txdStatus.IconColor = Color.FromArgb(192, 192, 0);
             mainform.hostTextBox.AppendTextSmartScroll(" sending "+type+":"+value+Environment.NewLine);
         }
 

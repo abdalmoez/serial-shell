@@ -365,6 +365,22 @@ namespace SerialShell
                 if ((Program.SerialPortInteface.IsOpen == false) && (connectionport.Enabled == false)) //device disconnected
                     connectbtn.PerformClick();
             }
+            if(rxdStatus.IconColor != Color.LightGray && DateTime.Now.Subtract(Program.SerialPortInteface.last_data_received).TotalMilliseconds > 150)
+            {
+                rxdStatus.IconColor = Color.LightGray;
+            }
+            if(txdStatus.IconColor != Color.LightGray && DateTime.Now.Subtract(Program.SerialPortInteface.last_data_sended).TotalMilliseconds > 150)
+            {
+                txdStatus.IconColor = Color.LightGray;
+            }
+            if (breakStatus.IconColor != Color.LightGray && DateTime.Now.Subtract(Program.SerialPortInteface.last_break).TotalMilliseconds > 150)
+            {
+                breakStatus.IconColor = Color.LightGray;
+            }
+            if (ringStatus.IconColor != Color.LightGray && DateTime.Now.Subtract(Program.SerialPortInteface.last_ring).TotalMilliseconds > 150)
+            {
+                ringStatus.IconColor = Color.LightGray;
+            }
         }
 
         private void ShowShortcutModeBtn_Click(object sender, EventArgs e)

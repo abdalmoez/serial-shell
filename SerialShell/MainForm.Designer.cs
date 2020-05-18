@@ -108,6 +108,7 @@
             this.receivelogsaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.watchdog = new System.Windows.Forms.Timer(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.logPanelToggle = new FontAwesome.Sharp.IconButton();
             this.logPanel = new MetroFramework.Controls.MetroGrid();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,7 +121,21 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.logPanelToggle = new FontAwesome.Sharp.IconButton();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.breakStatus = new FontAwesome.Sharp.IconButton();
+            this.dsrStatus = new FontAwesome.Sharp.IconButton();
+            this.ringStatus = new FontAwesome.Sharp.IconButton();
+            this.dcdStatus = new FontAwesome.Sharp.IconButton();
+            this.rxdStatus = new FontAwesome.Sharp.IconButton();
+            this.txdStatus = new FontAwesome.Sharp.IconButton();
+            this.metroLabel26 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel24 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel25 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel23 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel22 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel21 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel20 = new MetroFramework.Controls.MetroLabel();
+            this.ctsStatus = new FontAwesome.Sharp.IconButton();
             this.metroTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -139,6 +154,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
@@ -903,7 +919,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.guestcleaner);
             this.splitContainer1.Panel2.Controls.Add(this.guestTextBox);
             this.splitContainer1.Panel2.Controls.Add(this.metroLabel10);
-            this.splitContainer1.Size = new System.Drawing.Size(960, 309);
+            this.splitContainer1.Size = new System.Drawing.Size(960, 291);
             this.splitContainer1.SplitterDistance = 477;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -935,10 +951,10 @@
             // 
             // 
             this.hostTextBox.CustomButton.Image = null;
-            this.hostTextBox.CustomButton.Location = new System.Drawing.Point(193, 1);
+            this.hostTextBox.CustomButton.Location = new System.Drawing.Point(211, 1);
             this.hostTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.hostTextBox.CustomButton.Name = "";
-            this.hostTextBox.CustomButton.Size = new System.Drawing.Size(283, 283);
+            this.hostTextBox.CustomButton.Size = new System.Drawing.Size(265, 265);
             this.hostTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.hostTextBox.CustomButton.TabIndex = 1;
             this.hostTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -958,7 +974,7 @@
             this.hostTextBox.SelectionLength = 0;
             this.hostTextBox.SelectionStart = 0;
             this.hostTextBox.ShortcutsEnabled = true;
-            this.hostTextBox.Size = new System.Drawing.Size(477, 285);
+            this.hostTextBox.Size = new System.Drawing.Size(477, 267);
             this.hostTextBox.TabIndex = 1;
             this.hostTextBox.UseSelectable = true;
             this.hostTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1002,10 +1018,10 @@
             // 
             // 
             this.guestTextBox.CustomButton.Image = null;
-            this.guestTextBox.CustomButton.Location = new System.Drawing.Point(195, 1);
+            this.guestTextBox.CustomButton.Location = new System.Drawing.Point(213, 1);
             this.guestTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.guestTextBox.CustomButton.Name = "";
-            this.guestTextBox.CustomButton.Size = new System.Drawing.Size(283, 283);
+            this.guestTextBox.CustomButton.Size = new System.Drawing.Size(265, 265);
             this.guestTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.guestTextBox.CustomButton.TabIndex = 1;
             this.guestTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -1025,7 +1041,7 @@
             this.guestTextBox.SelectionLength = 0;
             this.guestTextBox.SelectionStart = 0;
             this.guestTextBox.ShortcutsEnabled = true;
-            this.guestTextBox.Size = new System.Drawing.Size(479, 285);
+            this.guestTextBox.Size = new System.Drawing.Size(479, 267);
             this.guestTextBox.TabIndex = 2;
             this.guestTextBox.UseSelectable = true;
             this.guestTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1210,7 +1226,6 @@
             // watchdog
             // 
             this.watchdog.Enabled = true;
-            this.watchdog.Interval = 1000;
             this.watchdog.Tick += new System.EventHandler(this.Watchdog_Tick);
             // 
             // metroToolTip1
@@ -1218,6 +1233,29 @@
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // logPanelToggle
+            // 
+            this.logPanelToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.logPanelToggle.BackColor = System.Drawing.Color.Transparent;
+            this.logPanelToggle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logPanelToggle.FlatAppearance.BorderSize = 0;
+            this.logPanelToggle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.logPanelToggle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.logPanelToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logPanelToggle.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.logPanelToggle.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.logPanelToggle.IconColor = System.Drawing.Color.Black;
+            this.logPanelToggle.IconSize = 24;
+            this.logPanelToggle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.logPanelToggle.Location = new System.Drawing.Point(930, 291);
+            this.logPanelToggle.Name = "logPanelToggle";
+            this.logPanelToggle.Rotation = 0D;
+            this.logPanelToggle.Size = new System.Drawing.Size(28, 24);
+            this.logPanelToggle.TabIndex = 12;
+            this.metroToolTip1.SetToolTip(this.logPanelToggle, "Toggle log panel");
+            this.logPanelToggle.UseVisualStyleBackColor = false;
+            this.logPanelToggle.Click += new System.EventHandler(this.LogPanelToggle_Click);
             // 
             // logPanel
             // 
@@ -1272,7 +1310,7 @@
             this.logPanel.RowHeadersVisible = false;
             this.logPanel.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.logPanel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.logPanel.Size = new System.Drawing.Size(960, 120);
+            this.logPanel.Size = new System.Drawing.Size(960, 114);
             this.logPanel.TabIndex = 6;
             // 
             // Time
@@ -1343,7 +1381,7 @@
             // metroLabel12
             // 
             this.metroLabel12.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.metroLabel12.Location = new System.Drawing.Point(0, 309);
+            this.metroLabel12.Location = new System.Drawing.Point(0, 291);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(960, 24);
             this.metroLabel12.TabIndex = 2;
@@ -1367,32 +1405,240 @@
             // 
             this.splitContainer2.Panel2.AutoScroll = true;
             this.splitContainer2.Panel2.Controls.Add(this.logPanel);
-            this.splitContainer2.Size = new System.Drawing.Size(960, 457);
-            this.splitContainer2.SplitterDistance = 333;
+            this.splitContainer2.Size = new System.Drawing.Size(960, 433);
+            this.splitContainer2.SplitterDistance = 315;
             this.splitContainer2.TabIndex = 8;
             // 
-            // logPanelToggle
+            // metroPanel1
             // 
-            this.logPanelToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.logPanelToggle.BackColor = System.Drawing.Color.Transparent;
-            this.logPanelToggle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.logPanelToggle.FlatAppearance.BorderSize = 0;
-            this.logPanelToggle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.logPanelToggle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.logPanelToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.logPanelToggle.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.logPanelToggle.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.logPanelToggle.IconColor = System.Drawing.Color.Black;
-            this.logPanelToggle.IconSize = 24;
-            this.logPanelToggle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.logPanelToggle.Location = new System.Drawing.Point(930, 309);
-            this.logPanelToggle.Name = "logPanelToggle";
-            this.logPanelToggle.Rotation = 0D;
-            this.logPanelToggle.Size = new System.Drawing.Size(28, 24);
-            this.logPanelToggle.TabIndex = 12;
-            this.metroToolTip1.SetToolTip(this.logPanelToggle, "Toggle log panel");
-            this.logPanelToggle.UseVisualStyleBackColor = false;
-            this.logPanelToggle.Click += new System.EventHandler(this.LogPanelToggle_Click);
+            this.metroPanel1.Controls.Add(this.breakStatus);
+            this.metroPanel1.Controls.Add(this.dsrStatus);
+            this.metroPanel1.Controls.Add(this.ringStatus);
+            this.metroPanel1.Controls.Add(this.dcdStatus);
+            this.metroPanel1.Controls.Add(this.rxdStatus);
+            this.metroPanel1.Controls.Add(this.txdStatus);
+            this.metroPanel1.Controls.Add(this.metroLabel26);
+            this.metroPanel1.Controls.Add(this.metroLabel24);
+            this.metroPanel1.Controls.Add(this.metroLabel25);
+            this.metroPanel1.Controls.Add(this.metroLabel23);
+            this.metroPanel1.Controls.Add(this.metroLabel22);
+            this.metroPanel1.Controls.Add(this.metroLabel21);
+            this.metroPanel1.Controls.Add(this.metroLabel20);
+            this.metroPanel1.Controls.Add(this.ctsStatus);
+            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(20, 646);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(960, 24);
+            this.metroPanel1.TabIndex = 9;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // breakStatus
+            // 
+            this.breakStatus.BackColor = System.Drawing.Color.Transparent;
+            this.breakStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.breakStatus.FlatAppearance.BorderSize = 0;
+            this.breakStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.breakStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.breakStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.breakStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.breakStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.breakStatus.IconColor = System.Drawing.Color.LightGray;
+            this.breakStatus.IconSize = 24;
+            this.breakStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.breakStatus.Location = new System.Drawing.Point(408, 0);
+            this.breakStatus.Name = "breakStatus";
+            this.breakStatus.Rotation = 0D;
+            this.breakStatus.Size = new System.Drawing.Size(28, 24);
+            this.breakStatus.TabIndex = 14;
+            this.breakStatus.UseVisualStyleBackColor = false;
+            // 
+            // dsrStatus
+            // 
+            this.dsrStatus.BackColor = System.Drawing.Color.Transparent;
+            this.dsrStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dsrStatus.FlatAppearance.BorderSize = 0;
+            this.dsrStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.dsrStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.dsrStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dsrStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.dsrStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.dsrStatus.IconColor = System.Drawing.Color.LightGray;
+            this.dsrStatus.IconSize = 24;
+            this.dsrStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dsrStatus.Location = new System.Drawing.Point(272, 0);
+            this.dsrStatus.Name = "dsrStatus";
+            this.dsrStatus.Rotation = 0D;
+            this.dsrStatus.Size = new System.Drawing.Size(28, 24);
+            this.dsrStatus.TabIndex = 14;
+            this.dsrStatus.UseVisualStyleBackColor = false;
+            // 
+            // ringStatus
+            // 
+            this.ringStatus.BackColor = System.Drawing.Color.Transparent;
+            this.ringStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ringStatus.FlatAppearance.BorderSize = 0;
+            this.ringStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ringStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ringStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ringStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.ringStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.ringStatus.IconColor = System.Drawing.Color.LightGray;
+            this.ringStatus.IconSize = 24;
+            this.ringStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ringStatus.Location = new System.Drawing.Point(340, 0);
+            this.ringStatus.Name = "ringStatus";
+            this.ringStatus.Rotation = 0D;
+            this.ringStatus.Size = new System.Drawing.Size(28, 24);
+            this.ringStatus.TabIndex = 14;
+            this.ringStatus.UseVisualStyleBackColor = false;
+            // 
+            // dcdStatus
+            // 
+            this.dcdStatus.BackColor = System.Drawing.Color.Transparent;
+            this.dcdStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dcdStatus.FlatAppearance.BorderSize = 0;
+            this.dcdStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.dcdStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.dcdStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dcdStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.dcdStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.dcdStatus.IconColor = System.Drawing.Color.LightGray;
+            this.dcdStatus.IconSize = 24;
+            this.dcdStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dcdStatus.Location = new System.Drawing.Point(136, 0);
+            this.dcdStatus.Name = "dcdStatus";
+            this.dcdStatus.Rotation = 0D;
+            this.dcdStatus.Size = new System.Drawing.Size(28, 24);
+            this.dcdStatus.TabIndex = 14;
+            this.dcdStatus.UseVisualStyleBackColor = false;
+            // 
+            // rxdStatus
+            // 
+            this.rxdStatus.BackColor = System.Drawing.Color.Transparent;
+            this.rxdStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rxdStatus.FlatAppearance.BorderSize = 0;
+            this.rxdStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rxdStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rxdStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rxdStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.rxdStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.rxdStatus.IconColor = System.Drawing.Color.LightGray;
+            this.rxdStatus.IconSize = 24;
+            this.rxdStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rxdStatus.Location = new System.Drawing.Point(64, 0);
+            this.rxdStatus.Name = "rxdStatus";
+            this.rxdStatus.Rotation = 0D;
+            this.rxdStatus.Size = new System.Drawing.Size(28, 24);
+            this.rxdStatus.TabIndex = 14;
+            this.rxdStatus.UseVisualStyleBackColor = false;
+            // 
+            // txdStatus
+            // 
+            this.txdStatus.BackColor = System.Drawing.Color.Transparent;
+            this.txdStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txdStatus.FlatAppearance.BorderSize = 0;
+            this.txdStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.txdStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.txdStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txdStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.txdStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.txdStatus.IconColor = System.Drawing.Color.LightGray;
+            this.txdStatus.IconSize = 24;
+            this.txdStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txdStatus.Location = new System.Drawing.Point(0, 0);
+            this.txdStatus.Name = "txdStatus";
+            this.txdStatus.Rotation = 0D;
+            this.txdStatus.Size = new System.Drawing.Size(28, 24);
+            this.txdStatus.TabIndex = 12;
+            this.txdStatus.UseVisualStyleBackColor = false;
+            // 
+            // metroLabel26
+            // 
+            this.metroLabel26.AutoSize = true;
+            this.metroLabel26.Location = new System.Drawing.Point(436, 1);
+            this.metroLabel26.Name = "metroLabel26";
+            this.metroLabel26.Size = new System.Drawing.Size(48, 19);
+            this.metroLabel26.TabIndex = 15;
+            this.metroLabel26.Text = "BREAK";
+            // 
+            // metroLabel24
+            // 
+            this.metroLabel24.AutoSize = true;
+            this.metroLabel24.Location = new System.Drawing.Point(300, 1);
+            this.metroLabel24.Name = "metroLabel24";
+            this.metroLabel24.Size = new System.Drawing.Size(33, 19);
+            this.metroLabel24.TabIndex = 15;
+            this.metroLabel24.Text = "DSR";
+            // 
+            // metroLabel25
+            // 
+            this.metroLabel25.AutoSize = true;
+            this.metroLabel25.Location = new System.Drawing.Point(368, 1);
+            this.metroLabel25.Name = "metroLabel25";
+            this.metroLabel25.Size = new System.Drawing.Size(35, 19);
+            this.metroLabel25.TabIndex = 15;
+            this.metroLabel25.Text = "Ring";
+            // 
+            // metroLabel23
+            // 
+            this.metroLabel23.AutoSize = true;
+            this.metroLabel23.Location = new System.Drawing.Point(232, 1);
+            this.metroLabel23.Name = "metroLabel23";
+            this.metroLabel23.Size = new System.Drawing.Size(32, 19);
+            this.metroLabel23.TabIndex = 15;
+            this.metroLabel23.Text = "CTS";
+            // 
+            // metroLabel22
+            // 
+            this.metroLabel22.AutoSize = true;
+            this.metroLabel22.Location = new System.Drawing.Point(164, 1);
+            this.metroLabel22.Name = "metroLabel22";
+            this.metroLabel22.Size = new System.Drawing.Size(36, 19);
+            this.metroLabel22.TabIndex = 15;
+            this.metroLabel22.Text = "DCD";
+            // 
+            // metroLabel21
+            // 
+            this.metroLabel21.AutoSize = true;
+            this.metroLabel21.Location = new System.Drawing.Point(96, 1);
+            this.metroLabel21.Name = "metroLabel21";
+            this.metroLabel21.Size = new System.Drawing.Size(32, 19);
+            this.metroLabel21.TabIndex = 15;
+            this.metroLabel21.Text = "RxD";
+            // 
+            // metroLabel20
+            // 
+            this.metroLabel20.AutoSize = true;
+            this.metroLabel20.Location = new System.Drawing.Point(28, 1);
+            this.metroLabel20.Name = "metroLabel20";
+            this.metroLabel20.Size = new System.Drawing.Size(29, 19);
+            this.metroLabel20.TabIndex = 13;
+            this.metroLabel20.Text = "TxD";
+            // 
+            // ctsStatus
+            // 
+            this.ctsStatus.BackColor = System.Drawing.Color.Transparent;
+            this.ctsStatus.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ctsStatus.FlatAppearance.BorderSize = 0;
+            this.ctsStatus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ctsStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ctsStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ctsStatus.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.ctsStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.ctsStatus.IconColor = System.Drawing.Color.LightGray;
+            this.ctsStatus.IconSize = 24;
+            this.ctsStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ctsStatus.Location = new System.Drawing.Point(204, 0);
+            this.ctsStatus.Name = "ctsStatus";
+            this.ctsStatus.Rotation = 0D;
+            this.ctsStatus.Size = new System.Drawing.Size(28, 24);
+            this.ctsStatus.TabIndex = 14;
+            this.ctsStatus.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 
@@ -1407,6 +1653,7 @@
             this.Controls.Add(this.savesettingsbtn);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.metroTabControl1);
+            this.Controls.Add(this.metroPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(620, 300);
@@ -1436,6 +1683,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1530,6 +1779,21 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copySelectedLineToolStripMenuItem;
         private FontAwesome.Sharp.IconButton logPanelToggle;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        public FontAwesome.Sharp.IconButton txdStatus;
+        private MetroFramework.Controls.MetroLabel metroLabel20;
+        private MetroFramework.Controls.MetroLabel metroLabel24;
+        private MetroFramework.Controls.MetroLabel metroLabel23;
+        private MetroFramework.Controls.MetroLabel metroLabel22;
+        private MetroFramework.Controls.MetroLabel metroLabel21;
+        public FontAwesome.Sharp.IconButton dsrStatus;
+        public FontAwesome.Sharp.IconButton ctsStatus;
+        public FontAwesome.Sharp.IconButton dcdStatus;
+        public FontAwesome.Sharp.IconButton rxdStatus;
+        private MetroFramework.Controls.MetroLabel metroLabel26;
+        private MetroFramework.Controls.MetroLabel metroLabel25;
+        public FontAwesome.Sharp.IconButton breakStatus;
+        public FontAwesome.Sharp.IconButton ringStatus;
     }
 }
 
